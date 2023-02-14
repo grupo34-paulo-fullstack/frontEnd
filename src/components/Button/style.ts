@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { IBiggerButtonStyleProps } from "../../interfaces/components";
+import { IButtonStyleProps } from "../../interfaces/components";
 
-export const BiggerButtonStyle = styled.button<IBiggerButtonStyleProps>`
+export const ButtonStyle = styled.button<IButtonStyleProps>`
   display: flex;
   align-items: center;
   justify-content: center;

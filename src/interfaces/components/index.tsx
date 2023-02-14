@@ -1,4 +1,4 @@
-export interface IBiggerButton {
+export interface IButton {
   children: React.ReactNode;
   color: string;
   background: string;
@@ -9,7 +9,7 @@ export interface IBiggerButton {
   disable?: string;
 }
 
-export interface IBiggerButtonStyleProps {
+export interface IButtonStyleProps {
   color: string;
   background: string;
   outline_color?: string;

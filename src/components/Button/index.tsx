@@ -1,7 +1,7 @@
-import { IBiggerButton } from "../../interfaces/components";
-import { BiggerButtonStyle } from "./style";
+import { IButton } from "../../interfaces/components";
+import { ButtonStyle } from "./style";
 
-const BiggerButton = ({
+const Button = ({
   background,
   color,
   outline_color,
@@ -10,8 +10,8 @@ const BiggerButton = ({
   color_hover,
   outline_hover,
   disable
-}: IBiggerButton) => (
-  <BiggerButtonStyle
+}: IButton) => (
+  <ButtonStyle
     color={color}
     background={background}
     outline_color={outline_color}
@@ -21,7 +21,7 @@ const BiggerButton = ({
     disable={disable}
   >
     {children}
-  </BiggerButtonStyle>
+  </ButtonStyle>
 );
 
-export default BiggerButton;
+export default Button;
