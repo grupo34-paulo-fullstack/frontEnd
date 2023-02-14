@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { IContext, IProvider } from '../interfaces'
+import { IContext, IProvider } from '../interfaces/context'
 
 export const Context = createContext({} as IContext)
 
