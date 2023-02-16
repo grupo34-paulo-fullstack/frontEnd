@@ -12,6 +12,19 @@ function generateColor() {
 
 function Card ( props: {item: ICard} ): JSX.Element {
 
+
+    // For teste card
+
+    // const data = {
+    //     image: 'https://uploaddeimagens.com.br/images/004/354/094/full/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview_1.png?1676409884',
+    //     title: 'Product title stays here - max 1 line',
+    //     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...',
+    //     name: 'Regina',
+    //     km: '50.156 KM',
+    //     year: '2019',
+    //     price: 'R$ 10.541,56'
+    //   } 
+
     return (
         <li>
             <Container>
