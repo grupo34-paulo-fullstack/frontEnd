@@ -1,10 +1,21 @@
-import { Toaster } from 'react-hot-toast'
 import './App.css'
+import Card from './components/Card'
 
-function App() {
+export interface ICard {
+  image: string;
+  title: string;
+  description: string;
+  name: string;
+  km: string;
+  year: string;
+  price: string;
+}
+
+function App() {    
 
   return (
-    <Toaster />
+    <>
+    </>
   )
 }
 
