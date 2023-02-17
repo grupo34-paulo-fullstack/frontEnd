@@ -6,12 +6,15 @@ export interface Props {
 
 
 
-export const Container = styled.div`
+export const Container = styled.li`
     font-family: 'Lexend';
-    display: flex;
+
+    display: flex;    
     align-items: flex-start;
+
     justify-content: space-between;
     flex-direction: column;
+
     width: 312px;
     height: 350px;
 
@@ -22,29 +25,21 @@ export const Container = styled.div`
 
     p {
         text-align: left;
-        display: flex;
         padding-left: 10px;
-        font-size: 0.875rem;
-        line-height: 1.5rem;
-
-        font-family: 'Inter';
     }
 
     .container-name{
         display: flex;
         align-items: center;
-        font-size: 15px;
         padding-left: 10px;
-
-        font-family: 'Inter';
     }
 
     .container-image{
         text-align: center;
         width: 19.5rem;
         height: 9.5rem;
-        background-color:  #E9ECEF;
-        border: 2px solid #E9ECEF;
+        background-color:  var(--colors-grey-7);
+        border: 2px solid var(--colors-grey-7);
     }
 
     .container-infos{
@@ -57,7 +52,8 @@ export const Container = styled.div`
         p{
             font-size: 1rem;
             font-weight: 600;
-            color: #212529;
+            color: var(--colors-grey-1);
+            margin-right: 6px;
         }
     }
 `
@@ -88,16 +84,10 @@ export const SpanInfo = styled.div`
         justify-content: center;
         align-items: center;
 
-
         padding: 5px 10px;
-        color: #4529E6;
+        color: var(--colors-brand-1);
 
-        background: #EDEAFD;
+        background: var(--colors-brand-4);
         border-radius: 4px;
-
-        font-size: 0.8rem;
-        font-weight: 550;
-        font-family: 'Inter';
-    }
-
+    }  
 `

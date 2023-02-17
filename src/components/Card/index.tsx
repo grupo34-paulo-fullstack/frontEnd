@@ -1,5 +1,14 @@
-import { ICard } from "../../App";
 import { Container, NameIcon, SpanInfo } from "./style"
+
+export interface ICard {
+    image: string;
+    title: string;
+    description: string;
+    name: string;
+    km: string;
+    year: string;
+    price: string;
+  }
 
 function generateColor() {
     const letters = '6789ABCDEF';
@@ -26,23 +35,21 @@ function Card ( props: {item: ICard} ): JSX.Element {
     //   } 
 
     return (
-        <li>
-            <Container>
-                <div className="container-image"><img src={props.item.image} alt="" /></div>
-                <h5>{props.item.title}</h5>
-                <p>{props.item.description}</p>
-                <div className="container-name"> 
-                    <NameIcon className="container-nameIcon-icon" backgroundColor={generateColor()}>{props.item.name[0]}</NameIcon> {props.item.name}
-                </div>
-                <div className="container-infos">
-                    <SpanInfo>
-                        <span>{props.item.km}</span> 
-                        <span>{props.item.year}</span>
-                    </SpanInfo> 
-                    <p>{props.item.price}</p>
-                </div>
-            </Container>
-        </li>
+        <Container>
+            <div className="container-image"><img src={props.item.image} alt="" /></div>
+            <h5>{props.item.title}</h5>
+            <p className="text-body-2-400">{props.item.description}</p>
+            <div className="container-name text-body-1-400"> 
+                <NameIcon className="container-nameIcon-icon text-body-2-400" backgroundColor={generateColor()}>{props.item.name[0]}</NameIcon> {props.item.name}
+            </div>
+            <div className="container-infos">
+                <SpanInfo>
+                    <span className="text-body-2-500">{props.item.km}</span> 
+                    <span className="text-body-2-500">{props.item.year}</span>
+                </SpanInfo> 
+                <p className="text-body-1-400">{props.item.price}</p>
+            </div>
+        </Container>
     )
 }
 
