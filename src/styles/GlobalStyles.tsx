@@ -1,10 +1,14 @@
-import {createGlobalStyle} from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 
 :root {
 
   //typography
+
+  --font-inter:'Inter', sans-serif;
+  --font-lexend: 'Lexend', sans-serif;
+
   --fonts-heading-1-700: 700;
   --fonts-heading-1-size: 44px;
   --fonts-heading-1-line: 56px;
@@ -228,4 +232,4 @@ html {
     max-width: 100%;
     height: auto;
   }
-`
+`;

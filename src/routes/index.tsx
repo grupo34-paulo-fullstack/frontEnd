@@ -1,9 +1,10 @@
-import {Routes, Route} from 'react-router-dom'
+import { Routes, Route } from "react-router-dom";
+import { AdPage } from "../pages/AdPage";
 
-const RoutesMain = () => (
-  <Routes>
-    {/* <Route path='' element={} /> */}
-  </Routes>
-)
-
-export default RoutesMain
+export const RoutesMain = () => {
+  return (
+    <Routes>
+      <Route path="/adPage" element={<AdPage />} />
+    </Routes>
+  );
+};
