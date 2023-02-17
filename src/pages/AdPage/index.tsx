@@ -1,7 +1,13 @@
+import { Header } from "../../components/Header";
+import { MainDiv } from "./style";
+
 export const AdPage = () => {
   return (
-    <div>
-      <p></p>
-    </div>
+    <>
+      <Header />
+      <MainDiv>
+        <p>alo asd</p>
+      </MainDiv>
+    </>
   );
 };

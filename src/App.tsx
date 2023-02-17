@@ -1,12 +1,12 @@
 import { Toaster } from "react-hot-toast";
-import "./App.css";
+import { RoutesMain } from "./routes";
+import { AdPage } from "./pages/AdPage";
 
-function App() {
+export const App = () => {
   return (
     <>
-      <Toaster /> 
+      <RoutesMain></RoutesMain>
+      <Toaster />
     </>
-  )
-}
-
-export default App;
+  );
+};
