@@ -70,8 +70,8 @@ export const GlobalStyle = createGlobalStyle`
   //brand
   --colors-brand-1: #4529E6;
   --colors-brand-2: #5126EA;
-  --colors-brand-2: #B0A6F0;
-  --colors-brand-2: #EDEAFD;
+  --colors-brand-3: #B0A6F0;
+  --colors-brand-4: #EDEAFD;
 
   //grey scale
   --colors-grey-0: #0B0D0D;
