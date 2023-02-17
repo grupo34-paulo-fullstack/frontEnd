@@ -1,12 +1,12 @@
-import './App.css'
+import { Toaster } from "react-hot-toast";
+import "./App.css";
 
-function App() {   
-
+function App() {
   return (
     <>
-     
+      <Toaster /> 
     </>
   )
 }
 
-export default App
+export default App;
