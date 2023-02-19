@@ -6,8 +6,9 @@ interface OpenMenuUser {
     width: number
 }
 
-export const HeaderStyle = styled.div`
-    width: 100vw;
+export const HeaderStyle = styled.header`
+    max-width: 100vw;
+    width: 100%;
     height: 5rem;    
     background-color: var(--colors-grey-10);
     border-bottom: 2px solid var(--colors-grey-6);
@@ -27,6 +28,8 @@ export const Container = styled.div`
         img{
             display: flex;
             align-items: center;
+            width: 154px;
+            height: 27px;
         }
 
         &:hover {
@@ -39,7 +42,7 @@ export const MenuNav = styled.nav`
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
-
+    z-index: 2;
     height: 100%;
 
     .vertical-line{

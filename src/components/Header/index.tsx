@@ -2,6 +2,7 @@ import { Container, HeaderStyle, LinkDropDownUser, MenuDropDown, MenuNav, NavLin
 // import Button from "../Button";
 import Burger from "./MenuHamburger";
 import { createRef, useEffect, useState } from "react";
+import logo from '../../assets/logo_header.png'
 
 export interface IMenuBurgerProps {
     isOpen: boolean;
@@ -10,7 +11,7 @@ export interface IMenuBurgerProps {
     refMenu: any
 }
 
-function Header () {
+export const Header = () => {
 
     const inputRef = createRef<HTMLInputElement>();
 
@@ -61,7 +62,7 @@ function Header () {
     <HeaderStyle>
         <Container>
             <div>
-                <img src="https://uploaddeimagens.com.br/images/004/356/518/thumb/Motors_shop.png?1676583156" alt="Logo" />
+                <img src={logo} alt="Motors shop" />
             </div>
 
             <Burger isOpen={isOpenHamburgerMenu} setIsOpen={setIsOpenHamburgerMenu} handleToggle={handleToggleHamburgerMenu} refMenu={inputRef}/>
@@ -93,5 +94,3 @@ function Header () {
     </HeaderStyle>
     )
 }
-
-export default Header;
