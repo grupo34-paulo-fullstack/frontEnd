@@ -5,7 +5,6 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 28px;
   font-weight: 600;
   font-size: 16px;
   width: 146px;
@@ -14,7 +13,7 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
   color: ${(props) => props.color};
   border-radius: 4px;
   border: none;
-  outline: 1px solid ${(props) => props.outline_color};
+  outline: 2px solid ${(props) => props.outline_color};
   cursor: pointer;
   transition: 0.2s;
 
