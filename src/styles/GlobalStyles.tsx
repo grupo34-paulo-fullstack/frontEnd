@@ -232,4 +232,9 @@ html {
     max-width: 100%;
     height: auto;
   }
+  figure {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
 `;
