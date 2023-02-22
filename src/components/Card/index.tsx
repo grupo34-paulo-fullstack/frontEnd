@@ -52,5 +52,3 @@ export const Card = ( props: {item: ICard} ): JSX.Element => {
         </Container>
     )
 }
-
-export default Card

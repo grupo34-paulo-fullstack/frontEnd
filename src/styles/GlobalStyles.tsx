@@ -158,7 +158,7 @@ html {
   }
   h5 {
     font-weight: var(--fonts-heading-5-600);
-    font-size: var(--fonts-heading-6-size);
+    font-size: var(--fonts-heading-5-size);
     line-height: var(--fonts-heading-5-line);
   }
   h6 {
