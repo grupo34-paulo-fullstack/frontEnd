@@ -1,7 +1,7 @@
 import { IButton } from "../../interfaces/components";
 import { ButtonStyle } from "./style";
 
-const Button = ({
+export const Button = ({
   background,
   color,
   outline_color,
@@ -23,5 +23,3 @@ const Button = ({
     {children}
   </ButtonStyle>
 );
-
-export default Button;
