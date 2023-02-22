@@ -1,10 +1,14 @@
-import {createGlobalStyle} from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 
 :root {
 
   //typography
+
+  --font-inter:'Inter', sans-serif;
+  --font-lexend: 'Lexend', sans-serif;
+
   --fonts-heading-1-700: 700;
   --fonts-heading-1-size: 44px;
   --fonts-heading-1-line: 56px;
@@ -70,8 +74,8 @@ export const GlobalStyle = createGlobalStyle`
   //brand
   --colors-brand-1: #4529E6;
   --colors-brand-2: #5126EA;
-  --colors-brand-2: #B0A6F0;
-  --colors-brand-2: #EDEAFD;
+  --colors-brand-3: #B0A6F0;
+  --colors-brand-4: #EDEAFD;
 
   //grey scale
   --colors-grey-0: #0B0D0D;
@@ -154,7 +158,7 @@ html {
   }
   h5 {
     font-weight: var(--fonts-heading-5-600);
-    font-size: var(--fonts-heading-6-size);
+    font-size: var(--fonts-heading-5-size);
     line-height: var(--fonts-heading-5-line);
   }
   h6 {
@@ -228,4 +232,4 @@ html {
     max-width: 100%;
     height: auto;
   }
-`
+`;
