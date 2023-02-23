@@ -12,12 +12,12 @@ export const Button = ({
   disable,
   width,
   height,
-  lower_width
+  lower_width,
 }: IButton) => (
   <ButtonStyle
-    width={width ? width : '146px'}
-    height={height ? height : '48px'}
-    lower_width={lower_width ? lower_width : '119px' }
+    width={width ? width : "146px"}
+    height={height ? height : "48px"}
+    lower_width={lower_width ? lower_width : "119px"}
     color={color}
     background={background}
     outline_color={outline_color}

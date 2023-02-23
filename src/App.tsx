@@ -1,11 +1,11 @@
 import { Toaster } from "react-hot-toast";
+import { RoutesMain } from "./routes";
 
-function App() {
+export const App = () => {
   return (
     <>
-      <Toaster /> 
+      <RoutesMain />
+      <Toaster />
     </>
-  )
-}
-
-export default App;
+  );
+};
