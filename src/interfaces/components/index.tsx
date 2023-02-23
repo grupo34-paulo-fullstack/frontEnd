@@ -7,6 +7,9 @@ export interface IButton {
   color_hover?: string;
   outline_hover?: string;
   disable?: string;
+  width?: string
+  height?: string
+  lower_width?: string
 }
 
 export interface IButtonStyleProps {
@@ -17,4 +20,7 @@ export interface IButtonStyleProps {
   color_hover?: string;
   outline_hover?: string;
   disable?: string;
+  width?: string
+  height?: string
+  lower_width?: string
 }

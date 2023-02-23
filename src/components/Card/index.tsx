@@ -1,4 +1,5 @@
-import { Container, NameIcon, SpanInfo } from "./style"
+import { Button } from "../Button";
+import { ButtonsForAnnouncer, Container, NameIcon, SpanInfo } from "./style"
 
 export interface ICard {
     image: string;
@@ -19,29 +20,59 @@ function generateColor() {
     return color;    
 }
 
+export const data = [{
+  image: 'https://uploaddeimagens.com.br/images/004/354/094/full/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview_1.png?1676409884',
+  title: 'Product title stays here - max 1 line',
+  description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...',
+  name: 'Regina',
+  km: '50.156 KM',
+  year: '2019',
+  price: 'R$ 10.541,56'
+},{
+  image: 'https://uploaddeimagens.com.br/images/004/354/094/full/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview_1.png?1676409884',
+  title: 'Product title stays here - max 1 line',
+  description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...',
+  name: 'Regina',
+  km: '50.156 KM',
+  year: '2019',
+  price: 'R$ 10.541,56'
+},{
+  image: 'https://uploaddeimagens.com.br/images/004/354/094/full/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview_1.png?1676409884',
+  title: 'Product title stays here - max 1 line',
+  description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...',
+  name: 'Regina',
+  km: '50.156 KM',
+  year: '2019',
+  price: 'R$ 10.541,56'
+},{
+  image: 'https://uploaddeimagens.com.br/images/004/354/094/full/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview_1.png?1676409884',
+  title: 'Product title stays here - max 1 line',
+  description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...',
+  name: 'Regina',
+  km: '50.156 KM',
+  year: '2019',
+  price: 'R$ 10.541,56'
+},{
+  image: 'https://uploaddeimagens.com.br/images/004/354/094/full/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview_1.png?1676409884',
+  title: 'Product title stays here - max 1 line',
+  description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...',
+  name: 'Regina',
+  km: '50.156 KM',
+  year: '2019',
+  price: 'R$ 10.541,56'
+} ]
+
 export const Card = ( props: {item: ICard} ): JSX.Element => {
 
-
-    // For teste card
-
-    // const data = {
-    //     image: 'https://uploaddeimagens.com.br/images/004/354/094/full/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview_1.png?1676409884',
-    //     title: 'Product title stays here - max 1 line',
-    //     description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...',
-    //     name: 'Regina',
-    //     km: '50.156 KM',
-    //     year: '2019',
-    //     price: 'R$ 10.541,56'
-    //   } 
 
     return (
         <Container>
             <div className="container-image"><img src={props.item.image} alt="" /></div>
             <h5>{props.item.title}</h5>
             <p className="text-body-2-400">{props.item.description}</p>
-            <div className="container-name text-body-1-400"> 
+            {props.item.name != 'Samuel Leão' ? (<div className="container-name text-body-1-400"> 
                 <NameIcon className="container-nameIcon-icon text-body-2-400" backgroundColor={generateColor()}>{props.item.name[0]}</NameIcon> {props.item.name}
-            </div>
+            </div>) : (<div className="container-name text-body-1-400"></div>)}
             <div className="container-infos">
                 <SpanInfo>
                     <span className="text-body-2-500">{props.item.km}</span> 
@@ -49,6 +80,11 @@ export const Card = ( props: {item: ICard} ): JSX.Element => {
                 </SpanInfo> 
                 <p className="text-body-1-400">{props.item.price}</p>
             </div>
+                {props.item.name == 'Samuel Leão' && 
+                <ButtonsForAnnouncer>
+                    <Button width="80px" height="38px" color="#212529" outline_color="#212529" outline_hover="#5126EA" background_hover="#5126EA" background="#FFFFF" children="Editar" />
+                    <Button width="105px" height="38px" color="#212529" outline_color="#212529" outline_hover="#5126EA" background_hover="#5126EA" background="#FFFFF" children="Ver como" />
+                </ButtonsForAnnouncer>}
         </Container>
     )
 }

@@ -13,11 +13,16 @@ export const CardContainer = styled.li<ICardAuctionProps>`
     min-height: 325px;
     max-height: 500px;
     list-style: none;
-
+    border-radius: 4px;
+    
     &:hover {
         /* background: linear-gradient(180deg, rgba(0, 0, 0, 0.71) 0%, #000000 100%); */
         background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 70%, rgba(0, 0, 0, 0.9) 100%);
-        border-radius: 4px;
+        
+        div:has(a) {
+            background-color: var(--colors-brand-2);
+           
+        }
     }
 
     .card-background{
@@ -38,10 +43,6 @@ export const Container = styled.div`
 
     /* background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, rgba(0, 0, 0, 1) 100%);  */
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 70%, rgba(0, 0, 0, 0.8) 100%);  
-
-    &:hover{
-        cursor: pointer;
-    }
 
     h6 {
         margin-top: 35px;
@@ -178,15 +179,48 @@ export const CardFooter = styled.div`
 
     background-color: #4529E6;
     border-radius: 0px 0px 4px 4px;
+    transition: 0.2s;
 
-    p {
+    &:hover {
+        a {
+            svg {
+                animation-name: move;
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
+            }
+        }
+    }
+ 
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
         color: var(--colors-white);
+        text-decoration: none;
+
+        svg {
+            color: var(--colors-white);
+            font-size: 30px;
+            
+            
+
+            @keyframes move {
+                0% {
+                    margin-right: 0px;
+                }
+
+                50% {
+                    margin-right: 7px;
+                }
+
+                100% {
+                    margin-right: 0px;
+                }
+            }
+        }
     }
 
-    svg {
-        color: var(--colors-white);
-        font-size: 30px;
-    }
 
     @media (min-width: 426px){
         padding: 0 36px;
