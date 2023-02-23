@@ -10,6 +10,7 @@ import {
 // import Button from "../Button";
 import Burger from "./MenuHamburger";
 import { createRef, useEffect, useState } from "react";
+import logo from "../../assets/logo_header.png";
 
 export interface IMenuBurgerProps {
   isOpen: boolean;
@@ -74,10 +75,7 @@ export const Header = () => {
     <HeaderStyle>
       <Container>
         <div>
-          <img
-            src="https://uploaddeimagens.com.br/images/004/356/518/thumb/Motors_shop.png?1676583156"
-            alt="Logo"
-          />
+          <img src={logo} alt="Motors shop" />
         </div>
 
         <Burger

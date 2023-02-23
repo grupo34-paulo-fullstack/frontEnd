@@ -19,7 +19,7 @@ function generateColor() {
     return color;    
 }
 
-function Card ( props: {item: ICard} ): JSX.Element {
+export const Card = ( props: {item: ICard} ): JSX.Element => {
 
 
     // For teste card
@@ -52,5 +52,3 @@ function Card ( props: {item: ICard} ): JSX.Element {
         </Container>
     )
 }
-
-export default Card
