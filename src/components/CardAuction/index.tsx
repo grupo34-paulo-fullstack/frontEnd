@@ -33,9 +33,9 @@ export const CardAuction = ( props: {item : ICardAuction}) => {
                     </Timer>
                     <h6>{props.item.title}</h6>
                     <p className="text-body-2-400">{props.item.description}</p>
-                    <div className="container-name text-body-1-400"> 
+                    {props.item.name != 'Samuel Leão' ? (<div className="container-name text-body-1-400"> 
                         <NameIcon className="container-nameIcon-icon text-body-2-400" backgroundColor={generateColor()}>{props.item.name[0]}</NameIcon> {props.item.name}
-                    </div>
+                    </div>) : (<div className="container-name text-body-1-400"></div>)}
                     <div className="container-infos">
                         <SpanInfo>
                             <span className="text-body-2-500">{props.item.year}</span> 
@@ -46,8 +46,9 @@ export const CardAuction = ( props: {item : ICardAuction}) => {
                 </Container>
             </div>
             <CardFooter>
-                <p className="text-button-big-text">Acessar página do leilão</p>
+                <a className="text-button-big-text">Acessar página do leilão
                 <BsArrowRight />
+                </a>
             </CardFooter>
         </CardContainer>
     )

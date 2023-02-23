@@ -7,8 +7,8 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
   justify-content: center;
   font-weight: 600;
   font-size: 16px;
-  width: 146px;
-  height: 48px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   background-color: ${(props) => props.background};
   color: ${(props) => props.color};
   border-radius: 4px;
@@ -18,7 +18,7 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
   transition: 0.2s;
 
   @media (max-width: 800px) {
-    width: 119px;
+    width: ${(props) => props.lower_width};
     height: 38px;
     font-weight: 600;
     font-size: 14px;
