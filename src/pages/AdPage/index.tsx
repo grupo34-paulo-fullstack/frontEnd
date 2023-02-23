@@ -1,4 +1,5 @@
 import { Header } from "../../components/Header";
+import { Footer } from "../../components/Footer";
 
 import {
   MainContent,
@@ -7,6 +8,8 @@ import {
   BoxImgCarInfoDescription,
   CarSection,
   Comments,
+  CommentSection,
+  CommentsBox,
 } from "./style";
 
 export const AdPage = () => {
@@ -41,73 +44,6 @@ export const AdPage = () => {
                 of type and scrambled it to make a type specimen book.
               </p>
             </section>
-
-            <Comments>
-              <h6>Comentários</h6>
-
-              <ul className="commentList">
-                <li className="listElement">
-                  <div className="userInfo">
-                    <span className="userBall">LS</span>{" "}
-                    <p className="name"> Luís Santos</p>{" "}
-                    <div className="userDot"></div>{" "}
-                    <span className="postedDate">há 3 dias</span>{" "}
-                  </div>
-                  <p className="userComment">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </p>
-                </li>
-                <li className="listElement">
-                  <div className="userInfo">
-                    <span className="userBall">LS</span>{" "}
-                    <p className="name"> Luís Santos</p>{" "}
-                    <div className="userDot"></div>{" "}
-                    <span className="postedDate">há 3 dias</span>{" "}
-                  </div>
-                  <p className="userComment">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </p>
-                </li>
-                <li className="listElement">
-                  <div className="userInfo">
-                    <span className="userBall">LS</span>{" "}
-                    <p className="name"> Luís Santos</p>{" "}
-                    <div className="userDot"></div>{" "}
-                    <span className="postedDate">há 3 dias</span>{" "}
-                  </div>
-                  <p className="userComment">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </p>
-                </li>
-                <li className="listElement">
-                  <div className="userInfo">
-                    <span className="userBall">LS</span>{" "}
-                    <p className="name"> Luís Santos</p>{" "}
-                    <div className="userDot"></div>{" "}
-                    <span className="postedDate">há 3 dias</span>{" "}
-                  </div>
-                  <p className="userComment">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </p>
-                </li>
-              </ul>
-            </Comments>
           </BoxImgCarInfoDescription>
 
           <Aside>
@@ -145,7 +81,87 @@ export const AdPage = () => {
             </section>
           </Aside>
         </MainContent>
+
+        <CommentsBox>
+          <Comments>
+            <h6>Comentários</h6>
+
+            <ul className="commentList">
+              <li className="listElement">
+                <div className="userInfo">
+                  <span className="userBall">LS</span>{" "}
+                  <p className="name"> Luís Santos</p>{" "}
+                  <div className="userDot"></div>{" "}
+                  <span className="postedDate">há 3 dias</span>{" "}
+                </div>
+                <p className="userComment">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+              </li>
+              <li className="listElement">
+                <div className="userInfo">
+                  <span className="userBall">LS</span>{" "}
+                  <p className="name"> Luís Santos</p>{" "}
+                  <div className="userDot"></div>{" "}
+                  <span className="postedDate">há 3 dias</span>{" "}
+                </div>
+                <p className="userComment">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+              </li>
+              <li className="listElement">
+                <div className="userInfo">
+                  <span className="userBall">LS</span>{" "}
+                  <p className="name"> Luís Santos</p>{" "}
+                  <div className="userDot"></div>{" "}
+                  <span className="postedDate">há 3 dias</span>{" "}
+                </div>
+                <p className="userComment">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+              </li>
+              <li className="listElement">
+                <div className="userInfo">
+                  <span className="userBall">LS</span>{" "}
+                  <p className="name"> Luís Santos</p>{" "}
+                  <div className="userDot"></div>{" "}
+                  <span className="postedDate">há 3 dias</span>{" "}
+                </div>
+                <p className="userComment">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+              </li>
+            </ul>
+          </Comments>
+
+          <CommentSection>
+            <div className="userInfoComment">
+              <span className="userBallComment">SL</span>{" "}
+              <p className="nameComment"> Samuel Leão</p>{" "}
+            </div>
+
+            <textarea></textarea>
+            <button>Comentar</button>
+          </CommentSection>
+        </CommentsBox>
       </Body>
+      <Footer />
     </>
   );
 };

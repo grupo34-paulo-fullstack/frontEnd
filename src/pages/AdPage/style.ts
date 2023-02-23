@@ -12,13 +12,17 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
 export const MainContent = styled.div`
   display: flex;
-  justify-content: center;
   margin-top: 2.5rem;
-  width: 100%;
+  width: 68.3%;
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const BoxImgCarInfoDescription = styled.div`
@@ -64,6 +68,9 @@ export const BoxImgCarInfoDescription = styled.div`
       font-size: 1rem;
       line-height: 1.75rem;
       color: var(--colors-grey-2);
+    }
+    @media screen and (max-width: 1000px) {
+      margin-bottom: 1rem;
     }
   }
 `;
@@ -125,6 +132,11 @@ export const CarSection = styled.section`
 export const Aside = styled.aside`
   width: 100%;
   max-width: 30rem;
+
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    max-width: 100rem;
+  }
 
   .photoSection {
     width: 100%;
@@ -217,15 +229,28 @@ export const Aside = styled.aside`
   }
 `;
 
+export const CommentsBox = styled.section`
+  width: 68%;
+  margin-bottom: 4.563rem;
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid red;
+  }
+`;
+
 export const Comments = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100%;
+
+  width: 60.4%;
 
   padding: 2rem 2rem 2rem 2rem;
   background: var(--colors-white);
   border-radius: 4px;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   h6 {
     margin-bottom: 1rem;
   }
@@ -297,5 +322,80 @@ export const Comments = styled.section`
         color: var(--colors-grey-2);
       }
     }
+  }
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
+`;
+
+export const CommentSection = styled.section`
+  width: 60.5%;
+  height: 289px;
+  padding: 2rem 2rem 2rem 2rem;
+  background: var(--colors-white);
+  border-radius: 4px;
+  position: relative;
+
+  textarea {
+    width: 100%;
+    height: 70%;
+  }
+
+  button {
+    position: absolute;
+    right: 10%;
+    top: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 10px;
+
+    width: 15%;
+    min-width: 70px;
+    height: 2.375rem;
+
+    color: var(--colors-white);
+    background: var(--colors-brand-1);
+    border: 1.5px solid var(--colors-brand-1);
+    border-radius: 4px;
+  }
+  .userInfoComment {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.75rem;
+
+    .userBallComment {
+      font-family: var(--font-inter);
+      width: 2rem;
+      height: 2rem;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 0.875rem;
+      line-height: 0px;
+
+      background: var(--colors-brand-1);
+      border-radius: 50px;
+
+      color: var(--colors-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 0.5rem;
+    }
+    .nameComment {
+      margin-right: 0.5rem;
+      font-family: var(--font-inter);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: var(--colors-grey-1);
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    width: 100%;
   }
 `;
