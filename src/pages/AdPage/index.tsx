@@ -27,7 +27,7 @@ export const AdPage = () => {
               <div className="carInfoBox">
                 <div className="yearAndKmBox">
                   <span className="yearKm">2015</span>
-                  <span className="yearKm">25</span>
+                  <span className="yearKm">25 km</span>
                 </div>
 
                 <p className="price">R$ 00.000,00</p>
@@ -158,6 +158,7 @@ export const AdPage = () => {
 
             <textarea></textarea>
             <button>Comentar</button>
+            <div className=""></div>
           </CommentSection>
         </CommentsBox>
       </Body>

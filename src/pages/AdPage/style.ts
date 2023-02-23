@@ -106,6 +106,13 @@ export const CarSection = styled.section`
         border-radius: 4px;
         max-width: 60px;
         margin-right: 0.75rem;
+        font-family: var(--font-inter);
+        font-style: normal;
+        font-weight: 500;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+
+        color: var(--colors-brand-1);
       }
     }
   }
@@ -153,13 +160,14 @@ export const Aside = styled.aside`
     .photoList {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
       width: 100%;
       .photoElement {
         display: flex;
         align-items: center;
         padding: 27px 7px;
-        width: 31%;
+        width: 29%;
         height: 6.75rem;
         background: var(--colors-grey-7);
         border-radius: 4px;
@@ -236,7 +244,6 @@ export const CommentsBox = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid red;
   }
 `;
 
@@ -330,7 +337,7 @@ export const Comments = styled.section`
 
 export const CommentSection = styled.section`
   width: 60.5%;
-  height: 289px;
+  height: 300px;
   padding: 2rem 2rem 2rem 2rem;
   background: var(--colors-white);
   border-radius: 4px;
@@ -338,13 +345,15 @@ export const CommentSection = styled.section`
 
   textarea {
     width: 100%;
-    height: 70%;
+    height: 60%;
+    border: 1.5px solid var(--colors-grey-7);
+    border-radius: 4px;
   }
 
   button {
     position: absolute;
-    right: 10%;
-    top: 70%;
+    right: 50px;
+    top: 185px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -397,5 +406,9 @@ export const CommentSection = styled.section`
   }
   @media screen and (max-width: 1000px) {
     width: 100%;
+    button {
+      top: 250px;
+      left: 31px;
+    }
   }
 `;
