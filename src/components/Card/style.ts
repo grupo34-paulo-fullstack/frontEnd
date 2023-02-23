@@ -17,15 +17,15 @@ export const Container = styled.li`
 
     width: 312px;
     height: 350px;
+    padding-left: 10px;
 
     h5 {
-        margin: 0 auto;
+        /* margin: 0 auto; */
         font-size: 1rem;
     }
 
     p {
         text-align: left;
-        padding-left: 10px;
     }
 
     .container-name{
@@ -43,7 +43,7 @@ export const Container = styled.li`
     }
 
     .container-infos{
-        padding-left: 10px;
+        /* padding-left: 10px; */
         width: 100%;
 
         display: flex;
@@ -91,3 +91,16 @@ export const SpanInfo = styled.div`
         border-radius: 4px;
     }  
 `
+
+export const ButtonsForAnnouncer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 16px;
+    /* margin-left: 10px; */
+
+    button:last-child {
+        margin-left: 16px;
+    } 
+` 

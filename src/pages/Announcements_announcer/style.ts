@@ -4,9 +4,13 @@ export const AnnouncementsAnnouncerPageStyle = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2444px;
+  height: 2500px;
   max-width: 100vw;
   width: 100%;
+
+  @media (max-width: 800px) {
+    height: 2100px;
+  }
 
   .container-page {
     display: flex;
@@ -16,6 +20,7 @@ export const AnnouncementsAnnouncerPageStyle = styled.main`
     height: 100%;
     max-width: 1600px;
     width: 100%;
+    background-color: var(--colors-grey-8);
 
     .background-announcer {
       display: flex;
@@ -40,8 +45,19 @@ export const AnnouncementsAnnouncerPageStyle = styled.main`
       padding: 44px 71px 44px 41px;
       background-color: var(--colors-grey-10);
 
+      @media (max-width: 1272px) {
+        max-width: 1190px;
+      }
+
+      @media (max-width: 800px) {
+        height: 461px;
+      }
+
       figure {
         margin: 0;
+        width: 104px;
+        height: 104px;
+
         img {
           width: 104px;
           height: 104px;
@@ -85,21 +101,106 @@ export const AnnouncementsAnnouncerPageStyle = styled.main`
         }
       }
 
-      p {
+      #description {
         font-family: "Inter";
         font-weight: 400;
         font-size: 16px;
+        text-align: justify;
+        width: 100%;
         color: var(--colors-grey-2);
         line-height: 28px;
       }
     }
 
     .content-announcements {
-     display: flex;
-     max-width: 1600px;
-     flex-direction: column;
-     align-items: flex-start;
-     margin-top: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 1493px;
+      width: 100%;
+      margin-top: 293px;
+      padding-left: 10px;
+      padding-right: 10px;
+
+      @media (max-width: 800px) {
+        margin-top: 300px;
+      }
+
+      #title-auction {
+        margin-bottom: 40px;
+
+        @media (max-width: 800px) {
+          display: none;
+        }
+      }
+
+      .list-auction {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        margin-bottom: 200px;
+        overflow-y: hidden;
+
+        @media (max-width: 1500px) {
+          overflow-x: scroll;
+        }
+
+        @media (max-width: 800px) {
+          margin-bottom: 52px;
+        }
+
+        li {
+          margin-right: 24px;
+        }
+      }
+
+      #title-cars {
+        margin-bottom: 62px;
+      }
+
+      .list-cars {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        overflow-y: hidden;
+        margin-bottom: 210px;
+
+        @media (max-width: 1500px) {
+          overflow-x: scroll;
+        }
+
+        @media (max-width: 800px) {
+          margin-bottom: 52px;
+        }
+
+        li {
+          margin-right: 48px;
+          margin-bottom: 15px;
+        }
+      }
+
+      #title-bikes {
+        margin-bottom: 62px;
+      }
+
+      .list-bikes {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        overflow-y: hidden;
+
+        @media (max-width: 1500px) {
+          overflow-x: scroll;
+        }
+
+        li {
+          margin-right: 48px;
+          margin-bottom: 15px;
+        }
+      }
     }
   }
 `;

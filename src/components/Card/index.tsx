@@ -1,4 +1,5 @@
-import { Container, NameIcon, SpanInfo } from "./style"
+import { Button } from "../Button";
+import { ButtonsForAnnouncer, Container, NameIcon, SpanInfo } from "./style"
 
 export interface ICard {
     image: string;
@@ -39,9 +40,9 @@ export const Card = ( props: {item: ICard} ): JSX.Element => {
             <div className="container-image"><img src={props.item.image} alt="" /></div>
             <h5>{props.item.title}</h5>
             <p className="text-body-2-400">{props.item.description}</p>
-            <div className="container-name text-body-1-400"> 
+            {props.item.name != 'Samuel Leão' ? (<div className="container-name text-body-1-400"> 
                 <NameIcon className="container-nameIcon-icon text-body-2-400" backgroundColor={generateColor()}>{props.item.name[0]}</NameIcon> {props.item.name}
-            </div>
+            </div>) : (<div className="container-name text-body-1-400"></div>)}
             <div className="container-infos">
                 <SpanInfo>
                     <span className="text-body-2-500">{props.item.km}</span> 
@@ -49,6 +50,11 @@ export const Card = ( props: {item: ICard} ): JSX.Element => {
                 </SpanInfo> 
                 <p className="text-body-1-400">{props.item.price}</p>
             </div>
+                {props.item.name == 'Samuel Leão' && 
+                <ButtonsForAnnouncer>
+                    <Button width="80px" height="38px" color="#212529" outline_color="#212529" outline_hover="#5126EA" background_hover="#5126EA" background="#FFFFF" children="Editar" />
+                    <Button width="105px" height="38px" color="#212529" outline_color="#212529" outline_hover="#5126EA" background_hover="#5126EA" background="#FFFFF" children="Ver como" />
+                </ButtonsForAnnouncer>}
         </Container>
     )
 }
