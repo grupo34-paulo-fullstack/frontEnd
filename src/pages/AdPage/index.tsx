@@ -1,5 +1,4 @@
 import { Header } from "../../components/Header";
-import { Button } from "../../components/Button";
 
 import {
   MainContent,
@@ -7,6 +6,7 @@ import {
   Aside,
   BoxImgCarInfoDescription,
   CarSection,
+  Comments,
 } from "./style";
 
 export const AdPage = () => {
@@ -32,7 +32,82 @@ export const AdPage = () => {
 
               <button>Comprar</button>
             </CarSection>
-            <div></div>
+            <section className="description">
+              <h6>Descrição</h6>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book.
+              </p>
+            </section>
+
+            <Comments>
+              <h6>Comentários</h6>
+
+              <ul className="commentList">
+                <li className="listElement">
+                  <div className="userInfo">
+                    <span className="userBall">LS</span>{" "}
+                    <p className="name"> Luís Santos</p>{" "}
+                    <div className="userDot"></div>{" "}
+                    <span className="postedDate">há 3 dias</span>{" "}
+                  </div>
+                  <p className="userComment">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book.
+                  </p>
+                </li>
+                <li className="listElement">
+                  <div className="userInfo">
+                    <span className="userBall">LS</span>{" "}
+                    <p className="name"> Luís Santos</p>{" "}
+                    <div className="userDot"></div>{" "}
+                    <span className="postedDate">há 3 dias</span>{" "}
+                  </div>
+                  <p className="userComment">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book.
+                  </p>
+                </li>
+                <li className="listElement">
+                  <div className="userInfo">
+                    <span className="userBall">LS</span>{" "}
+                    <p className="name"> Luís Santos</p>{" "}
+                    <div className="userDot"></div>{" "}
+                    <span className="postedDate">há 3 dias</span>{" "}
+                  </div>
+                  <p className="userComment">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book.
+                  </p>
+                </li>
+                <li className="listElement">
+                  <div className="userInfo">
+                    <span className="userBall">LS</span>{" "}
+                    <p className="name"> Luís Santos</p>{" "}
+                    <div className="userDot"></div>{" "}
+                    <span className="postedDate">há 3 dias</span>{" "}
+                  </div>
+                  <p className="userComment">
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book.
+                  </p>
+                </li>
+              </ul>
+            </Comments>
           </BoxImgCarInfoDescription>
 
           <Aside>
@@ -59,7 +134,15 @@ export const AdPage = () => {
                 </li>
               </ul>
             </section>
-            <div></div>
+            <section className="userSection">
+              <div className="userTag">SL</div>
+              <span className="userName">Samuel Leão</span>
+              <p className="userDescription">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's
+              </p>
+              <button className="userAds">Ver todos anúncios</button>
+            </section>
           </Aside>
         </MainContent>
       </Body>

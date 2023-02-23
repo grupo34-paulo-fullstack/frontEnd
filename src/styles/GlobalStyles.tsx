@@ -82,7 +82,6 @@ export const GlobalStyle = createGlobalStyle`
   --colors-grey-1: #212529;
   --colors-grey-2: #495057;
   --colors-grey-3: #868E96;
-  --colors-grey-3: #868E96;
   --colors-grey-4: #ADB5BD;
   --colors-grey-5: #CED4DA;
   --colors-grey-6: #DEE2E6;
@@ -237,4 +236,5 @@ html {
     padding: 0;
     border: 0;
   }
+
 `;
