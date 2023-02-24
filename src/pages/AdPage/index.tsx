@@ -51,22 +51,46 @@ export const AdPage = () => {
               <h6>Fotos</h6>
               <ul className="photoList">
                 <li className="photoElement">
-                  <img src="https://wallpapercave.com/wp/PV1fKeQ.jpg" alt="" />
+                  <img
+                    className="asideImg"
+                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
+                    alt=""
+                  />
                 </li>
                 <li className="photoElement">
-                  <img src="https://wallpapercave.com/wp/PV1fKeQ.jpg" alt="" />
+                  <img
+                    className="asideImg"
+                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
+                    alt=""
+                  />
                 </li>
                 <li className="photoElement">
-                  <img src="https://wallpapercave.com/wp/PV1fKeQ.jpg" alt="" />
+                  <img
+                    className="asideImg"
+                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
+                    alt=""
+                  />
                 </li>
                 <li className="photoElement">
-                  <img src="https://wallpapercave.com/wp/PV1fKeQ.jpg" alt="" />
+                  <img
+                    className="asideImg"
+                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
+                    alt=""
+                  />
                 </li>
                 <li className="photoElement">
-                  <img src="https://wallpapercave.com/wp/PV1fKeQ.jpg" alt="" />
+                  <img
+                    className="asideImg"
+                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
+                    alt=""
+                  />
                 </li>
                 <li className="photoElement">
-                  <img src="https://wallpapercave.com/wp/PV1fKeQ.jpg" alt="" />
+                  <img
+                    className="asideImg"
+                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
+                    alt=""
+                  />
                 </li>
               </ul>
             </section>
