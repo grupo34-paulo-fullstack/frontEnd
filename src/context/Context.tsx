@@ -3,8 +3,15 @@ import { IContext, IProvider } from "../interfaces/context";
 
 export const Context = createContext({} as IContext);
 
-const Provider = ({ children }: IProvider) => {
-  return <Context.Provider value={{}}>{children}</Context.Provider>;
-};
+export const Provider = ({ children }: IProvider) => {
+  const [showAddAnnouncementModal, setShowAddAnnouncementModal] =
+    useState<boolean>(false);
 
-export default Provider;
+  return (
+    <Context.Provider
+      value={{ showAddAnnouncementModal, setShowAddAnnouncementModal }}
+    >
+      {children}
+    </Context.Provider>
+  );
+};

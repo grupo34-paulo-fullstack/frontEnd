@@ -1,4 +1,4 @@
-import Footer from "../../components/Footer";
+import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AnnouncementsAnnouncerPageStyle } from "./style";
 import announcer from "../../assets/announcer_sl.png";
@@ -7,9 +7,13 @@ import { CardAuction } from "../../components/CardAuction";
 import { database } from "../../components/CardAuction/database";
 import { Card } from "../../components/Card";
 import { v4 as uuid } from 'uuid'
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Context } from "../../context/Context";
+import { ModallAddAnnouncement } from "../../components/ModalAddAnnouncement";
 
 export const AnnouncementAnnouncerPage = () => {
+
+  const { showAddAnnouncementModal, setShowAddAnnouncementModal } = useContext(Context)
   const [cars, setCars] = useState([
     {
       image:
@@ -107,6 +111,7 @@ export const AnnouncementAnnouncerPage = () => {
   return (
     <>
       <Header />
+      {showAddAnnouncementModal && <ModallAddAnnouncement />}
       <AnnouncementsAnnouncerPageStyle>
         <div className="container-page">
           <div className="background-announcer" />
@@ -137,6 +142,7 @@ export const AnnouncementAnnouncerPage = () => {
               children="Criar anúncio"
               width="160px"
               lower_width="160px"
+              onClick={() => setShowAddAnnouncementModal(true)}
             />
           </div>
 

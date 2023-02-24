@@ -2,7 +2,7 @@ import {Button} from "../../components/Button"
 import { Card, data } from "../../components/Card"
 import { CardAuction } from "../../components/CardAuction"
 import { database } from "../../components/CardAuction/database"
-import Footer from "../../components/Footer"
+import { Footer } from "../../components/Footer"
 import {Header} from "../../components/Header"
 import { Auction, CardCars, Container } from "./style"
 

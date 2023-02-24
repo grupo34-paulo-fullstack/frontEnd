@@ -3,5 +3,6 @@ export interface IProvider {
 }
 
 export interface IContext {
-  
+  showAddAnnouncementModal: boolean
+  setShowAddAnnouncementModal: React.Dispatch<React.SetStateAction<boolean>>
 }
