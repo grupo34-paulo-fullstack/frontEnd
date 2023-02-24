@@ -126,7 +126,7 @@ export const CarSection = styled.section`
       font-weight: 500;
       font-size: 16px;
       line-height: 20px;
-      color: #212529;
+      color: var(--colors-grey-1);
     }
   }
   button {
@@ -370,6 +370,14 @@ export const CommentSection = styled.section`
     height: 60%;
     border: 1.5px solid var(--colors-grey-7);
     border-radius: 4px;
+    resize: none;
+    font-family: var(--font-inter);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--colors-grey-2);
+    padding: 1rem 1rem 1rem 1rem;
   }
 
   button {

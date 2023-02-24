@@ -180,7 +180,7 @@ export const AdPage = () => {
               <p className="nameComment"> Samuel Leão</p>{" "}
             </div>
 
-            <textarea></textarea>
+            <textarea placeholder="Carro muito confortável, foi uma ótima experiência de compra..."></textarea>
             <button>Comentar</button>
             <div className=""></div>
           </CommentSection>
