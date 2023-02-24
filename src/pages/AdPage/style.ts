@@ -19,20 +19,25 @@ export const MainContent = styled.div`
   display: flex;
   margin-top: 2.5rem;
   width: 68.3%;
+  max-width: 1300px;
+
   @media screen and (max-width: 1000px) {
     display: flex;
     flex-direction: column;
+    width: 90%;
+    max-width: 2000px;
   }
 `;
 
 export const BoxImgCarInfoDescription = styled.div`
-  width: 100%;
-  max-width: 49rem;
-
+  width: 65%;
   display: flex;
   flex-direction: column;
   margin-right: 2rem;
 
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
   figure {
     display: flex;
     align-items: center;
@@ -115,6 +120,14 @@ export const CarSection = styled.section`
         color: var(--colors-brand-1);
       }
     }
+    .price {
+      font-family: var(--font-lexend);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: var(--colors-grey-1);
+    }
   }
   button {
     display: flex;
@@ -137,8 +150,8 @@ export const CarSection = styled.section`
 `;
 
 export const Aside = styled.aside`
-  width: 100%;
-  max-width: 30rem;
+  width: 35%;
+  /* max-width: 30rem; */
 
   @media screen and (max-width: 1000px) {
     width: 100%;
@@ -166,11 +179,16 @@ export const Aside = styled.aside`
       .photoElement {
         display: flex;
         align-items: center;
+        justify-content: center;
         padding: 27px 7px;
         width: 29%;
         height: 6.75rem;
         background: var(--colors-grey-7);
         border-radius: 4px;
+        .asideImg {
+          width: 85%;
+          height: 100%;
+        }
       }
     }
   }
@@ -238,12 +256,16 @@ export const Aside = styled.aside`
 `;
 
 export const CommentsBox = styled.section`
-  width: 68%;
+  width: 68.3%;
+  max-width: 1300px;
   margin-bottom: 4.563rem;
+  margin-top: 1rem;
   @media screen and (max-width: 1000px) {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 90%;
+    max-width: 2000px;
   }
 `;
 
@@ -251,12 +273,12 @@ export const Comments = styled.section`
   display: flex;
   flex-direction: column;
 
-  width: 60.4%;
+  width: 63.4%;
 
   padding: 2rem 2rem 2rem 2rem;
   background: var(--colors-white);
   border-radius: 4px;
-  margin-top: 1rem;
+
   margin-bottom: 1rem;
   h6 {
     margin-bottom: 1rem;
@@ -336,7 +358,7 @@ export const Comments = styled.section`
 `;
 
 export const CommentSection = styled.section`
-  width: 60.5%;
+  width: 63.4%;
   height: 300px;
   padding: 2rem 2rem 2rem 2rem;
   background: var(--colors-white);
@@ -348,6 +370,14 @@ export const CommentSection = styled.section`
     height: 60%;
     border: 1.5px solid var(--colors-grey-7);
     border-radius: 4px;
+    resize: none;
+    font-family: var(--font-inter);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--colors-grey-2);
+    padding: 1rem 1rem 1rem 1rem;
   }
 
   button {

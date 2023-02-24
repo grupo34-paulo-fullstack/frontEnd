@@ -60,7 +60,7 @@ export const AnnouncementAnnouncerPage = () => {
       price: "R$ 10.541,56",
     },
   ]);
-  
+
   const [bikes, setBikes] = useState([
     {
       image:
@@ -160,13 +160,17 @@ export const AnnouncementAnnouncerPage = () => {
             <h3 id="title-cars">Carros</h3>
 
             <ul className="list-cars">
-              {cars.map((item) => (<Card key={uuid()} item={item} />) )}
+              {cars.map((item) => (
+                <Card key={uuid()} item={item} />
+              ))}
             </ul>
 
             <h3 id="title-bikes">Motos</h3>
 
             <ul className="list-bikes">
-              {bikes.map((item) => (<Card key={uuid()} item={item} />))}
+              {bikes.map((item) => (
+                <Card key={uuid()} item={item} />
+              ))}
             </ul>
           </div>
         </div>
