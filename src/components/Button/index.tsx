@@ -13,6 +13,7 @@ export const Button = ({
   width,
   height,
   lower_width,
+  onClick
 }: IButton) => (
   <ButtonStyle
     width={width ? width : "146px"}
@@ -25,6 +26,7 @@ export const Button = ({
     background_hover={background_hover}
     color_hover={color_hover}
     disable={disable}
+    onClick={onClick}
   >
     {children}
   </ButtonStyle>

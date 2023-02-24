@@ -10,6 +10,7 @@ export interface IButton {
   width?: string
   height?: string
   lower_width?: string
+  onClick?: () => void
 }
 
 export interface IButtonStyleProps {
@@ -23,4 +24,5 @@ export interface IButtonStyleProps {
   width?: string
   height?: string
   lower_width?: string
+  onClick?: () => void
 }
