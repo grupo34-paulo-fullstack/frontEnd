@@ -55,12 +55,12 @@ export const ModallAddAnnouncement = () => {
     resolver: yupResolver(schema),
   });
 
-  const { fields, append, remove } = useFieldArray({ control, name: "photos" })
+  const { fields, append, remove } = useFieldArray({ control, name: "photos" });
 
   const show = (data) => console.log(data);
 
   return (
-    <AddAnnouncementStyle >
+    <AddAnnouncementStyle>
       <div className="container-modal">
         <div className="header-modal">
           <h4>Criar anúncio</h4>
@@ -160,7 +160,6 @@ export const ModallAddAnnouncement = () => {
               id="motorcycle"
               value="motorcycle"
               name="type_vehicle"
-             
             />
             <label
               onClick={() => {
@@ -197,12 +196,11 @@ export const ModallAddAnnouncement = () => {
             <>
               <label htmlFor="image-one">Imagem da galeria</label>
               <input
-              key={field}
+                key={field}
                 {...register(`photos.${index}.value`)}
                 id="image-one"
                 type="text"
                 placeholder="Inserir URL da imagem"
-                
               />
             </>
           ))}
