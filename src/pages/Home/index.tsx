@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import { Button } from "../../components/Button";
-import { Card, data } from "../../components/Card";
+import { Card } from "../../components/Card";
 import { CardAuction } from "../../components/CardAuction";
 import { database } from "../../components/CardAuction/database";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { Context } from "../../context/Context";
 import { Auction, CardCars, Container } from "./style";
 
 export const Home = () => {
+  const { announcements } = useContext(Context);
+
   return (
     <>
       <Header />
@@ -45,17 +49,21 @@ export const Home = () => {
       <CardCars>
         <h5>Carros</h5>
         <ul>
-          {data.map((item) => (
-            <Card item={item} />
-          ))}
+          {announcements
+            .filter((value) => value.type_vehicle === "car")
+            .map((item) => (
+              <Card item={item} />
+            ))}
         </ul>
       </CardCars>
       <CardCars>
         <h5>Motos</h5>
         <ul>
-          {data.map((item) => (
-            <Card item={item} />
-          ))}
+          {announcements
+            .filter((value) => value.type_vehicle === "motorcycle")
+            .map((item) => (
+              <Card item={item} />
+            ))}
         </ul>
       </CardCars>
       <Footer />
