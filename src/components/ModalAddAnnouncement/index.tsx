@@ -3,7 +3,7 @@ import { Context } from "../../context/Context";
 import { AddAnnouncementStyle } from "./style";
 import { CgClose } from "react-icons/cg";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IFormCreateAnnouncement } from "../../interfaces/components";
 
@@ -48,11 +48,14 @@ export const ModallAddAnnouncement = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormCreateAnnouncement>({
     resolver: yupResolver(schema),
   });
+
+  const { fields, append, remove } = useFieldArray({ control, name: "photos" })
 
   const show = (data) => console.log(data);
 
@@ -183,22 +186,23 @@ export const ModallAddAnnouncement = () => {
 
           <label htmlFor="first_image_gallery">1ª Imagem da galeria</label>
           <input
-            {...register("photo1")}
+            {...register("photos")}
             id="first_image_gallery"
             type="text"
-            name="photo1"
+            // name="photos"
             placeholder="Inserir URL da imagem"
           />
 
-          {addMoreImages.map((value, index) => (
+          {addMoreImages.map((field, index) => (
             <>
               <label htmlFor="image-one">Imagem da galeria</label>
               <input
-                {...register("photos")}
+              key={field}
+                {...register(`photos.${index}.value`)}
                 id="image-one"
                 type="text"
                 placeholder="Inserir URL da imagem"
-                name={`photos${index}`}
+                
               />
             </>
           ))}
