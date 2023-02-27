@@ -35,9 +35,6 @@ export const ModallAddAnnouncement = () => {
   const { setShowAddAnnouncementModal, createAnnouncement } =
     useContext(Context);
 
-  const [addMoreImages, setAddMoreImages] = useState<number[]>([]);
-  const [count, setCount] = useState<number>(1);
-
   const {
     register,
     control,
@@ -48,8 +45,6 @@ export const ModallAddAnnouncement = () => {
   });
 
   const { fields, append } = useFieldArray({ control, name: "photos_gallery" });
-
-  console.log(register);
 
   return (
     <AddAnnouncementStyle>
@@ -228,13 +223,3 @@ export const ModallAddAnnouncement = () => {
     </AddAnnouncementStyle>
   );
 };
-
-// errors.description ||
-//         errors.first_photo_gallery ||
-//         errors.image ||
-//         errors.km ||
-//         errors.photos_gallery ||
-//         errors.price ||
-//         errors.title ||
-//         errors.type_vehicle ||
-//         errors.year
