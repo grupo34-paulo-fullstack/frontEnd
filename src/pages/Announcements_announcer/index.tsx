@@ -61,7 +61,7 @@ export const AnnouncementAnnouncerPage = () => {
       price: "R$ 10.541,56",
     },
   ]);
-  
+
   const [bikes, setBikes] = useState([
     {
       image:
