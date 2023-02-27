@@ -1,15 +1,16 @@
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AnnouncementsAnnouncerPageStyle } from "./style";
-import announcer from "../../assets/announcer_sl.png";
 import { Button } from "../../components/Button";
 import { CardAuction } from "../../components/CardAuction";
 import { database } from "../../components/CardAuction/database";
-import { Card } from "../../components/Card";
 import { v4 as uuid } from 'uuid'
 import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import { ModallAddAnnouncement } from "../../components/ModalAddAnnouncement";
+import { CardForAnnouncer } from "../../components/CardForAnnouncer";
+import announcer from '../../assets/announcer_sl.png'
+import { CardAuctionForAnnouncer } from "../../components/CardAuctionForAnnouncer";
 
 export const AnnouncementAnnouncerPage = () => {
 
@@ -153,20 +154,20 @@ export const AnnouncementAnnouncerPage = () => {
               {database
                 .filter((result) => result.name == "Samuel Leão")
                 .map((item) => (
-                  <CardAuction key={uuid()} item={item} />
+                  <CardAuctionForAnnouncer key={uuid()} item={item} />
                 ))}
             </ul>
 
             <h3 id="title-cars">Carros</h3>
 
             <ul className="list-cars">
-              {cars.map((item) => (<Card key={uuid()} item={item} />) )}
+              {cars.map((item) => (<CardForAnnouncer key={uuid()} item={item} />) )}
             </ul>
 
             <h3 id="title-bikes">Motos</h3>
 
             <ul className="list-bikes">
-              {bikes.map((item) => (<Card key={uuid()} item={item} />))}
+              {bikes.map((item) => (<CardForAnnouncer key={uuid()} item={item} />))}
             </ul>
           </div>
         </div>

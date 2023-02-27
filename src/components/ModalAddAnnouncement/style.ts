@@ -155,7 +155,7 @@ export const AddAnnouncementStyle = styled.div`
         font-size: 16px;
         border-radius: 4px;
         padding-left: 16px;
-        margin-bottom: 24px;
+        margin-bottom: 12px;
         transition: 0.2s;
 
         &:hover {
@@ -175,23 +175,32 @@ export const AddAnnouncementStyle = styled.div`
         }
       }
 
+      span {
+        color: #CD2B31;
+        font-family: var(--font-inter);
+        font-size: 13px;
+        margin-bottom: 12px;
+        width: max-content;
+      }
+
       .year-km-price {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        margin-bottom: 24px;
+        margin-bottom: 12px;
 
         div {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           width: 148px;
-          height: 73px;
+          height: 113px;
 
           input {
             height: 48px;
             margin: 0;
+            margin-bottom: 12px;
           }
         }
       }
@@ -210,7 +219,7 @@ export const AddAnnouncementStyle = styled.div`
         resize: none;
         background-color: var(--colors-grey-10);
         transition: 0.2s;
-        margin-bottom: 24px;
+        margin-bottom: 12px;
 
         &::placeholder {
           font-weight: 400;
@@ -235,7 +244,6 @@ export const AddAnnouncementStyle = styled.div`
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        margin-bottom: 24px;
 
         input {
           display: none;

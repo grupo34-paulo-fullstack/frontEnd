@@ -1,6 +1,6 @@
 import { Button } from "../Button";
 import { ButtonsForAnnouncer, Container, NameIcon, SpanInfo } from "./style";
-import { IAnnouncement } from "../../interfaces/context/index"
+import { IAnnouncement } from "../../interfaces/context/index";
 
 export interface ICard {
   image: string;
@@ -21,7 +21,7 @@ function generateColor() {
   return color;
 }
 
-export const Card = ({item}: IAnnouncement) => {
+export const CardForAnnouncer = ({ item }) => {
   const nameToArray = "Filipe Judiss".split(" ");
   const name = nameToArray[0][0] + nameToArray[1][0];
 
@@ -30,6 +30,7 @@ export const Card = ({item}: IAnnouncement) => {
       <div className="container-image">
         <img src={item.image} alt="" />
       </div>
+
       <h5>{item.title}</h5>
 
       <p className="text-body-2-400">{item.description}</p>
@@ -52,6 +53,28 @@ export const Card = ({item}: IAnnouncement) => {
         <p className="text-body-1-400">{item.price}</p>
       </div>
 
+      <ButtonsForAnnouncer>
+        <Button
+          width="80px"
+          height="38px"
+          color="#212529"
+          outline_color="#212529"
+          outline_hover="#5126EA"
+          background_hover="#5126EA"
+          background="#FFFFF"
+          children="Editar"
+        />
+        <Button
+          width="105px"
+          height="38px"
+          color="#212529"
+          outline_color="#212529"
+          outline_hover="#5126EA"
+          background_hover="#5126EA"
+          background="#FFFFF"
+          children="Ver como"
+        />
+      </ButtonsForAnnouncer>
     </Container>
   );
 };

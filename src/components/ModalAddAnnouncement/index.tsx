@@ -1,29 +1,63 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../../context/Context";
 import { AddAnnouncementStyle } from "./style";
 import { CgClose } from "react-icons/cg";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { IFormCreateAnnouncement } from "../../interfaces/components";
 
-const schema = yup.object().shape({});
+const schema = yup.object().shape({
+  title: yup.string().required("Este campo é obrigatório"),
+  year: yup
+    .number()
+    .typeError("Apenas números")
+    .min(1970, "Acima de 1970")
+    .required("Este campo é obrigatório"),
+  km: yup
+    .number()
+    .typeError("Apenas números")
+    .min(0, "Inválido")
+    .required("Este campo é obrigatório"),
+  price: yup
+    .number()
+    .typeError("Apenas números")
+    .min(1, "Inválido")
+    .required("Este campo é obrigatório"),
+  description: yup.string().required("Este campo é obrigatório"),
+  type_vehicle: yup.string(),
+  image: yup.string().required("Este campo é obrigatório"),
+  photos: yup.array(yup.string()).ensure(),
+});
 
 export const ModallAddAnnouncement = () => {
-  const { setShowAddAnnouncementModal } = useContext(Context);
+  const { setShowAddAnnouncementModal, createAnnouncement } =
+    useContext(Context);
+
+  // CSS: label-add-gallery-1 { display: {  } }
 
   const [addMoreImages, setAddMoreImages] = useState<number[]>([]);
   const [count, setCount] = useState<number>(1);
+  const [isMotorcycle, setIsMotorcycle] = useState<boolean>(false);
+  const [isCar, setIsCar] = useState<boolean>(false);
+
+  // useEffect(() => {
+  //   console.log("moto selected", isMotorcycle);
+  //   console.log("car selected", isCar);
+  // }, [isMotorcycle, isCar]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IFormCreateAnnouncement>({
     resolver: yupResolver(schema),
   });
 
+  const show = (data) => console.log(data);
+
   return (
-    <AddAnnouncementStyle>
+    <AddAnnouncementStyle >
       <div className="container-modal">
         <div className="header-modal">
           <h4>Criar anúncio</h4>
@@ -39,89 +73,142 @@ export const ModallAddAnnouncement = () => {
         </div>
 
         <h5 id="title-form">Informações do veículo</h5>
-        <form>
+        <form onSubmit={handleSubmit(show)}>
           <label htmlFor="title">Título</label>
-          <input id="title" type="text" placeholder="Digitar título" />
+          <input
+            {...register("title")}
+            id="title"
+            type="text"
+            placeholder="Digitar título"
+          />
+          <span>{errors.title?.message}</span>
 
           <div className="year-km-price">
             <div className="label-input-year">
               <label htmlFor="year">Ano</label>
-              <input id="year" type="text" placeholder="Digitar ano" />
+              <input
+                {...register("year")}
+                id="year"
+                type="number"
+                min={1970}
+                placeholder="Digitar ano"
+              />
+              <span>{errors.year?.message}</span>
             </div>
 
             <div className="label-input-km">
               <label htmlFor="km">Quilometragem</label>
-              <input id="km" type="text" placeholder="0" />
+              <input
+                {...register("km")}
+                id="km"
+                type="number"
+                min={0}
+                placeholder="0"
+              />
+              <span>{errors.km?.message}</span>
             </div>
 
             <div className="label-input-price">
               <label htmlFor="price">Preço</label>
-              <input id="price" type="text" placeholder="Digitar preço" />
+              <input
+                {...register("price")}
+                id="price"
+                type="number"
+                min={1}
+                placeholder="Digitar preço"
+              />
+              <span>{errors.price?.message}</span>
             </div>
           </div>
 
           <label htmlFor="description">Descrição</label>
           <textarea
+            {...register("description")}
             id="description"
             placeholder="Digitar descrição"
             rows={4}
             cols={50}
           />
+          <span>{errors.description?.message}</span>
 
           <h5 id="title-type-vehicle">Tipo de veículo</h5>
           <div className="types-vehicle">
             <input
               {...register("type_vehicle")}
-              id="car"
               type="radio"
+              id="car"
               value="car"
-              name="type-vehicle"
-              checked
+              name="type_vehicle"
             />
-            <label className="label-car" htmlFor="car">
+            <label
+              onClick={() => {
+                setIsCar(true);
+                setIsMotorcycle(false);
+              }}
+              className="label-car"
+              htmlFor="car"
+            >
               Carro
             </label>
 
             <input
               {...register("type_vehicle")}
-              id="motorcycle"
               type="radio"
+              id="motorcycle"
               value="motorcycle"
-              name="type-vehicle"
+              name="type_vehicle"
+             
             />
-            <label className="label-motorcycle" htmlFor="motorcycle">
+            <label
+              onClick={() => {
+                setIsCar(false);
+                setIsMotorcycle(true);
+              }}
+              className="label-motorcycle"
+              htmlFor="motorcycle"
+            >
               Moto
             </label>
           </div>
+          <span>{errors.type_vehicle?.message}</span>
 
           <label htmlFor="image-principal">Imagem de capa</label>
           <input
+            {...register("image")}
             id="image-principal"
             type="text"
             placeholder="Inserir URL da imagem"
           />
+          <span>{errors.image?.message}</span>
 
           <label htmlFor="first_image_gallery">1ª Imagem da galeria</label>
           <input
+            {...register("photo1")}
             id="first_image_gallery"
             type="text"
+            name="photo1"
             placeholder="Inserir URL da imagem"
           />
 
-          {addMoreImages.map(() => (
+          {addMoreImages.map((value, index) => (
             <>
               <label htmlFor="image-one">Imagem da galeria</label>
               <input
+                {...register("photos")}
                 id="image-one"
                 type="text"
                 placeholder="Inserir URL da imagem"
+                name={`photos${index}`}
               />
             </>
           ))}
 
           <button
-
-            id={addMoreImages.length < 5 ? "add-image-gallery" : "add-image-limit-reached"}
+            id={
+              addMoreImages.length < 5
+                ? "add-image-gallery"
+                : "add-image-limit-reached"
+            }
             onClick={(event) => {
               event.preventDefault();
               if (addMoreImages.length < 5) {
@@ -145,7 +232,12 @@ export const ModallAddAnnouncement = () => {
             >
               Cancelar
             </button>
-            <button id={errors ? "create-announcement-off" : "create-announcement-on"} type="submit">Criar anúncio</button>
+            <button
+              id={errors ? "create-announcement-off" : "create-announcement-on"}
+              type="submit"
+            >
+              Criar anúncio
+            </button>
           </div>
         </form>
       </div>
