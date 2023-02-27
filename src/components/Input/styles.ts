@@ -12,7 +12,7 @@ export const Container = styled.div`
     min-height: 1.5rem;
     padding-left: 1rem;
 
-    background-color: var(--color-grey-2);
+    background-color: var(--colors-grey-10);
     border: 1.2182px solid #343b41;
     border-radius: 4px;
 
