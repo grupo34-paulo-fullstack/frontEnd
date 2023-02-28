@@ -19,7 +19,7 @@ export const StyledBurger = styled.button<IStyledBurguerProps>`
   border: none;
   cursor: pointer;
   padding: 0;
-  z-index: 10;
+  z-index: 1;
 
   &:focus {
     outline: none;
@@ -71,6 +71,8 @@ export const MenuDropDown = styled.nav<IStyledBurguerProps>`
   flex-flow: row nowrap;
 
   position: relative;  
+
+  z-index: 100;
 
   hr{
     margin-top: 16px;
@@ -124,12 +126,17 @@ export const IconUser = styled.div`
     gap: 5px;
 
     p{
-        padding: 7px;
-        background-color: var(--colors-brand-2);
-        border-radius: 50%;
+      padding: 7px;
+      background-color: var(--colors-brand-2);
+      border-radius: 50%;
 
-        color: var(--colors-white);
+      color: var(--colors-white);
 
-        line-height: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 30px;
+      height: 30px;
     }
 `

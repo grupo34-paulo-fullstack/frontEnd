@@ -37,7 +37,8 @@ export interface IFormCreateAnnouncement {
   description: string
   type_vehicle: string
   image: string
-  photos: Array<[]>
+  first_photo_gallery:  string
+  photos_gallery: any
 }
 
 export interface IFormUpdateAnnouncement {
@@ -52,3 +53,7 @@ export interface IFormUpdateAnnouncement {
   gallery?: IGallery[]
 }
 
+export interface ILoginRequest {
+  email: string;
+  password: string;
+}

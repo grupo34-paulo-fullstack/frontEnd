@@ -15,6 +15,13 @@ export interface IContext {
   deleteAnnouncement: (id: string) => void
 }
 
+export interface IAuthContext {
+  user: IUser | null;
+  setUser: any;
+  setLoading:any;
+  loading: boolean;
+}
+
 export interface IAnnouncement {
   id: string;
   title: string;

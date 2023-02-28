@@ -351,7 +351,7 @@ export const AddAnnouncementStyle = styled.div`
           }
         }
 
-        #create-announcement-off {
+        #create-announcement {
           cursor: pointer;
           width: 193px;
           height: 48px;
@@ -361,6 +361,7 @@ export const AddAnnouncementStyle = styled.div`
           color: var(--colors-brand-4);
           border-radius: 4px;
           border: 1.5px solid var(--colors-brand-3);
+          transition: 0.2s;
         }
 
         #create-announcement-on {
@@ -373,6 +374,7 @@ export const AddAnnouncementStyle = styled.div`
           color: white;
           border-radius: 4px;
           border: 1.5px solid var(--colors-brand-1);
+          transition: 0.2s;
 
           &:hover {
             background-color: var(--colors-brand-2);

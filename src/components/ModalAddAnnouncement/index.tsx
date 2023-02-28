@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import { AddAnnouncementStyle } from "./style";
 import { CgClose } from "react-icons/cg";
@@ -25,26 +25,15 @@ const schema = yup.object().shape({
     .min(1, "Inválido")
     .required("Este campo é obrigatório"),
   description: yup.string().required("Este campo é obrigatório"),
-  type_vehicle: yup.string(),
+  type_vehicle: yup.string().required("Este campo é obrigatório"),
   image: yup.string().required("Este campo é obrigatório"),
-  photos: yup.array(yup.string()).ensure(),
+  first_photo_gallery: yup.string().required("Este campo é obrigatório"),
+  photos_gallery: yup.array(yup.string()).ensure(),
 });
 
 export const ModallAddAnnouncement = () => {
   const { setShowAddAnnouncementModal, createAnnouncement } =
     useContext(Context);
-
-  // CSS: label-add-gallery-1 { display: {  } }
-
-  const [addMoreImages, setAddMoreImages] = useState<number[]>([]);
-  const [count, setCount] = useState<number>(1);
-  const [isMotorcycle, setIsMotorcycle] = useState<boolean>(false);
-  const [isCar, setIsCar] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   console.log("moto selected", isMotorcycle);
-  //   console.log("car selected", isCar);
-  // }, [isMotorcycle, isCar]);
 
   const {
     register,
@@ -55,9 +44,7 @@ export const ModallAddAnnouncement = () => {
     resolver: yupResolver(schema),
   });
 
-  const { fields, append, remove } = useFieldArray({ control, name: "photos" });
-
-  const show = (data) => console.log(data);
+  const { fields, append } = useFieldArray({ control, name: "photos_gallery" });
 
   return (
     <AddAnnouncementStyle>
@@ -76,7 +63,7 @@ export const ModallAddAnnouncement = () => {
         </div>
 
         <h5 id="title-form">Informações do veículo</h5>
-        <form onSubmit={handleSubmit(show)}>
+        <form onSubmit={handleSubmit(createAnnouncement)}>
           <label htmlFor="title">Título</label>
           <input
             {...register("title")}
@@ -143,14 +130,7 @@ export const ModallAddAnnouncement = () => {
               value="car"
               name="type_vehicle"
             />
-            <label
-              onClick={() => {
-                setIsCar(true);
-                setIsMotorcycle(false);
-              }}
-              className="label-car"
-              htmlFor="car"
-            >
+            <label className="label-car" htmlFor="car">
               Carro
             </label>
 
@@ -161,14 +141,7 @@ export const ModallAddAnnouncement = () => {
               value="motorcycle"
               name="type_vehicle"
             />
-            <label
-              onClick={() => {
-                setIsCar(false);
-                setIsMotorcycle(true);
-              }}
-              className="label-motorcycle"
-              htmlFor="motorcycle"
-            >
+            <label className="label-motorcycle" htmlFor="motorcycle">
               Moto
             </label>
           </div>
@@ -185,41 +158,41 @@ export const ModallAddAnnouncement = () => {
 
           <label htmlFor="first_image_gallery">1ª Imagem da galeria</label>
           <input
-            {...register("photos")}
+            {...register("first_photo_gallery")}
             id="first_image_gallery"
             type="text"
-            // name="photos"
             placeholder="Inserir URL da imagem"
           />
+          <span>{errors.first_photo_gallery?.message}</span>
 
-          {addMoreImages.map((field, index) => (
-            <>
-              <label htmlFor="image-one">Imagem da galeria</label>
-              <input
-                key={field}
-                {...register(`photos.${index}.value`)}
-                id="image-one"
-                type="text"
-                placeholder="Inserir URL da imagem"
-              />
-            </>
-          ))}
+          {fields.map((field, index) =>
+            index < 5 ? (
+              <>
+                <label htmlFor={`image-${index}`}>Imagem da galeria</label>
+                <input
+                  {...register(`photos_gallery.${index}`)}
+                  id={`image-${index}`}
+                  type="text"
+                  placeholder="Inserir URL da imagem"
+                />
+              </>
+            ) : (
+              ""
+            )
+          )}
 
           <button
             id={
-              addMoreImages.length < 5
+              fields.length < 5
                 ? "add-image-gallery"
                 : "add-image-limit-reached"
             }
-            onClick={(event) => {
-              event.preventDefault();
-              if (addMoreImages.length < 5) {
-                setCount(count + 1);
-                setAddMoreImages((old) => [...old, count]);
-              }
+            type="button"
+            onClick={() => {
+              append("");
             }}
           >
-            {addMoreImages.length < 5
+            {fields.length < 5
               ? "Adicionar campo para imagem da galeria"
               : "Máximo de fotos por anúncio atingido"}
           </button>
@@ -235,7 +208,11 @@ export const ModallAddAnnouncement = () => {
               Cancelar
             </button>
             <button
-              id={errors ? "create-announcement-off" : "create-announcement-on"}
+              id={
+                Object.keys(errors).length != 0
+                  ? "create-announcement"
+                  : "create-announcement-on"
+              }
               type="submit"
             >
               Criar anúncio
