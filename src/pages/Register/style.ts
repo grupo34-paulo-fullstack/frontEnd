@@ -42,4 +42,35 @@ export const Form = styled.form`
     margin-bottom: 1.5rem;
     color: #000000;
   }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 28px;
+    gap: 10px;
+    background: var(--colors-brand-4);
+    color: var(--colors-grey-0);
+    cursor: pointer;
+    /* Brand/brand1 */
+
+    border: 1.5px solid var(--colors-brand-4);
+    border-radius: 4px;
+    &:hover {
+      color: var(--colors-white);
+      background-color: var(--colors-brand-1);
+      transition: 0.8s;
+    }
+  }
+
+  .boxTwoInfos {
+    display: flex;
+    width: 100%;
+
+    .boxFirstHalf {
+      padding-right: 5px;
+    }
+    .boxSecondHalf {
+    }
+  }
 `;

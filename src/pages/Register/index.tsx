@@ -82,25 +82,29 @@ export const RegisterPage = () => {
             error={errors?.cep}
             type="text"
           />
+          <div className="boxTwoInfos">
+            <div className="boxFirstHalf">
+              <Input
+                id="state"
+                placeholder="Ex: ES"
+                label="Estado"
+                {...register("state")}
+                error={errors?.state}
+                type="text"
+              />
+            </div>
 
-          <Input
-            id="state"
-            placeholder="Ex: ES"
-            label="Estado"
-            {...register("state")}
-            error={errors?.state}
-            type="text"
-          />
-
-          <Input
-            id="city"
-            placeholder="Digitar cidade"
-            label="Cidade"
-            {...register("city")}
-            error={errors?.city}
-            type="text"
-          />
-
+            <div className="boxSecondHalf">
+              <Input
+                id="city"
+                placeholder="Digitar cidade"
+                label="Cidade"
+                {...register("city")}
+                error={errors?.city}
+                type="text"
+              />
+            </div>
+          </div>
           <Input
             id="street"
             placeholder="Digitar Rua"
@@ -110,23 +114,39 @@ export const RegisterPage = () => {
             type="text"
           />
 
-          <Input
-            id="description"
-            placeholder="Digite aqui seu nome"
-            label="Descrição"
-            {...register("description")}
-            error={errors?.description}
-            type="text"
-          />
+          <div className="boxTwoInfos">
+            <div className="boxFirstHalf">
+              <Input
+                id="number"
+                placeholder="Digitar número"
+                label="Número"
+                {...register("number")}
+                error={errors?.number}
+                type="text"
+              />
+            </div>
+            <div className="boxSecondHalf">
+              <Input
+                id="complement"
+                placeholder="Ex: apart 307"
+                label="Complemento"
+                {...register("complement")}
+                error={errors?.complement}
+                type="text"
+              />
+            </div>
+          </div>
 
           <Input
-            id="description"
-            placeholder="Digite aqui seu nome"
-            label="Descrição"
-            {...register("description")}
-            error={errors?.description}
-            type="text"
+            id="complement"
+            placeholder=""
+            label="Tipo de conta"
+            {...register("is_announcer")}
+            error={errors?.is_announcer}
+            type="radio"
           />
+
+          <button type="submit">Finalizar Cadastro</button>
         </Form>
       </RegisterMain>
       <Footer />
