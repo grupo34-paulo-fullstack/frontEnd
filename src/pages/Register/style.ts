@@ -65,12 +65,56 @@ export const Form = styled.form`
 
   .boxTwoInfos {
     display: flex;
+    display: flex;
+    align-items: center;
+
     width: 100%;
 
     .boxFirstHalf {
       padding-right: 5px;
+      width: 50%;
     }
     .boxSecondHalf {
+      width: 50%;
     }
+    #True {
+      &:checked ~ .adLabel {
+        transition: 0.2s;
+        background-color: var(--colors-brand-1);
+        border-color: var(--colors-brand-1);
+        color: white;
+      }
+    }
+
+    #False {
+      &:checked ~ .adLabel {
+        transition: 0.2s;
+        background-color: var(--colors-brand-1);
+        border-color: var(--colors-brand-1);
+        color: white;
+      }
+    }
+  }
+
+  .adInput {
+    display: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 0;
+  }
+  .adLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 48px;
+    padding: 12px 28px;
+    border: 1.5px solid var(--colors-grey-4);
+    border-radius: 4px;
+    background-color: white;
+    color: var(--colors-grey-0);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
   }
 `;

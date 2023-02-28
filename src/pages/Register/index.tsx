@@ -6,8 +6,11 @@ import { registerSchema } from "../../schema/registerSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { IUser } from "../../interfaces/context";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
 
 export const RegisterPage = () => {
+  const { handleRegister } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -20,7 +23,7 @@ export const RegisterPage = () => {
     <>
       <Header />
       <RegisterMain>
-        <Form>
+        <Form onSubmit={handleSubmit(handleRegister)}>
           <h5>Cadastro</h5>
           <span>informações pessoais</span>
           <Input
@@ -136,14 +139,52 @@ export const RegisterPage = () => {
               />
             </div>
           </div>
+          <span>Tipo de conta</span>
+          <div className="boxTwoInfos">
+            <div className="boxFirstHalf">
+              <input
+                className="adInput"
+                value="False"
+                id="False"
+                type="radio"
+                {...register("is_announcer")}
+              />
+              <label className="adLabel" htmlFor="False">
+                {" "}
+                Comprador
+              </label>
+            </div>
+            <div className="boxSecondHalf">
+              <input
+                className="adInput"
+                value="True"
+                id="True"
+                type="radio"
+                {...register("is_announcer")}
+              />
+              <label className="adLabel" htmlFor="True">
+                {" "}
+                Anunciante
+              </label>
+            </div>
+          </div>
 
           <Input
-            id="complement"
-            placeholder=""
-            label="Tipo de conta"
-            {...register("is_announcer")}
-            error={errors?.is_announcer}
-            type="radio"
+            id="password"
+            placeholder="Digitar senha"
+            label="Senha"
+            {...register("password")}
+            error={errors?.password}
+            type="password"
+          />
+
+          <Input
+            id="confirmPassword"
+            placeholder="Digitar senha"
+            label="Confirmar Senha"
+            {...register("passwordCheck")}
+            error={errors?.passwordCheck}
+            type="password"
           />
 
           <button type="submit">Finalizar Cadastro</button>
