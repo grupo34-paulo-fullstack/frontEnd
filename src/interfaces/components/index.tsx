@@ -53,3 +53,7 @@ export interface IFormUpdateAnnouncement {
   gallery?: IGallery[]
 }
 
+export interface ILoginRequest {
+  email: string;
+  password: string;
+}

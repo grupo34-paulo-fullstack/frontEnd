@@ -88,11 +88,14 @@ export const NavUser = styled.div`
     p{
         padding: 10px;
         background-color: var(--colors-brand-2);
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
 
         color: var(--colors-white);
-
-        line-height: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     h4{
