@@ -1,7 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { IAuthContext, IProvider, IUser } from "../interfaces/context";
+import {
+  IAuthContext,
+  IProvider,
+  IUser,
+  ICreateUser,
+} from "../interfaces/context";
 import { api } from "../service/api";
 
 export const AuthContext = createContext({} as IAuthContext);
@@ -11,9 +16,13 @@ export const Provider = ({ children }: IProvider) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const handleRegister = async (data: IUser) => {
+  const handleRegister = async (data: ICreateUser) => {
+    // console.log(data);
+    const announcer = data.is_announcer === "Anunciante" ? true : false;
+    const newData = { ...data, is_announcer: announcer };
+    console.log(newData);
     await api
-      .post("users", data)
+      .post("users", newData)
       .then((response) => {
         toast.success("Conta criada com sucesso!");
         return navigate("/login");

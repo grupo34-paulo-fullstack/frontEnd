@@ -6,6 +6,7 @@ import {
 } from "../interfaces/components";
 import { IAnnouncement, IContext, IProvider } from "../interfaces/context";
 import { api } from "../service/api";
+import { FocusEvent } from "react";
 
 export const Context = createContext({} as IContext);
 
@@ -50,6 +51,15 @@ export const Provider = ({ children }: IProvider) => {
       .delete(`/announcements/${id}`)
       .catch((error) => toast.error(`${error.response.data.message}`));
 
+  const checkCep = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const cep = e.target.value.replace(/\D/g, "");
+    fetch(`viacep.com.br/ws/${cep}/json/`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
     <Context.Provider
       value={{
@@ -61,6 +71,7 @@ export const Provider = ({ children }: IProvider) => {
         getAllAnnouncements,
         updateAnnouncement,
         deleteAnnouncement,
+        checkCep,
       }}
     >
       {children}

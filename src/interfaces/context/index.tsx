@@ -16,10 +16,11 @@ export interface IContext {
   getAllAnnouncements: () => Promise<void>;
   updateAnnouncement: (data: IFormUpdateAnnouncement, id: string) => void;
   deleteAnnouncement: (id: string) => void;
+  checkCep: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface IAuthContext {
-  handleRegister: (data: IUser) => void;
+  handleRegister: (data: ICreateUser) => void;
   user: IUser | null;
   setUser: any;
   setLoading: any;
@@ -61,6 +62,25 @@ export interface IUser {
   number: number;
   complement?: string;
   is_announcer: boolean;
+  password: string;
+  passwordCheck?: string;
+}
+
+export interface ICreateUser {
+  id: string;
+  name: string;
+  email: string;
+  cpf: string;
+  phone: string;
+  birthdate: string;
+  description?: string;
+  cep: string;
+  state: string;
+  city: string;
+  street: string;
+  number: number;
+  complement?: string;
+  is_announcer: string;
   password: string;
   passwordCheck?: string;
 }

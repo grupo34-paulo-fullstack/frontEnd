@@ -77,7 +77,7 @@ export const Form = styled.form`
     .boxSecondHalf {
       width: 50%;
     }
-    #True {
+    #Anunciante {
       &:checked ~ .adLabel {
         transition: 0.2s;
         background-color: var(--colors-brand-1);
@@ -86,7 +86,7 @@ export const Form = styled.form`
       }
     }
 
-    #False {
+    #Comprador {
       &:checked ~ .adLabel {
         transition: 0.2s;
         background-color: var(--colors-brand-1);
