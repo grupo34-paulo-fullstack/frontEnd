@@ -1,4 +1,7 @@
-import { IFormCreateAnnouncement, IFormUpdateAnnouncement } from "../components";
+import {
+  IFormCreateAnnouncement,
+  IFormUpdateAnnouncement,
+} from "../components";
 
 export interface IProvider {
   children: React.ReactNode;
@@ -7,12 +10,16 @@ export interface IProvider {
 export interface IContext {
   showAddAnnouncementModal: boolean;
   setShowAddAnnouncementModal: React.Dispatch<React.SetStateAction<boolean>>;
-  announcements: IAnnouncement[]
-  setAnnouncements: React.Dispatch<React.SetStateAction<IAnnouncement[]>>
-  createAnnouncement: (data: IFormCreateAnnouncement) => void
-  getAllAnnouncements: () => Promise<void>
-  updateAnnouncement: (data: IFormUpdateAnnouncement, id: string) => void
-  deleteAnnouncement: (id: string) => void
+  announcements: IAnnouncement[];
+  setAnnouncements: React.Dispatch<React.SetStateAction<IAnnouncement[]>>;
+  createAnnouncement: (data: IFormCreateAnnouncement) => void;
+  getAllAnnouncements: () => Promise<void>;
+  updateAnnouncement: (data: IFormUpdateAnnouncement, id: string) => void;
+  deleteAnnouncement: (id: string) => void;
+  showModalAddAnnouncementSuccess: boolean;
+  setShowModalAddAnnouncementSuccess: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
 }
 
 export interface IAuthContext {
@@ -38,12 +45,12 @@ export interface IAnnouncement {
 }
 
 export interface IGallery {
-  id: string
-  image: string
+  id: string;
+  image: string;
 }
 
 export interface IUser {
-  id: string
+  id: string;
   name: string;
   email: string;
   cpf: string;

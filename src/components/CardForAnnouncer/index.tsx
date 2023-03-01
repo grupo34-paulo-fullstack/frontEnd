@@ -50,7 +50,7 @@ export const CardForAnnouncer = ({ item }) => {
           <span className="text-body-2-500">{item.km}</span>
           <span className="text-body-2-500">{item.year}</span>
         </SpanInfo>
-        <p className="text-body-1-400">{item.price}</p>
+        <p className="text-body-1-400">R$ {item.price}</p>
       </div>
 
       <ButtonsForAnnouncer>

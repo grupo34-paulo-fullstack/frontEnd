@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import {
   IFormCreateAnnouncement,
   IFormUpdateAnnouncement,
@@ -19,8 +20,10 @@ export const Provider = ({ children }: IProvider) => {
 
   const [showAddAnnouncementModal, setShowAddAnnouncementModal] =
     useState<boolean>(false);
-
   const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
+  const [showModalAddAnnouncementSuccess, setShowModalAddAnnouncementSuccess] =
+    useState<boolean>(false);
+  const navigate = useNavigate()
 
   const getAllAnnouncements = () =>
     api
@@ -28,27 +31,37 @@ export const Provider = ({ children }: IProvider) => {
       .then((res) => setAnnouncements(res.data))
       .catch((error) => console.log(error));
 
-  const createAnnouncement = async (data: IFormCreateAnnouncement) =>
+  const createAnnouncement = async (data: IFormCreateAnnouncement) => {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
     await api
       .post("/announcements", data)
       .then((res) => {
         setAnnouncements((old) => [...old, res.data]);
-        toast.success("Anúncio criado com sucesso!");
+        setShowAddAnnouncementModal(false);
+        setShowModalAddAnnouncementSuccess(true);
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
+  };
 
   const updateAnnouncement = async (
     data: IFormUpdateAnnouncement,
     id: string
-  ) =>
+  ) => {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
     await api
       .patch(`/announcements/${id}`, data)
       .catch((error) => toast.error(`${error.response.data.message}`));
+  };
 
-  const deleteAnnouncement = async (id: string) =>
+  const deleteAnnouncement = async (id: string) => {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
     await api
       .delete(`/announcements/${id}`)
       .catch((error) => toast.error(`${error.response.data.message}`));
+  };
 
   return (
     <Context.Provider
@@ -61,6 +74,8 @@ export const Provider = ({ children }: IProvider) => {
         getAllAnnouncements,
         updateAnnouncement,
         deleteAnnouncement,
+        showModalAddAnnouncementSuccess,
+        setShowModalAddAnnouncementSuccess,
       }}
     >
       {children}
