@@ -6,7 +6,9 @@ export const LoginMain = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100% - 220px);
+  min-height: 786px;
+  height: 100%;
+  max-height: 80vh;
   background: rgba(233, 236, 239, 1);
 `;
 
@@ -21,6 +23,7 @@ export const Form = styled.form`
   width: 25.688rem;
   margin-top: 2.875rem;
   margin-bottom: 2.875rem;
+  border-radius: 4px;
   h5 {
     font-family: var(--font-lexend);
     font-style: normal;
@@ -45,32 +48,46 @@ export const Form = styled.form`
     color: #000000;
   }
 
-  p{
+  p {
     color: var(--colors-grey-2);
     text-align: center;
     margin: 1.5rem 0;
+    font-family: var(--font-inter);
   }
 
-  .forget-password{
+  .forget-password {
     text-align: end;
+    width: max-content;
     cursor: pointer;
     margin-bottom: 20px;
+    margin-left: 174px;
     margin-top: -22px;
     z-index: 1;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
-  @media (max-width: 425px){
+  .label {
+    color: var(--colors-grey-2);
+  } 
+
+  @media (max-width: 425px) {
     width: 90%;
     padding: 7%;
   }
 `;
 
-export const BodyLogin = styled.div`   
-    height: 100vh;
-` 
+export const BodyLogin = styled.div`
+  height: 100vh;
+`;
 
 export const BtnSignIn = styled.button`
-  width: 19.70rem;
+  width: 19.7rem;
   height: 3rem;
 
   background: var(--colors-brand-4);
@@ -81,19 +98,19 @@ export const BtnSignIn = styled.button`
 
   transition: 0.4s;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
     background: var(--colors-brand-1);
     color: var(--colors-white);
   }
 
-  @media (max-width: 425px){
+  @media (max-width: 425px) {
     width: 100%;
   }
-`
+`;
 
 export const BtnSignUp = styled(Link)`
-  width: 19.70rem;
+  width: 19.7rem;
   height: 3rem;
 
   color: var(--colors-grey-0);
@@ -109,15 +126,14 @@ export const BtnSignUp = styled(Link)`
 
   transition: 0.4s;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
     border: 2px solid var(--colors-grey-0);
     background-color: var(--colors-grey-0);
     color: var(--colors-white);
   }
 
-  @media (max-width: 425px){
+  @media (max-width: 425px) {
     width: 100%;
   }
-`
-  
+`;

@@ -23,7 +23,7 @@ export const Provider = ({ children }: IProvider) => {
   const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
   const [showModalAddAnnouncementSuccess, setShowModalAddAnnouncementSuccess] =
     useState<boolean>(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const getAllAnnouncements = () =>
     api
