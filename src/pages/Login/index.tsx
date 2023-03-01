@@ -44,7 +44,7 @@ export const LoginPage = () => {
           navigate("/", {replace: true})
         }, 1000)
       })
-      .catch((error) => toast.error(`${error.response.data.message}`));
+      .catch((error) => toast.error(`${error.message}`));
   }
 
   const handleModalForgetPassword = () => {
