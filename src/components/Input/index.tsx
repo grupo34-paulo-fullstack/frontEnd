@@ -3,7 +3,7 @@ import { FieldError } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
 import { Container, Error } from "./styles";
 import { RefAttributes } from "react";
-// import { FocusEvent } from "react";
+
 interface InputProps {
   id: string;
   label: string;
@@ -11,9 +11,6 @@ interface InputProps {
   error?: FieldError;
   placeholder?: string;
   autoComplete?: string;
-  onBlur?: any;
-  value?: boolean;
-  name?: string;
 }
 
 export const Input = forwardRef(
@@ -23,11 +20,8 @@ export const Input = forwardRef(
       label,
       error,
       type,
-      placeholder,
       autoComplete,
-      onBlur,
-      value,
-      name,
+      placeholder,
       ...register
     }: InputProps,
     ref: React.LegacyRef<HTMLInputElement>

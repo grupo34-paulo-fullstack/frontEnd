@@ -17,7 +17,6 @@ export const Provider = ({ children }: IProvider) => {
   const navigate = useNavigate();
 
   const handleRegister = async (data: ICreateUser) => {
-    // console.log(data);
     const announcer = data.is_announcer === "Anunciante" ? true : false;
     const newData = { ...data, is_announcer: announcer };
     console.log(newData);
