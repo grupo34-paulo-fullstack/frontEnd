@@ -34,7 +34,7 @@ export const LoginPage = () => {
       .post("/session", data)
       .then((res) => {
 
-        localStorage.setItem("@token", JSON.stringify(res.data.token))
+        localStorage.setItem("@token", res.data.token)
         localStorage.setItem("@user", JSON.stringify(res.data.user)) 
         setUser(res.data.user)
         

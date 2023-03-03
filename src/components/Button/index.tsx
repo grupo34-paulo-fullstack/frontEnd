@@ -2,6 +2,7 @@ import { IButton } from "../../interfaces/components";
 import { ButtonStyle } from "./style";
 
 export const Button = ({
+  id,
   background,
   color,
   outline_color,
@@ -13,9 +14,10 @@ export const Button = ({
   width,
   height,
   lower_width,
-  onClick
+  onClick,
 }: IButton) => (
   <ButtonStyle
+    id={id}
     width={width ? width : "146px"}
     height={height ? height : "48px"}
     lower_width={lower_width ? lower_width : "119px"}

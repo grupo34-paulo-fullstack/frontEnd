@@ -6,7 +6,6 @@ import {
 } from "../interfaces/components";
 import { IAnnouncement, IContext, IProvider } from "../interfaces/context";
 import { api } from "../service/api";
-import { FocusEvent } from "react";
 
 export const Context = createContext({} as IContext);
 
@@ -18,38 +17,69 @@ export const Provider = ({ children }: IProvider) => {
       .catch((error) => console.log(error));
   }, []);
 
+  const token = localStorage.getItem("@token");
+
   const [showAddAnnouncementModal, setShowAddAnnouncementModal] =
+    useState<boolean>(false);
+  const [showEditAnnouncementModal, setShowEditAnnouncementModal] =
     useState<boolean>(false);
 
   const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
+  const [announcementId, setAnnouncementId] = useState<string>("");
 
-  const getAllAnnouncements = () =>
+  const createAnnouncement = (data: IFormCreateAnnouncement) => {
+    const token = localStorage.getItem("@token");
+
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    const { first_photo_gallery, photos_gallery, ...rest } = data;
+
+    let gallery = [];
+
+    data.photos_gallery.map((value: string) => gallery.push(value));
+
+    gallery.unshift(data.first_photo_gallery);
+
+    const newData = { ...rest, gallery };
+
     api
-      .get("/announcements")
-      .then((res) => setAnnouncements(res.data))
-      .catch((error) => console.log(error));
-
-  const createAnnouncement = async (data: IFormCreateAnnouncement) =>
-    await api
-      .post("/announcements", data)
+      .post("/announcements", newData)
       .then((res) => {
         setAnnouncements((old) => [...old, res.data]);
         toast.success("Anúncio criado com sucesso!");
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
+  };
 
-  const updateAnnouncement = async (
-    data: IFormUpdateAnnouncement,
-    id: string
-  ) =>
-    await api
-      .patch(`/announcements/${id}`, data)
+  const updateAnnouncement = (data: IFormUpdateAnnouncement, id: string) => {
+    const token = localStorage.getItem("@token");
+
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    const { first_photo_gallery, photos_gallery, ...rest } = data;
+
+    let gallery = [];
+
+    data.photos_gallery.map((value: string) => gallery.push(value));
+
+    gallery.unshift(data.first_photo_gallery);
+
+    const newData = { ...rest, gallery };
+
+    console.log(newData)
+
+    api
+      .patch(`/announcements/${id}`, newData)
       .catch((error) => toast.error(`${error.response.data.message}`));
+  };
 
-  const deleteAnnouncement = async (id: string) =>
-    await api
+  const deleteAnnouncement = (id: string) => {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    api
       .delete(`/announcements/${id}`)
       .catch((error) => toast.error(`${error.response.data.message}`));
+  };
 
   const checkCep = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const cep = e.target.value.replace(/\D/g, "");
@@ -68,10 +98,13 @@ export const Provider = ({ children }: IProvider) => {
         announcements,
         setAnnouncements,
         createAnnouncement,
-        getAllAnnouncements,
         updateAnnouncement,
         deleteAnnouncement,
         checkCep,
+        showEditAnnouncementModal,
+        setShowEditAnnouncementModal,
+        announcementId,
+        setAnnouncementId,
       }}
     >
       {children}

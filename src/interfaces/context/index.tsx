@@ -10,13 +10,16 @@ export interface IProvider {
 export interface IContext {
   showAddAnnouncementModal: boolean;
   setShowAddAnnouncementModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showEditAnnouncementModal: boolean;
+  setShowEditAnnouncementModal: React.Dispatch<React.SetStateAction<boolean>>;
   announcements: IAnnouncement[];
   setAnnouncements: React.Dispatch<React.SetStateAction<IAnnouncement[]>>;
-  createAnnouncement: (data: IFormCreateAnnouncement) => void;
-  getAllAnnouncements: () => Promise<void>;
-  updateAnnouncement: (data: IFormUpdateAnnouncement, id: string) => void;
-  deleteAnnouncement: (id: string) => void;
+  createAnnouncement: (data: IFormCreateAnnouncement) => void
+  updateAnnouncement: ((data: IFormUpdateAnnouncement, id: string) => void) | any
+  deleteAnnouncement: (id: string) => void
   checkCep: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  announcementId: string;
+  setAnnouncementId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface IAuthContext {

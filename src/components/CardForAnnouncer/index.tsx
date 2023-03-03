@@ -1,6 +1,7 @@
+import { useContext } from "react";
+import { Context } from "../../context/Context";
 import { Button } from "../Button";
 import { ButtonsForAnnouncer, Container, NameIcon, SpanInfo } from "./style";
-import { IAnnouncement } from "../../interfaces/context/index";
 
 export interface ICard {
   image: string;
@@ -22,8 +23,7 @@ function generateColor() {
 }
 
 export const CardForAnnouncer = ({ item }) => {
-  const nameToArray = "Filipe Judiss".split(" ");
-  const name = nameToArray[0][0] + nameToArray[1][0];
+  const { setAnnouncementId, setShowEditAnnouncementModal } = useContext(Context)
 
   return (
     <Container>
@@ -42,7 +42,7 @@ export const CardForAnnouncer = ({ item }) => {
         >
           {}
         </NameIcon>
-        {name}
+        {item.name}
       </div>
 
       <div className="container-infos">
@@ -50,11 +50,12 @@ export const CardForAnnouncer = ({ item }) => {
           <span className="text-body-2-500">{item.km}</span>
           <span className="text-body-2-500">{item.year}</span>
         </SpanInfo>
-        <p className="text-body-1-400">{item.price}</p>
+        <p className="text-body-1-400">R$ {item.price}</p>
       </div>
 
       <ButtonsForAnnouncer>
         <Button
+          id={item.id}
           width="80px"
           height="38px"
           color="#212529"
@@ -63,6 +64,10 @@ export const CardForAnnouncer = ({ item }) => {
           background_hover="#5126EA"
           background="#FFFFF"
           children="Editar"
+          onClick={(event: any) => {
+            setAnnouncementId(event.currentTarget.id)
+            setShowEditAnnouncementModal(true)
+          }}
         />
         <Button
           width="105px"

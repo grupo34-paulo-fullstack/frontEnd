@@ -46,7 +46,7 @@ export const RegisterPage = () => {
             type="text"
           />
           <Input
-            {...register("phone")}
+            {...register("cpf")}
             id="cpf"
             placeholder="000.000.000-00"
             label="CPF"

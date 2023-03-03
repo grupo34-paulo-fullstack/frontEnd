@@ -19,7 +19,7 @@ export const Provider = ({ children }: IProvider) => {
   const handleRegister = async (data: ICreateUser) => {
     const announcer = data.is_announcer === "Anunciante" ? true : false;
     const newData = { ...data, is_announcer: announcer };
-    console.log(newData);
+    
     await api
       .post("users", newData)
       .then((response) => {
