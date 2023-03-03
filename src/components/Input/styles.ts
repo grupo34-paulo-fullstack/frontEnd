@@ -6,20 +6,38 @@ export const Container = styled.div`
   justify-content: center;
   position: relative;
   width: 100%;
+
   input {
     width: 100%;
-    height: 2.8rem;
-    min-height: 1.5rem;
+    height: 48px;
     padding-left: 1rem;
     background-color: var(--colors-grey-10);
-    border: 1.2182px solid #343b41;
+    border: 1.5px solid var(--colors-grey-7);
     border-radius: 4px;
     font-style: normal;
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.625rem;
     margin-bottom: 2rem;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: var(--colors-grey-8);
+      outline-color: var(--colors-grey-8);
+    }
+
+    &::placeholder {
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--colors-grey-3);
+    }
+
+    &:focus {
+      background-color: var(--colors-grey-9);
+      outline-color: var(--colors-brand-2);
+    }
   }
+
   svg {
     position: absolute;
     color: red;
@@ -35,9 +53,11 @@ export const Container = styled.div`
 export const Error = styled.div`
   position: relative;
   display: flex;
+
   &:hover span {
     opacity: 1;
   }
+
   span {
     width: 155px;
     position: absolute;
@@ -48,6 +68,7 @@ export const Error = styled.div`
     top: 5px;
     opacity: 0;
     transition: opacity 0.4s;
+
     &::before {
       content: "";
       border-style: solid;

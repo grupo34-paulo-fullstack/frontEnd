@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import {
   IFormCreateAnnouncement,
   IFormUpdateAnnouncement,
@@ -23,9 +24,11 @@ export const Provider = ({ children }: IProvider) => {
     useState<boolean>(false);
   const [showEditAnnouncementModal, setShowEditAnnouncementModal] =
     useState<boolean>(false);
-
   const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
   const [announcementId, setAnnouncementId] = useState<string>("");
+  const [showModalAddAnnouncementSuccess, setShowModalAddAnnouncementSuccess] =
+    useState<boolean>(false);
+  const navigate = useNavigate();
 
   const createAnnouncement = (data: IFormCreateAnnouncement) => {
     const token = localStorage.getItem("@token");
@@ -46,7 +49,8 @@ export const Provider = ({ children }: IProvider) => {
       .post("/announcements", newData)
       .then((res) => {
         setAnnouncements((old) => [...old, res.data]);
-        toast.success("Anúncio criado com sucesso!");
+        setShowAddAnnouncementModal(false);
+        setShowModalAddAnnouncementSuccess(true);
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };

@@ -5,19 +5,21 @@ import { Button } from "../../components/Button";
 import { cardsAnnouncerPage } from "../../components/CardAuction/database";
 import { v4 as uuid } from "uuid";
 import { useContext } from "react";
+import { database } from "../../components/CardAuction/database";
 import { Context } from "../../context/Context";
 import { ModalAddAnnouncement } from "../../components/ModalAddAnnouncement";
 import { CardForAnnouncer } from "../../components/CardForAnnouncer";
 import announcer from "../../assets/announcer_sl.png";
 import { CardAuctionForAnnouncer } from "../../components/CardAuctionForAnnouncer";
 import { ModalEditAnnouncement } from "../../components/ModalEditAnnouncement";
+import { ModalAddAnnouncementSuccess } from "../../components/ModalAddAnnouncementSuccess";
 
 export const AnnouncementAnnouncerPage = () => {
   const {
+    announcements,
     showAddAnnouncementModal,
     setShowAddAnnouncementModal,
-    showEditAnnouncementModal,
-    announcements,
+    showModalAddAnnouncementSuccess,
   } = useContext(Context);
 
   return (
@@ -25,6 +27,8 @@ export const AnnouncementAnnouncerPage = () => {
       <Header />
       {showAddAnnouncementModal && <ModalAddAnnouncement />}
       {showEditAnnouncementModal && <ModalEditAnnouncement />}
+      {showModalAddAnnouncementSuccess && <ModalAddAnnouncementSuccess />}
+
       <AnnouncementsAnnouncerPageStyle>
         <div className="container-page">
           <div className="background-announcer" />
