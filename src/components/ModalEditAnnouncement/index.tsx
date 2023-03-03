@@ -1,57 +1,62 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Context } from "../../context/Context";
-import { AddAnnouncementStyle } from "./style";
+import { EditAnnouncementStyle } from "./style";
 import { CgClose } from "react-icons/cg";
 import * as yup from "yup";
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IFormCreateAnnouncement } from "../../interfaces/components";
+import { IFormUpdateAnnouncement } from "../../interfaces/components";
 
 const schema = yup.object().shape({
-  title: yup.string().required("Este campo é obrigatório"),
+  title: yup.string(),
   year: yup
     .number()
     .typeError("Apenas números")
-    .min(1970, "Acima de 1970")
-    .required("Este campo é obrigatório"),
+    .min(1970, "Acima de 1970"),
   km: yup
     .number()
     .typeError("Apenas números")
-    .min(0, "Inválido")
-    .required("Este campo é obrigatório"),
+    .min(0, "Inválido"),
   price: yup
     .number()
     .typeError("Apenas números")
-    .min(1, "Inválido")
-    .required("Este campo é obrigatório"),
-  description: yup.string().required("Este campo é obrigatório"),
-  type_vehicle: yup.string().required("Este campo é obrigatório"),
-  image: yup.string().required("Este campo é obrigatório"),
-  first_photo_gallery: yup.string().required("Este campo é obrigatório"),
+    .min(1, "Inválido"),
+  description: yup.string(),
+  type_vehicle: yup.string(),
+  image: yup.string(),
+  first_photo_gallery: yup.string(),
   photos_gallery: yup.array(yup.string()).ensure(),
 });
 
-export const ModalAddAnnouncement = () => {
-  const { setShowAddAnnouncementModal, createAnnouncement } =
-    useContext(Context);
+export const ModalEditAnnouncement = () => {
+  const {
+    setShowEditAnnouncementModal,
+    updateAnnouncement,
+    announcements,
+    announcementId,
+  } = useContext(Context);
+
+  const filteredAnnouncement = announcements.find(
+    (result) => result.id == announcementId
+  );
 
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormCreateAnnouncement>({
+  } = useForm<IFormUpdateAnnouncement>({
     resolver: yupResolver(schema),
   });
 
   const { fields, append } = useFieldArray({ control, name: "photos_gallery" });
 
   return (
-    <AddAnnouncementStyle>
+    <EditAnnouncementStyle>
       <div className="container-modal">
         <div className="header-modal">
-          <h4>Criar anúncio</h4>
-          <button onClick={() => setShowAddAnnouncementModal(false)}>
+          <h4>Editar anúncio</h4>
+          <button onClick={() => setShowEditAnnouncementModal(false)}>
             <CgClose />
           </button>
         </div>
@@ -63,13 +68,14 @@ export const ModalAddAnnouncement = () => {
         </div>
 
         <h5 id="title-form">Informações do veículo</h5>
-        <form onSubmit={handleSubmit(createAnnouncement)}>
+        <form onSubmit={handleSubmit(updateAnnouncement)}>
           <label htmlFor="title">Título</label>
           <input
             {...register("title")}
             id="title"
             type="text"
             placeholder="Digitar título"
+            defaultValue={`${filteredAnnouncement?.title}`}
           />
           <span>{errors.title?.message}</span>
 
@@ -82,6 +88,7 @@ export const ModalAddAnnouncement = () => {
                 type="number"
                 min={1970}
                 placeholder="Digitar ano"
+                defaultValue={`${filteredAnnouncement?.year}`}
               />
               <span>{errors.year?.message}</span>
             </div>
@@ -94,6 +101,7 @@ export const ModalAddAnnouncement = () => {
                 type="number"
                 min={0}
                 placeholder="0"
+                defaultValue={`${filteredAnnouncement?.km}`}
               />
               <span>{errors.km?.message}</span>
             </div>
@@ -106,6 +114,7 @@ export const ModalAddAnnouncement = () => {
                 type="number"
                 min={1}
                 placeholder="Digitar preço"
+                defaultValue={`${filteredAnnouncement?.price}`}
               />
               <span>{errors.price?.message}</span>
             </div>
@@ -118,6 +127,7 @@ export const ModalAddAnnouncement = () => {
             placeholder="Digitar descrição"
             rows={4}
             cols={50}
+            defaultValue={`${filteredAnnouncement?.description}`}
           />
           <span>{errors.description?.message}</span>
 
@@ -153,6 +163,7 @@ export const ModalAddAnnouncement = () => {
             id="image-principal"
             type="text"
             placeholder="Inserir URL da imagem"
+            defaultValue={`${filteredAnnouncement?.image}`}
           />
           <span>{errors.image?.message}</span>
 
@@ -202,7 +213,7 @@ export const ModalAddAnnouncement = () => {
               id="button-cancel"
               onClick={(event) => {
                 event.preventDefault();
-                setShowAddAnnouncementModal(false);
+                setShowEditAnnouncementModal(false);
               }}
             >
               Cancelar
@@ -220,6 +231,6 @@ export const ModalAddAnnouncement = () => {
           </div>
         </form>
       </div>
-    </AddAnnouncementStyle>
+    </EditAnnouncementStyle>
   );
 };

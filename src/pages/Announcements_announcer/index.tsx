@@ -2,15 +2,16 @@ import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AnnouncementsAnnouncerPageStyle } from "./style";
 import { Button } from "../../components/Button";
-import { CardAuction } from "../../components/CardAuction";
-import { database } from "../../components/CardAuction/database";
+import { cardsAnnouncerPage } from "../../components/CardAuction/database";
 import { v4 as uuid } from "uuid";
-import { useContext, useState } from "react";
+import { useContext } from "react";
+import { database } from "../../components/CardAuction/database";
 import { Context } from "../../context/Context";
-import { ModallAddAnnouncement } from "../../components/ModalAddAnnouncement";
+import { ModalAddAnnouncement } from "../../components/ModalAddAnnouncement";
 import { CardForAnnouncer } from "../../components/CardForAnnouncer";
 import announcer from "../../assets/announcer_sl.png";
 import { CardAuctionForAnnouncer } from "../../components/CardAuctionForAnnouncer";
+import { ModalEditAnnouncement } from "../../components/ModalEditAnnouncement";
 import { ModalAddAnnouncementSuccess } from "../../components/ModalAddAnnouncementSuccess";
 
 export const AnnouncementAnnouncerPage = () => {
@@ -24,8 +25,10 @@ export const AnnouncementAnnouncerPage = () => {
   return (
     <>
       <Header />
+      {showAddAnnouncementModal && <ModalAddAnnouncement />}
+      {showEditAnnouncementModal && <ModalEditAnnouncement />}
       {showModalAddAnnouncementSuccess && <ModalAddAnnouncementSuccess />}
-      {showAddAnnouncementModal && <ModallAddAnnouncement />}
+
       <AnnouncementsAnnouncerPageStyle>
         <div className="container-page">
           <div className="background-announcer" />
@@ -64,7 +67,7 @@ export const AnnouncementAnnouncerPage = () => {
             <h3 id="title-auction">Leilão</h3>
 
             <ul className="list-auction">
-              {database
+              {cardsAnnouncerPage
                 .filter((result) => result.name == "Samuel Leão")
                 .map((item) => (
                   <CardAuctionForAnnouncer key={uuid()} item={item} />

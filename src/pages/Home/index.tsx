@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
 import { CardAuction } from "../../components/CardAuction";
-import { database } from "../../components/CardAuction/database";
+import { cardsHome } from "../../components/CardAuction/database";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Context } from "../../context/Context";
@@ -41,7 +41,7 @@ export const Home = () => {
       <Auction>
         <h5>Leilão</h5>
         <ul>
-          {database.map((item) => (
+          {cardsHome.map((item) => (
             <CardAuction item={item} />
           ))}
         </ul>
