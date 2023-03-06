@@ -1,4 +1,5 @@
 import {
+  IEditUserProfile,
   IFormCreateAnnouncement,
   IFormUpdateAnnouncement,
 } from "../components";
@@ -14,12 +15,23 @@ export interface IContext {
   setShowEditAnnouncementModal: React.Dispatch<React.SetStateAction<boolean>>;
   announcements: IAnnouncement[];
   setAnnouncements: React.Dispatch<React.SetStateAction<IAnnouncement[]>>;
-  createAnnouncement: (data: IFormCreateAnnouncement) => void
-  updateAnnouncement: ((data: IFormUpdateAnnouncement, id: string) => void) | any
-  deleteAnnouncement: (id: string) => void
+  createAnnouncement: (data: IFormCreateAnnouncement) => void;
+  updateAnnouncement:
+    | ((data: IFormUpdateAnnouncement, id: string) => void)
+    | any;
+  deleteAnnouncement: (id: string) => void;
   checkCep: (e: React.ChangeEvent<HTMLInputElement>) => void;
   announcementId: string;
   setAnnouncementId: React.Dispatch<React.SetStateAction<string>>;
+  isModalProfileOpen: boolean;
+  setModalProfile: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowModalAddAnnouncementSuccess: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
+
+  updateUser: (data: IEditUserProfile) => void;
+  isModalAddressOpen: boolean;
+  setModalAddress: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IAuthContext {

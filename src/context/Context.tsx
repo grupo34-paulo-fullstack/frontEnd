@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   IFormCreateAnnouncement,
   IFormUpdateAnnouncement,
+  IEditUserProfile,
 } from "../interfaces/components";
 import { IAnnouncement, IContext, IProvider } from "../interfaces/context";
 import { api } from "../service/api";
@@ -20,6 +21,8 @@ export const Provider = ({ children }: IProvider) => {
 
   const token = localStorage.getItem("@token");
 
+  const [isModalProfileOpen, setModalProfile] = useState(false);
+  const [isModalAddressOpen, setModalAddress] = useState(false);
   const [showAddAnnouncementModal, setShowAddAnnouncementModal] =
     useState<boolean>(false);
   const [showEditAnnouncementModal, setShowEditAnnouncementModal] =
@@ -70,7 +73,7 @@ export const Provider = ({ children }: IProvider) => {
 
     const newData = { ...rest, gallery };
 
-    console.log(newData)
+    console.log(newData);
 
     api
       .patch(`/announcements/${id}`, newData)
@@ -94,6 +97,32 @@ export const Provider = ({ children }: IProvider) => {
       });
   };
 
+  const updateUser = (data: IEditUserProfile) => {
+    const token = localStorage.getItem("@token");
+
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    api
+      .patch(`/users`, data)
+      .then((response) => {
+        toast.success("Dados editados com sucesso!");
+      })
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+
+  const deleteUser = () => {
+    const token = localStorage.getItem("@token");
+
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    api
+      .delete(`/users`)
+      .then((response) => {
+        toast.success("Sua conta foi deletada!");
+      })
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+
   return (
     <Context.Provider
       value={{
@@ -109,6 +138,12 @@ export const Provider = ({ children }: IProvider) => {
         setShowEditAnnouncementModal,
         announcementId,
         setAnnouncementId,
+        isModalProfileOpen,
+        setModalProfile,
+        setShowModalAddAnnouncementSuccess,
+        updateUser,
+        isModalAddressOpen,
+        setModalAddress,
       }}
     >
       {children}

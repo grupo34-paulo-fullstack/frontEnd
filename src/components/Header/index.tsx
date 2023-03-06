@@ -7,11 +7,12 @@ import {
   NavLink,
   NavUser,
 } from "./style";
-import {Button} from "../Button";
+import { Button } from "../Button";
 import Burger from "./MenuHamburger";
 import { createRef, useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo_header.png";
 import { AuthContext } from "../../context/AuthContext";
+import { Context } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
@@ -26,26 +27,45 @@ export interface IMenuBurgerProps {
 export const Header = () => {
   const inputRef = createRef<HTMLInputElement>();
 
-  const { user, setUser } = useContext(AuthContext)
-  const navigate = useNavigate()
+  const { user, setUser } = useContext(AuthContext);
+  const { isModalProfileOpen, setModalProfile } = useContext(Context);
+  const { isModalAddressOpen, setModalAddress } = useContext(Context);
+  const navigate = useNavigate();
 
   const [isOpenMenuUser, setIsOpenMenuUser] = useState(false);
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false);
   const [width, setWidth] = useState<number>(0);
 
   function handleToggleMenuUser() {
-    setIsOpenMenuUser((prev) => !prev);    
+    setIsOpenMenuUser((prev) => !prev);
+  }
+
+  function openModal() {
+    setModalProfile(!isModalProfileOpen);
+  }
+
+  function openAddressModal() {
+    setModalAddress(!isModalAddressOpen);
+  }
+
+  function handleBothClicksAddress() {
+    handleToggleMenuUser();
+    openAddressModal();
+  }
+  function handleBothClicks() {
+    handleToggleMenuUser();
+    openModal();
   }
 
   function quitAccount() {
     setIsOpenMenuUser((prev) => !prev);
-    toast.success("Logout realizado com sucesso")
-    localStorage.removeItem("@token")
-    localStorage.removeItem("@user")
-    setUser(null)
-    setTimeout(()=> {
-      navigate("/", {replace: true})
-    }, 1000)
+    toast.success("Logout realizado com sucesso");
+    localStorage.removeItem("@token");
+    localStorage.removeItem("@user");
+    setUser(null);
+    setTimeout(() => {
+      navigate("/", { replace: true });
+    }, 1000);
   }
 
   function handleToggleHamburgerMenu() {
@@ -116,31 +136,47 @@ export const Header = () => {
           </NavLink>
           <div className="vertical-line" />
 
-          {user ?
-          <NavUser onClick={handleToggleMenuUser}>
-            <p className="text-button-big-text">{user.name.split(' ').map((name, index)=> index <= 1 ? name[0].toUpperCase() : undefined)}</p>
-            <h4 className="text-body-1-400">{user.name}</h4>
-          </NavUser>
-          :
-          <>
-            <NavLink className='text-body-1-600' to="/login">Fazer Login</NavLink>
-            <Button onClick={()=> navigate("/register", {replace: true})} background={'var(--colors-grey-10)'} color={'var(--colors-grey-0)'} outline_color={'var(--colors-grey-4)'} children={'Cadastrar'} background_hover={'var(--colors-grey-1)'} color_hover={'var(--colors-grey-10)'}></Button> 
-          </>
-          }
+          {user ? (
+            <NavUser onClick={handleToggleMenuUser}>
+              <p className="text-button-big-text">
+                {user.name
+                  .split(" ")
+                  .map((name, index) =>
+                    index <= 1 ? name[0].toUpperCase() : undefined
+                  )}
+              </p>
+              <h4 className="text-body-1-400">{user.name}</h4>
+            </NavUser>
+          ) : (
+            <>
+              <NavLink className="text-body-1-600" to="/login">
+                Fazer Login
+              </NavLink>
+              <Button
+                onClick={() => navigate("/register", { replace: true })}
+                background={"var(--colors-grey-10)"}
+                color={"var(--colors-grey-0)"}
+                outline_color={"var(--colors-grey-4)"}
+                children={"Cadastrar"}
+                background_hover={"var(--colors-grey-1)"}
+                color_hover={"var(--colors-grey-10)"}
+              ></Button>
+            </>
+          )}
 
           {isOpenMenuUser && (
             <MenuDropDown ref={inputRef} open={isOpenMenuUser} width={width}>
               <LinkDropDownUser
                 className="text-body-1-400"
                 to=""
-                onClick={handleToggleMenuUser}
+                onClick={handleBothClicks}
               >
                 Editar Perfil
               </LinkDropDownUser>
               <LinkDropDownUser
                 className="text-body-1-400"
                 to=""
-                onClick={handleToggleMenuUser}
+                onClick={handleBothClicksAddress}
               >
                 Editar Endereço
               </LinkDropDownUser>
@@ -157,7 +193,7 @@ export const Header = () => {
                 onClick={quitAccount}
               >
                 Sair
-              </LinkDropDownUser>              
+              </LinkDropDownUser>
             </MenuDropDown>
           )}
         </MenuNav>

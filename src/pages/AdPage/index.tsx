@@ -1,6 +1,5 @@
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-
 import {
   MainContent,
   Body,
@@ -11,10 +10,26 @@ import {
   CommentSection,
   CommentsBox,
 } from "./style";
+import { Context } from "../../context/Context";
+import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
+import { ModalEditAddress } from "../../components/ModalEditAddress";
+import { useContext } from "react";
 
 export const AdPage = () => {
+  const {
+    isModalProfileOpen,
+    setModalProfile,
+    isModalAddressOpen,
+    setModalAddress,
+  } = useContext(Context);
   return (
     <>
+      {isModalProfileOpen && (
+        <ModalProfileEditRemove setModalProfile={setModalProfile} />
+      )}
+      {isModalAddressOpen && (
+        <ModalEditAddress setModalAddress={setModalAddress} />
+      )}
       <Header />
       <Body>
         <MainContent>
