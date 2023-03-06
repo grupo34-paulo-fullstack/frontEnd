@@ -54,6 +54,7 @@ export const Provider = ({ children }: IProvider) => {
       .then((res) => setAnnouncements(res.data))
       .catch((error) => console.log(error));
 
+
   const createAnnouncement = (data: IFormCreateAnnouncement) => {
     const token = localStorage.getItem("@token");
 
@@ -63,9 +64,9 @@ export const Provider = ({ children }: IProvider) => {
 
     let gallery = [];
 
-    data.photos_gallery.map((value: string) => gallery.push(value));
+    data.photos_gallery.map((value: string) => gallery.push({image: value}));
 
-    gallery.unshift(data.first_photo_gallery);
+    gallery.unshift({image: data.first_photo_gallery});
 
     const newData = { ...rest, gallery };
 

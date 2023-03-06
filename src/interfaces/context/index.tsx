@@ -88,6 +88,21 @@ export interface IUser {
   announcements?: IAnnouncement[];
 }
 
+export interface IAnnouncementResponse {
+  id: string;
+  title: string;
+  year: number;
+  km: number;
+  price: number;
+  description: string;
+  createdAt: Date;
+  type_vehicle: string;
+  image: string;
+  is_active: boolean;
+  user: IUser;
+  gallery: any[];
+}
+
 export interface ICreateUser {
   id: string;
   name: string;

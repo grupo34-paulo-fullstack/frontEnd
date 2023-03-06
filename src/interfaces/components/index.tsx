@@ -59,3 +59,13 @@ export interface ILoginRequest {
   email: string;
   password: string;
 }
+
+
+export interface IComment {
+  description: string;
+  createdAt: Date;
+  user: {
+      id: string;
+      name: string;
+  }
+}
