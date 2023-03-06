@@ -38,7 +38,7 @@ export const cardsHome = [
       "https://uploaddeimagens.com.br/images/004/363/097/full/Photo_%281%29.png?1677076382",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
-    name: "Samuel Leão",
+    name: "Marcos Neves",
     km: "0",
     year: "2013",
     price: "00.000,00",
@@ -49,7 +49,7 @@ export const cardsHome = [
       "https://uploaddeimagens.com.br/images/004/363/102/full/Photo_%283%29.png?1677076800",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
-    name: "Samuel Leão",
+    name: "Marcos Neves",
     km: "0",
     year: "2013",
     price: "00.000,00",

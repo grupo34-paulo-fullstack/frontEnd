@@ -171,7 +171,7 @@ export const CardFooter = styled.div`
     width: 100%;
     height: 62px;
     padding: 0 22px;
-    cursor: pointer;
+    cursor: default;
 
     display: flex;
     align-items: center;

@@ -5,11 +5,11 @@ export const Button = ({
   id,
   background,
   color,
-  outline_color,
+  border_color,
   children,
   background_hover,
   color_hover,
-  outline_hover,
+  border_hover,
   disable,
   width,
   height,
@@ -23,8 +23,8 @@ export const Button = ({
     lower_width={lower_width ? lower_width : "119px"}
     color={color}
     background={background}
-    outline_color={outline_color}
-    outline_hover={outline_hover}
+    border_color={border_color}
+    border_hover={border_hover}
     background_hover={background_hover}
     color_hover={color_hover}
     disable={disable}
