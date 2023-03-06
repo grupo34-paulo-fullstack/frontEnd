@@ -9,17 +9,17 @@ export const EditAnnouncementStyle = styled.div`
   justify-content: center;
   max-width: 100vw;
   width: 100%;
-  height: 2720px;
+  height: 2580px;
   background-color: rgba(0, 0, 0, 0.5);
 
   @media (max-width: 800px) {
-    height: 2300px;
+    height: 2180px;
   }
 
   @media (max-width: 620px) {
-    height: 2490px;
+    height: 2180px;
   }
-  
+
   .container-modal {
     display: flex;
     top: 80px;
@@ -176,7 +176,7 @@ export const EditAnnouncementStyle = styled.div`
       }
 
       span {
-        color: #CD2B31;
+        color: #cd2b31;
         font-family: var(--font-inter);
         font-size: 13px;
         margin-bottom: 12px;
@@ -231,7 +231,8 @@ export const EditAnnouncementStyle = styled.div`
         }
       }
 
-      #title-type-vehicle {
+      #title-type-vehicle,
+      #publicated {
         font-weight: 500;
         font-size: 14px;
         line-height: 24px;
@@ -263,6 +264,53 @@ export const EditAnnouncementStyle = styled.div`
 
         #motorcycle {
           &:checked ~ .label-motorcycle {
+            transition: 0.2s;
+            background-color: var(--colors-brand-1);
+            border-color: var(--colors-brand-1);
+            color: white;
+          }
+        }
+
+        label {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 228px;
+          height: 48px;
+          border: 1.5px solid var(--colors-grey-4);
+          border-radius: 4px;
+          background-color: white;
+          color: var(--colors-grey-0);
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 16px;
+        }
+      }
+
+      .is_active {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+
+        input {
+          display: none;
+          width: 50px;
+          height: 50px;
+          border-radius: 0;
+        }
+
+        #yes {
+          &:checked ~ .label-yes {
+            transition: 0.2s;
+            background-color: var(--colors-brand-1);
+            border-color: var(--colors-brand-1);
+            color: white;
+          }
+        }
+
+        #no {
+          &:checked ~ .label-no {
             transition: 0.2s;
             background-color: var(--colors-brand-1);
             border-color: var(--colors-brand-1);
@@ -328,28 +376,9 @@ export const EditAnnouncementStyle = styled.div`
       .buttons {
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: space-between;
         width: 100%;
         margin-bottom: 26px;
-
-        #button-cancel {
-          cursor: pointer;
-          height: 48px;
-          width: 126px;
-          color: var(--colors-grey-2);
-          background-color: var(--colors-grey-6);
-          border: 1.5px solid var(--colors-grey-6);
-          border-radius: 4px;
-          transition: 0.2s;
-          margin-right: 10px;
-          font-weight: 600;
-          font-size: 16px;
-
-          &:hover {
-            background-color: var(--colors-grey-5);
-            border-color: var(--colors-grey-5);
-          }
-        }
 
         #create-announcement {
           cursor: pointer;

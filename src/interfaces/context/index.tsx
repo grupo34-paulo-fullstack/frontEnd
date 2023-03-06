@@ -8,18 +8,36 @@ export interface IProvider {
 }
 
 export interface IContext {
+  suggestion: string;
+  setSuggestion: React.Dispatch<React.SetStateAction<string>>;
   showAddAnnouncementModal: boolean;
   setShowAddAnnouncementModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showModalAddAnnouncementSuccess: boolean;
+  setShowModalAddAnnouncementSuccess: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
   showEditAnnouncementModal: boolean;
   setShowEditAnnouncementModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showModalDeleteAnnouncement: boolean;
+  setShowModalDeleteAnnouncement: React.Dispatch<React.SetStateAction<boolean>>;
   announcements: IAnnouncement[];
   setAnnouncements: React.Dispatch<React.SetStateAction<IAnnouncement[]>>;
-  createAnnouncement: (data: IFormCreateAnnouncement) => void
-  updateAnnouncement: ((data: IFormUpdateAnnouncement, id: string) => void) | any
-  deleteAnnouncement: (id: string) => void
+  getAllAnnouncements: () => Promise<void>;
+  createAnnouncement: (data: IFormCreateAnnouncement) => void;
+  updateAnnouncement:
+    | ((data: IFormUpdateAnnouncement, id: string) => void)
+    | any;
+  deleteAnnouncement: (id: string) => void;
   checkCep: (e: React.ChangeEvent<HTMLInputElement>) => void;
   announcementId: string;
   setAnnouncementId: React.Dispatch<React.SetStateAction<string>>;
+  announcer: IAnnouncer;
+  setAnnouncer: React.Dispatch<React.SetStateAction<IAnnouncer>>;
+  retrieveAnnouncer: (id: string) => void;
+  retrieveAnnouncement: (id: string) => void;
+  announcementDetail: IAnnouncement;
+  setAnnouncementDetail: React.Dispatch<React.SetStateAction<IAnnouncement>>;
+  createComment: (data: string, id: string) => void;
 }
 
 export interface IAuthContext {
@@ -43,6 +61,7 @@ export interface IAnnouncement {
   is_active: boolean;
   user: IUser;
   gallery?: IGallery[];
+  comments?: IComment[];
 }
 
 export interface IGallery {
@@ -66,7 +85,7 @@ export interface IUser {
   complement?: string;
   is_announcer: boolean;
   password: string;
-  passwordCheck?: string;
+  announcements?: IAnnouncement[];
 }
 
 export interface ICreateUser {
@@ -86,4 +105,29 @@ export interface ICreateUser {
   is_announcer: string;
   password: string;
   passwordCheck?: string;
+}
+
+export interface IAnnouncer {
+  id: string;
+  name: string;
+  email: string;
+  cpf: string;
+  phone: string;
+  birthdate: string;
+  description?: string;
+  cep: string;
+  state: string;
+  city: string;
+  street: string;
+  number: number;
+  complement?: string;
+  is_announcer: boolean;
+  announcements: any;
+}
+
+export interface IComment {
+  id: string;
+  description: string;
+  createdAt: Date;
+  user: IUser;
 }

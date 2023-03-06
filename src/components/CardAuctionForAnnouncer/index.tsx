@@ -66,7 +66,7 @@ export const CardAuctionForAnnouncer = (props: { item: ICardAuction }) => {
           width="80px"
           height="38px"
           color="#FDFDFD"
-          outline_color="#FDFDFD"
+          border_color="#FDFDFD"
           background="#4529E6"
           children="Editar"
         />
@@ -74,7 +74,7 @@ export const CardAuctionForAnnouncer = (props: { item: ICardAuction }) => {
           width="105px"
           height="38px"
           color="#FDFDFD"
-          outline_color="#FDFDFD"
+          border_color="#FDFDFD"
           background="#4529E6"
           children="Ver como"
         />

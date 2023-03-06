@@ -72,6 +72,7 @@ export const FooterStyle = styled.footer`
 
       &:hover {
         border: 1px solid white;
+        transform: scale(1.05);
       }
 
       svg {

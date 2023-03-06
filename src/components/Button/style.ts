@@ -12,14 +12,12 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
   background-color: ${(props) => props.background};
   color: ${(props) => props.color};
   border-radius: 4px;
-  border: none;
-  outline: 2px solid ${(props) => props.outline_color};
+  border: 2px solid ${(props) => props.border_color};
   cursor: pointer;
   transition: 0.2s;
 
   @media (max-width: 800px) {
     width: ${(props) => props.lower_width};
-    height: 38px;
     font-weight: 600;
     font-size: 14px;
     padding: 12px 20px;
@@ -28,7 +26,7 @@ export const ButtonStyle = styled.button<IButtonStyleProps>`
   &:hover {
     background-color: ${(props) => props.background_hover};
     color: ${(props) => props.color_hover};
-    outline-color: ${(props) => props.outline_hover};
+    border-color: ${(props) => props.border_color};
     transition: 0.2s;
     cursor: ${(props) => props.disable};
   }
