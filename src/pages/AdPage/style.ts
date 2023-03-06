@@ -47,6 +47,7 @@ export const BoxImgCarInfoDescription = styled.div`
     margin-bottom: 1rem;
     padding: 1rem 1rem 1rem 1rem;
     width: 100%;
+    min-height: 350px;
     height: 100%;
     max-height: 22.1rem;
     img {
@@ -109,7 +110,6 @@ export const CarSection = styled.section`
         gap: 10px;
         background: var(--colors-brand-4);
         border-radius: 4px;
-        max-width: 60px;
         margin-right: 0.75rem;
         font-family: var(--font-inter);
         font-style: normal;
@@ -130,20 +130,8 @@ export const CarSection = styled.section`
     }
   }
   button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     padding: 12px 20px;
     gap: 10px;
-
-    width: 6.25rem;
-    height: 2.375rem;
-
-    color: var(--colors-white);
-    background: var(--colors-brand-1);
-    border: 1.5px solid var(--colors-brand-1);
-    border-radius: 4px;
 
     margin-top: 1rem;
   }
@@ -180,7 +168,7 @@ export const Aside = styled.aside`
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 27px 7px;
+        padding: 15px 5px;
         width: 29%;
         height: 6.75rem;
         background: var(--colors-grey-7);
@@ -188,6 +176,7 @@ export const Aside = styled.aside`
         .asideImg {
           width: 85%;
           height: 100%;
+          object-fit: cover;
         }
       }
     }
@@ -202,6 +191,10 @@ export const Aside = styled.aside`
     align-items: center;
 
     .userTag {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       font-family: var(--font-inter);
       font-style: normal;
       font-weight: 500;
@@ -209,7 +202,8 @@ export const Aside = styled.aside`
       line-height: 3.313rem;
       background: var(--colors-brand-1);
       border-radius: 50px;
-      padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+      width: 80px;
+      height: 80px;
       color: var(--colors-white);
       margin-bottom: 1rem;
     }
@@ -234,23 +228,33 @@ export const Aside = styled.aside`
     }
     .userAds {
       font-family: var(--font-inter);
-      font-style: normal;
       font-weight: 600;
       font-size: 1rem;
       line-height: 0px;
       color: var(--colors-white);
 
       display: flex;
-      flex-direction: row;
       justify-content: center;
       align-items: center;
       padding: 20px 28px;
-      gap: 10px;
 
       background: var(--colors-grey-0);
 
       border: 1.5px solid var(--colors-grey-0);
       border-radius: 4px;
+      cursor: pointer;
+
+      @media screen and (max-width: 1200px){
+        font-size: 0.8rem;
+      }
+
+      @media screen and (max-width: 1075px){
+        font-size: 0.65rem;
+      }
+
+      @media screen and (max-width: 1000px){
+        font-size: 1rem;
+      }
     }
   }
 `;
@@ -286,72 +290,9 @@ export const Comments = styled.section`
   .commentList {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    .listElement {
-      margin-bottom: 2.75rem;
-      width: 100%;
-
-      .userInfo {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        margin-bottom: 1.75rem;
-        .userBall {
-          font-family: var(--font-inter);
-          width: 2rem;
-          height: 2rem;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 0.875rem;
-          line-height: 0px;
-
-          background: var(--colors-brand-1);
-          border-radius: 50px;
-
-          color: var(--colors-white);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-right: 0.5rem;
-        }
-        .name {
-          margin-right: 0.5rem;
-          font-family: var(--font-inter);
-          font-style: normal;
-          font-weight: 500;
-          font-size: 0.875rem;
-          line-height: 1.5rem;
-          color: var(--colors-grey-1);
-        }
-        .userDot {
-          width: 0.25rem;
-          height: 0.25rem;
-          background: var(--colors-grey-4);
-          border-radius: 50px;
-          margin-right: 0.5rem;
-        }
-
-        .postedDate {
-          font-family: var(--font-inter);
-          font-style: normal;
-          font-weight: 400;
-          font-size: 0.75rem;
-          line-height: 1.5rem;
-
-          color: var(--colors-grey-3);
-        }
-      }
-      .userComment {
-        font-family: var(--font-inter);
-        font-style: normal;
-        font-weight: 400;
-        font-size: 0.875rem;
-        line-height: 1.5rem;
-
-        color: var(--colors-grey-2);
-      }
-    }
+    flex-direction: column;    
   }
+
   @media screen and (max-width: 1000px) {
     width: 100%;
   }
@@ -439,6 +380,160 @@ export const CommentSection = styled.section`
     button {
       top: 250px;
       left: 31px;
+    }
+  }
+
+  .comments-fixed{
+    display: flex;
+    justify-content: row;
+    gap: 5px;    
+
+    @media screen and (max-width:1000px) {
+    justify-content: end;
+    }
+    @media screen and (max-width:630px) {
+    display: none;
+    }
+  }
+`;
+
+export const BoxComment = styled.div`
+  width: 63.5%;
+  height: 100px;
+  padding: 2rem 2rem 2rem 2rem;
+  background: var(--colors-white);
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
+`
+
+export const CommentsFixed = styled.span`
+  background-color: var(--colors-grey-7);
+  color: var(--colors-grey-3);
+  border-radius: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+
+  padding: 0 10px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+
+  @media screen and (max-width:1100px) {
+    font-size: 11px;
+  }
+  
+`
+
+export const CommentSectionOffline = styled.section`
+  width: 63.4%;
+  height: 300px;
+  padding: 4rem 2rem 2rem 2rem;
+  background: var(--colors-white);
+  border-radius: 4px;
+  position: relative;
+
+  textarea {
+    width: 100%;
+    height: 60%;
+    border: 1.5px solid var(--colors-grey-7);
+    border-radius: 4px;
+    resize: none;
+    font-family: var(--font-inter);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--colors-grey-2);
+    padding: 1rem 1rem 1rem 1rem;
+  }
+
+  button {
+    position: absolute;
+    right: 50px;
+    top: 140px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 10px;
+
+    width: 15%;
+    min-width: 70px;
+    height: 2.375rem;
+
+    color: var(--colors-grey-2);
+    background: var(--colors-grey-7);
+    border: 1.5px solid var(--colors-grey-7);
+    border-radius: 4px;
+  }
+  .userInfoComment {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.75rem;
+
+    .userBallComment {
+      font-family: var(--font-inter);
+      width: 2rem;
+      height: 2rem;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 0.875rem;
+      line-height: 0px;
+
+      background: var(--colors-brand-1);
+      border-radius: 50px;
+
+      color: var(--colors-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 0.5rem;
+    }
+    .nameComment {
+      margin-right: 0.5rem;
+      font-family: var(--font-inter);
+      font-style: normal;
+      font-weight: 500;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: var(--colors-grey-1);
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    button {
+      top: 200px;
+      left: 31px;
+    }
+  }
+
+  .comments-fixed{
+    display: flex;
+    justify-content: row;
+    gap: 5px;
+
+    
+
+    @media screen and (max-width:1000px) {
+    justify-content: end;
+    }
+    @media screen and (max-width:630px) {
+    display: none;
     }
   }
 `;

@@ -10,9 +10,70 @@ import {
   Comments,
   CommentSection,
   CommentsBox,
+  BoxComment,
+  CommentsFixed,
+  CommentSectionOffline,
 } from "./style";
+import { CardComments } from "../../components/CardComments";
+import { LegacyRef, useContext, useEffect, useRef, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate, useParams } from "react-router-dom";
+import { api } from "../../service/api";
+import { IComment } from "../../interfaces/components";
+import { IAnnouncementResponse } from "../../interfaces/context";
+import { Button } from "../../components/Button";
+import { toast } from "react-hot-toast";
+import { ModalImageCar } from "../../components/ModalImageCar";
+
 
 export const AdPage = () => {
+
+  const [modalImageCar, setModalImageCar] = useState(false)
+  const [imageRender, setImageRender] = useState("")
+
+  const textAreaRef = useRef<any>(null)
+  const { user } = useContext(AuthContext)
+  const [comments, setComments] = useState<IComment[]>([])
+  const navigate = useNavigate()
+  const [announcement, setAnnouncement] = useState<IAnnouncementResponse>({} as IAnnouncementResponse)
+
+  const { announcementId } = useParams();
+
+
+  useEffect( ()=> {
+    const getAnnouncementsAndComments = async () => {
+      // const comments = await api.get(`/comments/${announcementId}`)
+      const comments = await api.get(`/comments/8ad1780f-27bf-4bab-815c-ad1e21c371c3`)
+      setComments(comments.data)
+      console.log(comments.data)
+      const announcement = await api.get(`/announcements`)
+      const announcementOpen = announcement.data.filter((announc: IAnnouncementResponse) => announc.id == "2207e3b5-7205-44d9-9400-83e0f1eff9ae")
+      setAnnouncement(announcementOpen[0])
+      console.log(announcementOpen[0])
+    }
+
+    getAnnouncementsAndComments()
+      .catch(err => alert(err))
+  }, [])
+
+  const modalAndImageRender = (image: string) => {
+    setModalImageCar(!modalImageCar) 
+    setImageRender(image)
+  }
+
+  const createComment = async () => {
+   try{
+    const data = {description: textAreaRef.current.value}
+    await api.post(`/comments/8ad1780f-27bf-4bab-815c-ad1e21c371c3`, data)
+
+    const comments = await api.get(`/comments/8ad1780f-27bf-4bab-815c-ad1e21c371c3`)
+    setComments(comments.data)
+
+  } catch {
+    toast.error("Não foi possível fazer o comentário")
+  } 
+  }
+  
   return (
     <>
       <Header />
@@ -20,28 +81,25 @@ export const AdPage = () => {
         <MainContent>
           <BoxImgCarInfoDescription>
             <figure>
-              <img src="https://wallpapercave.com/wp/PV1fKeQ.jpg" alt="" />
+              <img src={announcement.image} alt="Foto Principal" />
             </figure>
             <CarSection>
-              <h6>Lamborghini Gallardo</h6>
+              <h6>{announcement.title}</h6>
               <div className="carInfoBox">
                 <div className="yearAndKmBox">
-                  <span className="yearKm">2015</span>
-                  <span className="yearKm">25 km</span>
+                  <span className="yearKm">{announcement.year}</span>
+                  <span className="yearKm">{announcement.km} km</span>
                 </div>
 
-                <p className="price">R$ 00.000,00</p>
+                <p className="price">R$ {announcement.price}</p>
               </div>
 
-              <button>Comprar</button>
+              <Button color="var(--colors-white)" outline_color="var(--colors-brand-3)" children="Comprar" background_hover="var(--colors-brand-1)" color_hover="var(--colors-white)" outline_hover="var(--colors-brand-1)" width="100px" height="38px" background="var(--colors-brand-1)" />
             </CarSection>
             <section className="description">
               <h6>Descrição</h6>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
+                {announcement.description}
               </p>
             </section>
           </BoxImgCarInfoDescription>
@@ -50,58 +108,34 @@ export const AdPage = () => {
             <section className="photoSection">
               <h6>Fotos</h6>
               <ul className="photoList">
-                <li className="photoElement">
-                  <img
-                    className="asideImg"
-                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
-                    alt=""
-                  />
-                </li>
-                <li className="photoElement">
-                  <img
-                    className="asideImg"
-                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
-                    alt=""
-                  />
-                </li>
-                <li className="photoElement">
-                  <img
-                    className="asideImg"
-                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
-                    alt=""
-                  />
-                </li>
-                <li className="photoElement">
-                  <img
-                    className="asideImg"
-                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
-                    alt=""
-                  />
-                </li>
-                <li className="photoElement">
-                  <img
-                    className="asideImg"
-                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
-                    alt=""
-                  />
-                </li>
-                <li className="photoElement">
-                  <img
-                    className="asideImg"
-                    src="https://wallpapercave.com/wp/PV1fKeQ.jpg"
-                    alt=""
-                  />
-                </li>
+                {announcement.gallery &&
+                  announcement.gallery.map((item, index)=> {
+                    return(
+                      <>
+                        <li key={index} className="photoElement" onClick={()=> modalAndImageRender(item.image)}>
+                          <img
+                            className="asideImg"
+                            src={item.image}
+                            alt="Fotos Galeria"
+                          />
+                        </li>
+                      </>
+                    )
+                  })
+                }
               </ul>
+              {
+                modalImageCar &&
+                <ModalImageCar image={imageRender} setModalImageCar={setModalImageCar} modalImageCar={modalImageCar}/>
+              }
             </section>
             <section className="userSection">
-              <div className="userTag">SL</div>
-              <span className="userName">Samuel Leão</span>
+              <div className="userTag">{announcement.user?.name.split(' ').map((name, index)=> index <= 1 ? name[0].toUpperCase() : undefined)}</div>
+              <span className="userName">{announcement.user?.name}</span>
               <p className="userDescription">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's
+                {announcement.user?.description}
               </p>
-              <button className="userAds">Ver todos anúncios</button>
+              <button className="userAds">Ver todos anuncios</button>
             </section>
           </Aside>
         </MainContent>
@@ -111,79 +145,43 @@ export const AdPage = () => {
             <h6>Comentários</h6>
 
             <ul className="commentList">
-              <li className="listElement">
-                <div className="userInfo">
-                  <span className="userBall">LS</span>{" "}
-                  <p className="name"> Luís Santos</p>{" "}
-                  <div className="userDot"></div>{" "}
-                  <span className="postedDate">há 3 dias</span>{" "}
-                </div>
-                <p className="userComment">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
-                </p>
-              </li>
-              <li className="listElement">
-                <div className="userInfo">
-                  <span className="userBall">LS</span>{" "}
-                  <p className="name"> Luís Santos</p>{" "}
-                  <div className="userDot"></div>{" "}
-                  <span className="postedDate">há 3 dias</span>{" "}
-                </div>
-                <p className="userComment">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
-                </p>
-              </li>
-              <li className="listElement">
-                <div className="userInfo">
-                  <span className="userBall">LS</span>{" "}
-                  <p className="name"> Luís Santos</p>{" "}
-                  <div className="userDot"></div>{" "}
-                  <span className="postedDate">há 3 dias</span>{" "}
-                </div>
-                <p className="userComment">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
-                </p>
-              </li>
-              <li className="listElement">
-                <div className="userInfo">
-                  <span className="userBall">LS</span>{" "}
-                  <p className="name"> Luís Santos</p>{" "}
-                  <div className="userDot"></div>{" "}
-                  <span className="postedDate">há 3 dias</span>{" "}
-                </div>
-                <p className="userComment">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
-                </p>
-              </li>
+              {
+              
+               comments && comments.map((comment, index)=> <CardComments key={index} description={comment.description} createdAt={comment.createdAt} user={comment.user}/>)
+              }
+              
             </ul>
           </Comments>
 
-          <CommentSection>
-            <div className="userInfoComment">
-              <span className="userBallComment">SL</span>{" "}
-              <p className="nameComment"> Samuel Leão</p>{" "}
-            </div>
+            {
+              user?
+              <CommentSection>
+                <div className="userInfoComment">
+                  <span className="userBallComment">{user.name.split(' ').map((name, index)=> index <= 1 ? name[0].toUpperCase() : undefined)}</span>{" "}
+                  <p className="nameComment">{user.name}</p>{" "}
+                </div>
 
-            <textarea placeholder="Carro muito confortável, foi uma ótima experiência de compra..."></textarea>
-            <button>Comentar</button>
-            <div className=""></div>
-          </CommentSection>
+                <textarea ref={textAreaRef} placeholder="Carro muito confortável, foi uma ótima experiência de compra..."></textarea>
+                <button onClick={()=>createComment()} >Comentar</button>
+                <div className="comments-fixed">
+                  <CommentsFixed onClick={()=> {textAreaRef.current.value="Gostei muito!"}}>Gostei muito!</CommentsFixed>
+                  <CommentsFixed onClick={()=> {textAreaRef.current.value="Incrível"}}>Incrível</CommentsFixed>
+                  <CommentsFixed onClick={()=> {textAreaRef.current.value="Recomendarei para meus amigos!"}}>Recomendarei para meus amigos!</CommentsFixed>
+                </div>
+                
+              </CommentSection>
+              :
+              <CommentSectionOffline>
+                <textarea ref={textAreaRef} placeholder="Carro muito confortável, foi uma ótima experiência de compra..."></textarea>
+                <button onClick={()=> navigate("/login", {replace: true})} >Comentar</button>
+                <div className="comments-fixed">
+                  <CommentsFixed onClick={()=> {textAreaRef.current.value="Gostei muito!"}}>Gostei muito!</CommentsFixed>
+                  <CommentsFixed onClick={()=> {textAreaRef.current.value="Incrível"}}>Incrível</CommentsFixed>
+                  <CommentsFixed onClick={()=> {textAreaRef.current.value="Recomendarei para meus amigos!"}}>Recomendarei para meus amigos!</CommentsFixed>
+                </div>
+                
+              </CommentSectionOffline>
+            }
         </CommentsBox>
       </Body>
       <Footer />
