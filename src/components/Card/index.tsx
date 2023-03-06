@@ -1,6 +1,8 @@
+import { useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Context } from "../../context/Context";
 import { Button } from "../Button";
 import { ButtonsForAnnouncer, Container, NameIcon, SpanInfo } from "./style";
-import { IAnnouncement } from "../../interfaces/context/index"
 
 export interface ICard {
   image: string;
@@ -21,15 +23,30 @@ function generateColor() {
   return color;
 }
 
-export const Card = ({item}: IAnnouncement) => {
-  const nameToArray = "Filipe Judiss".split(" ");
-  const name = nameToArray[0][0] + nameToArray[1][0];
+export const Card = ({ item }) => {
+  const { setAnnouncementId, setShowEditAnnouncementModal } =
+    useContext(Context);
+
+  const userLogged = JSON.parse(localStorage.getItem("@user")!);
+
+  const params = useParams();
+
+  const navigate = useNavigate();
 
   return (
-    <Container>
+    <Container
+      background={item.is_active == true ? "#4529E6" : "#ADB5BD"}
+      width={item.is_active == true ? "51px" : "61px"}
+    >
       <div className="container-image">
+        <div className="is_active">
+          <p className={item.is_active == true ? "active" : "inactive"}>
+            {item.is_active == true ? "Ativo" : "Inativo"}
+          </p>
+        </div>
         <img src={item.image} alt="" />
       </div>
+
       <h5>{item.title}</h5>
 
       <p className="text-body-2-400">{item.description}</p>
@@ -39,19 +56,49 @@ export const Card = ({item}: IAnnouncement) => {
           className="container-nameIcon-icon text-body-2-400"
           backgroundColor={generateColor()}
         >
-          {}
+          {item.name}
         </NameIcon>
-        {name}
+        {item.name}
       </div>
 
       <div className="container-infos">
         <SpanInfo>
-          <span className="text-body-2-500">{item.km}</span>
+          <span className="text-body-2-500">{item.km} KM</span>
           <span className="text-body-2-500">{item.year}</span>
         </SpanInfo>
         <p className="text-body-1-400">R$ {item.price}</p>
       </div>
 
+      {userLogged?.id == params.id && (
+        <ButtonsForAnnouncer>
+          <Button
+            id={item.id}
+            width="80px"
+            height="38px"
+            color="#212529"
+            border_color="#212529"
+            border_hover="#5126EA"
+            background_hover="#5126EA"
+            background="#FFFFF"
+            children="Editar"
+            onClick={(event: any) => {
+              setAnnouncementId(event.currentTarget.id);
+              setShowEditAnnouncementModal(true);
+            }}
+          />
+          <Button
+            width="105px"
+            height="38px"
+            color="#212529"
+            border_color="#212529"
+            border_hover="#5126EA"
+            background_hover="#5126EA"
+            background="#FFFFF"
+            children="Ver como"
+            onClick={() => navigate(`/announcement/${item.id}`)}
+          />
+        </ButtonsForAnnouncer>
+      )}
     </Container>
   );
 };

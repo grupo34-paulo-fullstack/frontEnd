@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import { AdPage } from "../pages/AdPage";
-import { AnnouncementAnnouncerPage } from "../pages/Announcements_announcer";
+import { AnnouncerPage } from "../pages/Announcer";
 import { Home } from "../pages/Home";
 import { RegisterPage } from "../pages/Register";
 import { LoginPage } from "../pages/Login";
+import { Annoucement } from "../pages/Annoucement";
 
 export const RoutesMain = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/announcementPage" element={<AnnouncementAnnouncerPage />} />
-      <Route path="/adPage" element={<AdPage />} />
+      <Route path="/announcer/:id" element={<AnnouncerPage />} />
+      <Route path="/announcement/:id" element={<Annoucement />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
     </Routes>

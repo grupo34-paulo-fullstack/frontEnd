@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Body = styled.div`
+export const Body = styled.main`
   background: rgb(233, 236, 239);
   background: linear-gradient(
     0deg,
@@ -118,6 +118,11 @@ export const CarSection = styled.section`
         line-height: 1.5rem;
 
         color: var(--colors-brand-1);
+
+        &:last-child {
+          max-width: 95px;
+          width: 100%;
+        }
       }
     }
     .price {
@@ -154,6 +159,15 @@ export const Aside = styled.aside`
     background: var(--colors-white);
     border-radius: 4px;
     max-height: 21.875rem;
+
+    img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 200px;
+      max-height: 200px;
+      margin: 0 auto;
+    }
 
     h6 {
       margin-bottom: 2rem;
@@ -232,6 +246,7 @@ export const Aside = styled.aside`
       font-size: 1rem;
       line-height: 0px;
       color: var(--colors-white);
+      cursor: pointer;
 
       display: flex;
       justify-content: center;
@@ -244,7 +259,7 @@ export const Aside = styled.aside`
       border-radius: 4px;
       cursor: pointer;
 
-      @media screen and (max-width: 1200px){
+      /* @media screen and (max-width: 1200px){
         font-size: 0.8rem;
       }
 
@@ -254,6 +269,11 @@ export const Aside = styled.aside`
 
       @media screen and (max-width: 1000px){
         font-size: 1rem;
+ */
+      transition: 0.2s;
+
+      &:hover {
+        background-color: #212529;
       }
     }
   }
@@ -319,6 +339,13 @@ export const CommentSection = styled.section`
     line-height: 24px;
     color: var(--colors-grey-2);
     padding: 1rem 1rem 1rem 1rem;
+    margin-bottom: 15px;
+    outline-color: transparent;
+    transition: 0.2s;
+
+    &:focus {
+      outline-color: var(--colors-brand-1);
+    }
   }
 
   button {
@@ -331,15 +358,42 @@ export const CommentSection = styled.section`
     align-items: center;
     padding: 12px 20px;
     gap: 10px;
+    cursor: pointer;
 
     width: 15%;
     min-width: 70px;
     height: 2.375rem;
 
+    border-radius: 4px;
+    font-weight: 600;
+    font-family: var(--font-inter);
+    transition: 0.2s;
+
     color: var(--colors-white);
     background: var(--colors-brand-1);
     border: 1.5px solid var(--colors-brand-1);
-    border-radius: 4px;
+
+    &:hover {
+      background-color: var(--colors-brand-2);
+    }
+
+  }
+  
+  .button-able {
+    color: var(--colors-white);
+    background: var(--colors-brand-1);
+    border: 1.5px solid var(--colors-brand-1);
+    
+    &:hover {
+      background-color: var(--colors-brand-2);
+    }
+  }
+
+  .button-disabled {
+    color: #ffff;
+    background: #ced4da;
+    border: 1.5px solid #ced4da;
+    cursor: not-allowed;
   }
   .userInfoComment {
     width: 100%;
@@ -375,6 +429,45 @@ export const CommentSection = styled.section`
       color: var(--colors-grey-1);
     }
   }
+
+  .suggestions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 401px;
+    width: 100%;
+
+    p {
+      margin-right: 5px;
+      background-color: #e9ecef;
+      color: #868e96;
+      font-family: var(--font-inter);
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 24px;
+      border-radius: 50px;
+      text-align: center;
+      transition: 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ced4da;
+      }
+    }
+
+    #suggestion-one {
+      width: 101px;
+    }
+
+    #suggestion-two {
+      width: 66px;
+    }
+
+    #suggestion-three {
+      width: 218px;
+    }
+  }
+
   @media screen and (max-width: 1000px) {
     width: 100%;
     button {

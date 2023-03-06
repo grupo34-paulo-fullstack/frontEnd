@@ -19,24 +19,48 @@ export const Container = styled.div`
     background: var(--colors-white);
     max-width: 32.5rem;
     width: 90%;
-    height: 15.625rem;
+    height: 22.625rem;    
 
-    margin: 0 auto;
+    position: relative;
+
+    margin: 0 auto;  
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
  
     border-radius: 10px;
     padding: 2rem;
 
+    svg{
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        color: var(--colors-grey-4);
+        cursor: pointer;
+
+    }
+
     h6{
         margin-bottom: 20px;
+        text-align: start;
     }
 
-    #email{
-        margin-top: 5px;
-    }
+    figure{
+        
+        width: 466px;
+        height: 239px;
 
-    .btns {
         display: flex;
-        gap: 6%;
+        align-items: center;
+        justify-content: center;
+
+        img{
+            transform: scale(2);
+        }
+
+        
     }
 `;
 

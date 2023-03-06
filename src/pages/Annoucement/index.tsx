@@ -24,9 +24,10 @@ import { IAnnouncementResponse } from "../../interfaces/context";
 import { Button } from "../../components/Button";
 import { toast } from "react-hot-toast";
 import { ModalImageCar } from "../../components/ModalImageCar";
+import { Context } from "../../context/Context";
 
 
-export const AdPage = () => {
+export const Annoucement = () => {
 
   const [modalImageCar, setModalImageCar] = useState(false)
   const [imageRender, setImageRender] = useState("")
@@ -37,21 +38,19 @@ export const AdPage = () => {
   const navigate = useNavigate()
   const [announcement, setAnnouncement] = useState<IAnnouncementResponse>({} as IAnnouncementResponse)
 
-  const { announcementId } = useParams();
+  const params = useParams();
 
-
+  console.log(announcement)
+  
   useEffect( ()=> {
     const getAnnouncementsAndComments = async () => {
-      // const comments = await api.get(`/comments/${announcementId}`)
-      const comments = await api.get(`/comments/8ad1780f-27bf-4bab-815c-ad1e21c371c3`)
+      const comments = await api.get(`/comments/${params.id}`)
       setComments(comments.data)
-      console.log(comments.data)
-      const announcement = await api.get(`/announcements`)
-      const announcementOpen = announcement.data.filter((announc: IAnnouncementResponse) => announc.id == "2207e3b5-7205-44d9-9400-83e0f1eff9ae")
-      setAnnouncement(announcementOpen[0])
-      console.log(announcementOpen[0])
-    }
 
+      const announcement = await api.get(`/announcements`)
+      const announcementOpen = announcement.data.filter((announc: IAnnouncementResponse) => announc.id == params.id)
+      setAnnouncement(announcementOpen[0])
+    }
     getAnnouncementsAndComments()
       .catch(err => alert(err))
   }, [])
@@ -63,10 +62,14 @@ export const AdPage = () => {
 
   const createComment = async () => {
    try{
-    const data = {description: textAreaRef.current.value}
-    await api.post(`/comments/8ad1780f-27bf-4bab-815c-ad1e21c371c3`, data)
+    const token = localStorage.getItem("@token");
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    const comments = await api.get(`/comments/8ad1780f-27bf-4bab-815c-ad1e21c371c3`)
+    const data = {description: textAreaRef.current.value}
+
+    await api.post(`/comments/${params.id}`, data)
+
+    const comments = await api.get(`/comments/${params.id}`)
     setComments(comments.data)
 
   } catch {
@@ -94,7 +97,7 @@ export const AdPage = () => {
                 <p className="price">R$ {announcement.price}</p>
               </div>
 
-              <Button color="var(--colors-white)" outline_color="var(--colors-brand-3)" children="Comprar" background_hover="var(--colors-brand-1)" color_hover="var(--colors-white)" outline_hover="var(--colors-brand-1)" width="100px" height="38px" background="var(--colors-brand-1)" />
+              <Button color="var(--colors-white)" border_color="var(--colors-brand-1)" children="Comprar" background_hover="var(--colors-brand-2)" color_hover="var(--colors-white)" border_hover="var(--colors-brand-1)" width="100px" height="38px" background="var(--colors-brand-1)" />
             </CarSection>
             <section className="description">
               <h6>Descrição</h6>
@@ -107,8 +110,10 @@ export const AdPage = () => {
           <Aside>
             <section className="photoSection">
               <h6>Fotos</h6>
-              <ul className="photoList">
-                {announcement.gallery &&
+              {
+                announcement?.gallery?.length > 0 ?
+                <ul className="photoList">
+                { 
                   announcement.gallery.map((item, index)=> {
                     return(
                       <>
@@ -121,9 +126,14 @@ export const AdPage = () => {
                         </li>
                       </>
                     )
-                  })
+                  })                  
+                  
                 }
               </ul>
+              :
+              <img src="https://triunfo.pe.gov.br/pm_tr430/wp-content/uploads/2018/03/sem-foto-300x300.jpg" />
+              }
+              
               {
                 modalImageCar &&
                 <ModalImageCar image={imageRender} setModalImageCar={setModalImageCar} modalImageCar={modalImageCar}/>
@@ -135,7 +145,9 @@ export const AdPage = () => {
               <p className="userDescription">
                 {announcement.user?.description}
               </p>
-              <button className="userAds">Ver todos anuncios</button>
+              <button className="userAds" onClick={() =>
+                  navigate(`/announcer/${announcement.user.id}`)
+              }>Ver todos anuncios</button>
             </section>
           </Aside>
         </MainContent>
@@ -147,7 +159,7 @@ export const AdPage = () => {
             <ul className="commentList">
               {
               
-               comments && comments.map((comment, index)=> <CardComments key={index} description={comment.description} createdAt={comment.createdAt} user={comment.user}/>)
+              comments && comments.map((comment, index)=> <CardComments key={index} description={comment.description} createdAt={comment.createdAt} user={comment.user}/>)
               }
               
             </ul>

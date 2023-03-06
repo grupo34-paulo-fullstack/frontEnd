@@ -15,11 +15,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { ModalForgetPassword } from "../../components/ModalForgetPassword";
 
 export const LoginPage = () => {
-
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const { setUser } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const {
     register,
@@ -29,27 +28,23 @@ export const LoginPage = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const requestLogin = async (data:ILoginRequest ) => {
+  const requestLogin = async (data: ILoginRequest) => {
     await api
       .post("/session", data)
       .then((res) => {
+        localStorage.setItem("@token", res.data.token);
+        localStorage.setItem("@user", JSON.stringify(res.data.user));
+        setUser(res.data.user);
 
-        localStorage.setItem("@token", res.data.token)
-        localStorage.setItem("@user", JSON.stringify(res.data.user)) 
-        setUser(res.data.user)
-        
-        toast.success("Logado com sucesso!");
-
-        setTimeout(()=> {
-          navigate("/", {replace: true})
-        }, 1000)
+        toast.success("Login com sucesso. Bem-vindo(a)!");
+        navigate("/", { replace: true });
       })
       .catch((error) => toast.error(`${error.message}`));
-  }
+  };
 
   const handleModalForgetPassword = () => {
-    setIsOpenModal(!isOpenModal)
-  }
+    setIsOpenModal(!isOpenModal);
+  };
 
   return (
     <BodyLogin>
@@ -64,7 +59,7 @@ export const LoginPage = () => {
             {...register("email")}
             error={errors?.email}
             type="text"
-          /> 
+          />
           <Input
             id="password"
             placeholder="Digitar senha"
@@ -74,13 +69,25 @@ export const LoginPage = () => {
             type="password"
           />
 
-          <p className="label forget-password" onClick={handleModalForgetPassword}>Esqueci minha senha</p>
-          {
-            isOpenModal && <ModalForgetPassword isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal}/>
-          }
-          <BtnSignIn className="text-button-big-text" type="submit">Entrar</BtnSignIn>
+          <p
+            className="label forget-password"
+            onClick={handleModalForgetPassword}
+          >
+            Esqueci minha senha
+          </p>
+          {isOpenModal && (
+            <ModalForgetPassword
+              isOpenModal={isOpenModal}
+              setIsOpenModal={setIsOpenModal}
+            />
+          )}
+          <BtnSignIn className="text-button-big-text" type="submit">
+            Entrar
+          </BtnSignIn>
           <p className="label">Ainda não possui conta?</p>
-          <BtnSignUp className="text-button-big-text" to="/register">Cadastrar</BtnSignUp>
+          <BtnSignUp className="text-button-big-text" to="/register">
+            Cadastrar
+          </BtnSignUp>
         </Form>
       </LoginMain>
       <Footer />
