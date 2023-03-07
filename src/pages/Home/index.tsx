@@ -7,12 +7,26 @@ import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Context } from "../../context/Context";
 import { Auction, CardCars, Container } from "./style";
+import { ModalEditAddress } from "../../components/ModalEditAddress";
+import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
 
 export const Home = () => {
-  const { announcements } = useContext(Context);
+  const {
+    announcements,
+    isModalProfileOpen,
+    setModalProfile,
+    isModalAddressOpen,
+    setModalAddress,
+  } = useContext(Context);
 
   return (
     <>
+      {isModalProfileOpen && (
+        <ModalProfileEditRemove setModalProfile={setModalProfile} />
+      )}
+      {isModalAddressOpen && (
+        <ModalEditAddress setModalAddress={setModalAddress} />
+      )}
       <Header />
       <Container>
         <h1>Velocidade e experiência em um lugar feito para você</h1>

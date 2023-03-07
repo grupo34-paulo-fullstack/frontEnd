@@ -12,6 +12,7 @@ import Burger from "./MenuHamburger";
 import { createRef, useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo_header.png";
 import { AuthContext } from "../../context/AuthContext";
+import { Context } from "../../context/Context";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
@@ -27,6 +28,8 @@ export const Header = () => {
   const inputRef = createRef<HTMLInputElement>();
 
   const { user, setUser } = useContext(AuthContext);
+  const { isModalProfileOpen, setModalProfile } = useContext(Context);
+  const { isModalAddressOpen, setModalAddress } = useContext(Context);
   const navigate = useNavigate();
 
   const [isOpenMenuUser, setIsOpenMenuUser] = useState(false);
@@ -35,6 +38,23 @@ export const Header = () => {
 
   function handleToggleMenuUser() {
     setIsOpenMenuUser((prev) => !prev);
+  }
+
+  function openModal() {
+    setModalProfile(!isModalProfileOpen);
+  }
+
+  function openAddressModal() {
+    setModalAddress(!isModalAddressOpen);
+  }
+
+  function handleBothClicksAddress() {
+    handleToggleMenuUser();
+    openAddressModal();
+  }
+  function handleBothClicks() {
+    handleToggleMenuUser();
+    openModal();
   }
 
   function quitAccount() {
@@ -152,14 +172,14 @@ export const Header = () => {
               <LinkDropDownUser
                 className="text-body-1-400"
                 to=""
-                onClick={handleToggleMenuUser}
+                onClick={handleBothClicks}
               >
                 Editar Perfil
               </LinkDropDownUser>
               <LinkDropDownUser
                 className="text-body-1-400"
                 to=""
-                onClick={handleToggleMenuUser}
+                onClick={handleBothClicksAddress}
               >
                 Editar Endereço
               </LinkDropDownUser>

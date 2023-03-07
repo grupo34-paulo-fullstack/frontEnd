@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import {
   IFormCreateAnnouncement,
   IFormUpdateAnnouncement,
+  IEditUserProfile,
 } from "../interfaces/components";
 import {
   IAnnouncement,
@@ -24,6 +25,8 @@ export const Provider = ({ children }: IProvider) => {
 
   const token = localStorage.getItem("@token");
 
+  const [isModalProfileOpen, setModalProfile] = useState(false);
+  const [isModalAddressOpen, setModalAddress] = useState(false);
   const [announcer, setAnnouncer] = useState<IAnnouncer>({} as IAnnouncer);
 
   const [suggestion, setSuggestion] = useState<string>("");
@@ -54,7 +57,6 @@ export const Provider = ({ children }: IProvider) => {
       .then((res) => setAnnouncements(res.data))
       .catch((error) => console.log(error));
 
-
   const createAnnouncement = (data: IFormCreateAnnouncement) => {
     const token = localStorage.getItem("@token");
 
@@ -64,9 +66,9 @@ export const Provider = ({ children }: IProvider) => {
 
     let gallery = [];
 
-    data.photos_gallery.map((value: string) => gallery.push({image: value}));
+    data.photos_gallery.map((value: string) => gallery.push({ image: value }));
 
-    gallery.unshift({image: data.first_photo_gallery});
+    gallery.unshift({ image: data.first_photo_gallery });
 
     const newData = { ...rest, gallery };
 
@@ -139,15 +141,34 @@ export const Provider = ({ children }: IProvider) => {
 
   const createComment = (data: string, id: string) => {
     const newData = { description: data };
+    api.post(`/comments/${id}`, newData).then((res) => {
+      toast.success("Comentário criado");
+      retrieveAnnouncement(id);
+      setSuggestion("");
+    });
+  };
+
+  const updateUser = (data: IEditUserProfile) => {
+    const token = localStorage.getItem("@token");
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    api
+      .patch(`/users`, data)
+      .then((response) => {
+        toast.success("Dados editados com sucesso!");
+      })
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+
+  const deleteUser = () => {
+    const token = localStorage.getItem("@token");
 
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     api
-      .post(`/comments/${id}`, newData)
-      .then((res) => {
-        toast.success("Comentário criado");
-        retrieveAnnouncement(id);
-        setSuggestion("")
+      .delete(`/users`)
+      .then((response) => {
+        toast.success("Sua conta foi deletada!");
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
@@ -168,8 +189,13 @@ export const Provider = ({ children }: IProvider) => {
         setShowEditAnnouncementModal,
         announcementId,
         setAnnouncementId,
-        showModalAddAnnouncementSuccess,
+        isModalProfileOpen,
+        setModalProfile,
         setShowModalAddAnnouncementSuccess,
+        updateUser,
+        isModalAddressOpen,
+        setModalAddress,
+        showModalAddAnnouncementSuccess,
         showModalDeleteAnnouncement,
         setShowModalDeleteAnnouncement,
         announcer,
