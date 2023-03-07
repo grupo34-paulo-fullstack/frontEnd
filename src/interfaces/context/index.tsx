@@ -38,6 +38,9 @@ export interface IContext {
   announcementDetail: IAnnouncement;
   setAnnouncementDetail: React.Dispatch<React.SetStateAction<IAnnouncement>>;
   createComment: (data: string, id: string) => void;
+  updateComment: (data: string, id: string) => void;
+  deleteComment: (id: string) => void;
+
 }
 
 export interface IAuthContext {
@@ -60,7 +63,7 @@ export interface IAnnouncement {
   image: string;
   is_active: boolean;
   user: IUser;
-  gallery?: IGallery[];
+  gallery: IGallery[];
   comments?: IComment[];
 }
 

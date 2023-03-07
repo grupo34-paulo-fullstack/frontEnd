@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Button } from "../../components/Button";
 import { CardAuction } from "../../components/CardAuction";
 import { cardsHome } from "../../components/CardAuction/database";
@@ -6,10 +6,18 @@ import { CardHome } from "../../components/CardHome";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Context } from "../../context/Context";
+import { api } from "../../service/api";
 import { Auction, CardCars, Container } from "./style";
 
 export const Home = () => {
-  const { announcements } = useContext(Context);
+  const { announcements, setAnnouncements } = useContext(Context);
+
+  useEffect(() => {
+    api
+      .get("/announcements")
+      .then((res) => setAnnouncements(res.data))
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <>

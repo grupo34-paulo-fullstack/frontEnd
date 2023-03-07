@@ -54,7 +54,6 @@ export const Provider = ({ children }: IProvider) => {
       .then((res) => setAnnouncements(res.data))
       .catch((error) => console.log(error));
 
-
   const createAnnouncement = (data: IFormCreateAnnouncement) => {
     const token = localStorage.getItem("@token");
 
@@ -64,9 +63,9 @@ export const Provider = ({ children }: IProvider) => {
 
     let gallery = [];
 
-    data.photos_gallery.map((value: string) => gallery.push({image: value}));
+    data.photos_gallery.map((value: string) => gallery.push({ image: value }));
 
-    gallery.unshift({image: data.first_photo_gallery});
+    gallery.unshift({ image: data.first_photo_gallery });
 
     const newData = { ...rest, gallery };
 
@@ -147,7 +146,33 @@ export const Provider = ({ children }: IProvider) => {
       .then((res) => {
         toast.success("Comentário criado");
         retrieveAnnouncement(id);
-        setSuggestion("")
+        setSuggestion("");
+      })
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+
+  const updateComment = (data: string, id: string) => {
+    const newData = { description: data };
+
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    api
+      .patch(`/comments/${id}`, newData)
+      .then((res) => {
+        toast.success("Comentário atualizado");
+        retrieveAnnouncement(res.data.announcement);
+      })
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+
+  const deleteComment = (id: string) => {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    api
+      .delete(`/comments/${id}`)
+      .then((res) => {
+        toast.success("Comentário excluído");
+        retrieveAnnouncement(id);
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
@@ -181,6 +206,8 @@ export const Provider = ({ children }: IProvider) => {
         suggestion,
         setSuggestion,
         createComment,
+        updateComment,
+        deleteComment,
       }}
     >
       {children}
