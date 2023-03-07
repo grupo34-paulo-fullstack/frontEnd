@@ -75,7 +75,7 @@ const Burger = ({
                 onClick={() => navigate("/register", { replace: true })}
                 background={"var(--colors-grey-10)"}
                 color={"var(--colors-grey-0)"}
-                outline_color={"var(--colors-grey-4)"}
+                border_color={"var(--colors-grey-4)"}
                 children={"Cadastrar"}
                 background_hover={"var(--colors-grey-1)"}
                 color_hover={"var(--colors-grey-10)"}

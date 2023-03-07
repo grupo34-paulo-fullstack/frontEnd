@@ -1,12 +1,16 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import {
   IFormCreateAnnouncement,
   IFormUpdateAnnouncement,
   IEditUserProfile,
 } from "../interfaces/components";
-import { IAnnouncement, IContext, IProvider } from "../interfaces/context";
+import {
+  IAnnouncement,
+  IAnnouncer,
+  IContext,
+  IProvider,
+} from "../interfaces/context";
 import { api } from "../service/api";
 
 export const Context = createContext({} as IContext);
@@ -23,15 +27,35 @@ export const Provider = ({ children }: IProvider) => {
 
   const [isModalProfileOpen, setModalProfile] = useState(false);
   const [isModalAddressOpen, setModalAddress] = useState(false);
+  const [announcer, setAnnouncer] = useState<IAnnouncer>({} as IAnnouncer);
+
+  const [suggestion, setSuggestion] = useState<string>("");
+
   const [showAddAnnouncementModal, setShowAddAnnouncementModal] =
     useState<boolean>(false);
+
   const [showEditAnnouncementModal, setShowEditAnnouncementModal] =
     useState<boolean>(false);
+
   const [announcements, setAnnouncements] = useState<IAnnouncement[]>([]);
+
   const [announcementId, setAnnouncementId] = useState<string>("");
+
+  const [announcementDetail, setAnnouncementDetail] = useState<IAnnouncement>(
+    {} as IAnnouncement
+  );
+
   const [showModalAddAnnouncementSuccess, setShowModalAddAnnouncementSuccess] =
     useState<boolean>(false);
-  const navigate = useNavigate();
+
+  const [showModalDeleteAnnouncement, setShowModalDeleteAnnouncement] =
+    useState<boolean>(false);
+
+  const getAllAnnouncements = async () =>
+    await api
+      .get("/announcements")
+      .then((res) => setAnnouncements(res.data))
+      .catch((error) => console.log(error));
 
   const createAnnouncement = (data: IFormCreateAnnouncement) => {
     const token = localStorage.getItem("@token");
@@ -42,28 +66,25 @@ export const Provider = ({ children }: IProvider) => {
 
     let gallery = [];
 
-    data.photos_gallery.map((value: string) => gallery.push(value));
+    data.photos_gallery.map((value: string) => gallery.push({ image: value }));
 
-    gallery.unshift(data.first_photo_gallery);
+    gallery.unshift({ image: data.first_photo_gallery });
 
     const newData = { ...rest, gallery };
 
     api
       .post("/announcements", newData)
       .then((res) => {
-        setAnnouncements((old) => [...old, res.data]);
         setShowAddAnnouncementModal(false);
         setShowModalAddAnnouncementSuccess(true);
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
 
-  const updateAnnouncement = (data: IFormUpdateAnnouncement, id: string) => {
-    const token = localStorage.getItem("@token");
+  const updateAnnouncement = (data: IFormUpdateAnnouncement) => {
+    const { first_photo_gallery, photos_gallery, is_active, ...rest } = data;
 
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-    const { first_photo_gallery, photos_gallery, ...rest } = data;
+    let boolean_is_active = is_active == "yes" ? true : "false";
 
     let gallery = [];
 
@@ -71,12 +92,15 @@ export const Provider = ({ children }: IProvider) => {
 
     gallery.unshift(data.first_photo_gallery);
 
-    const newData = { ...rest, gallery };
-
-    console.log(newData);
+    const newData = { ...rest, is_active: boolean_is_active, gallery };
 
     api
-      .patch(`/announcements/${id}`, newData)
+      .patch(`/announcements/${announcementId}`, newData)
+      .then((res) => {
+        toast.success("Anúncio atualizado");
+        getAllAnnouncements();
+        setShowEditAnnouncementModal(false);
+      })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
 
@@ -85,6 +109,10 @@ export const Provider = ({ children }: IProvider) => {
 
     api
       .delete(`/announcements/${id}`)
+      .then((res) => {
+        toast.success("Anúncio exclúido");
+        setTimeout(() => setShowModalDeleteAnnouncement(false), 2000);
+      })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
 
@@ -97,9 +125,31 @@ export const Provider = ({ children }: IProvider) => {
       });
   };
 
+  const retrieveAnnouncer = (id: string) => {
+    api
+      .get(`users/${id}`)
+      .then((res) => setAnnouncer(res.data))
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+
+  const retrieveAnnouncement = (id: string) => {
+    api
+      .get(`announcements/${id}`)
+      .then((res) => setAnnouncementDetail(res.data))
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+
+  const createComment = (data: string, id: string) => {
+    const newData = { description: data };
+    api.post(`/comments/${id}`, newData).then((res) => {
+      toast.success("Comentário criado");
+      retrieveAnnouncement(id);
+      setSuggestion("");
+    });
+  };
+
   const updateUser = (data: IEditUserProfile) => {
     const token = localStorage.getItem("@token");
-
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     api
@@ -130,6 +180,7 @@ export const Provider = ({ children }: IProvider) => {
         setShowAddAnnouncementModal,
         announcements,
         setAnnouncements,
+        getAllAnnouncements,
         createAnnouncement,
         updateAnnouncement,
         deleteAnnouncement,
@@ -144,6 +195,18 @@ export const Provider = ({ children }: IProvider) => {
         updateUser,
         isModalAddressOpen,
         setModalAddress,
+        showModalAddAnnouncementSuccess,
+        showModalDeleteAnnouncement,
+        setShowModalDeleteAnnouncement,
+        announcer,
+        setAnnouncer,
+        retrieveAnnouncer,
+        retrieveAnnouncement,
+        announcementDetail,
+        setAnnouncementDetail,
+        suggestion,
+        setSuggestion,
+        createComment,
       }}
     >
       {children}

@@ -6,24 +6,17 @@ import * as yup from "yup";
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IFormUpdateAnnouncement } from "../../interfaces/components";
+import { Button } from "../Button";
 
 const schema = yup.object().shape({
   title: yup.string(),
-  year: yup
-    .number()
-    .typeError("Apenas números")
-    .min(1970, "Acima de 1970"),
-  km: yup
-    .number()
-    .typeError("Apenas números")
-    .min(0, "Inválido"),
-  price: yup
-    .number()
-    .typeError("Apenas números")
-    .min(1, "Inválido"),
+  year: yup.number().typeError("Apenas números").min(1970, "Acima de 1970"),
+  km: yup.number().typeError("Apenas números").min(0, "Inválido"),
+  price: yup.number().typeError("Apenas números").min(1, "Inválido"),
   description: yup.string(),
-  type_vehicle: yup.string(),
-  image: yup.string(),
+  type_vehicle: yup.string().required("Este campo é obrigatório"),
+  is_active: yup.string().required("Este campo é obrigatório"),
+  image: yup.string().required("Este campo é obrigatório"),
   first_photo_gallery: yup.string(),
   photos_gallery: yup.array(yup.string()).ensure(),
 });
@@ -31,6 +24,7 @@ const schema = yup.object().shape({
 export const ModalEditAnnouncement = () => {
   const {
     setShowEditAnnouncementModal,
+    setShowModalDeleteAnnouncement,
     updateAnnouncement,
     announcements,
     announcementId,
@@ -39,6 +33,8 @@ export const ModalEditAnnouncement = () => {
   const filteredAnnouncement = announcements.find(
     (result) => result.id == announcementId
   );
+
+  console.log(announcementId);
 
   const {
     register,
@@ -157,6 +153,32 @@ export const ModalEditAnnouncement = () => {
           </div>
           <span>{errors.type_vehicle?.message}</span>
 
+          <h5 id="publicated">Publicado</h5>
+          <div className="is_active">
+            <input
+              {...register("is_active")}
+              type="radio"
+              id="yes"
+              value="yes"
+              name="is_active"
+            />
+            <label className="label-yes" htmlFor="yes">
+              Sim
+            </label>
+
+            <input
+              {...register("is_active")}
+              type="radio"
+              id="no"
+              value="no"
+              name="is_active"
+            />
+            <label className="label-no" htmlFor="no">
+              Não
+            </label>
+          </div>
+          <span>{errors.is_active?.message}</span>
+
           <label htmlFor="image-principal">Imagem de capa</label>
           <input
             {...register("image")}
@@ -209,15 +231,21 @@ export const ModalEditAnnouncement = () => {
           </button>
 
           <div className="buttons">
-            <button
-              id="button-cancel"
-              onClick={(event) => {
-                event.preventDefault();
-                setShowEditAnnouncementModal(false);
+            <Button
+              background="#DEE2E6"
+              background_hover="#CED4DA"
+              border_hover="#CED4DA"
+              border_color="#DEE2E6"
+              color="#495057"
+              width="262px"
+              height="48px"
+              lower_width="262px"
+              children="Excluir anúncio"
+              onClick={() => {
+                setShowEditAnnouncementModal(false)
+                setShowModalDeleteAnnouncement(true)
               }}
-            >
-              Cancelar
-            </button>
+            />
             <button
               id={
                 Object.keys(errors).length != 0
@@ -226,7 +254,7 @@ export const ModalEditAnnouncement = () => {
               }
               type="submit"
             >
-              Criar anúncio
+              Salvar alterações
             </button>
           </div>
         </form>

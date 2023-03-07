@@ -13,11 +13,11 @@ export const AddAnnouncementStyle = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 
   @media (max-width: 800px) {
-    height: 2300px;
+    height: 2180px;
   }
 
   @media (max-width: 620px) {
-    height: 2490px;
+    height: 2180px;
   }
   
   .container-modal {

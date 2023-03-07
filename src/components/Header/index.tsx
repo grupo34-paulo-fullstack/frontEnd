@@ -13,7 +13,7 @@ import { createRef, useContext, useEffect, useState } from "react";
 import logo from "../../assets/logo_header.png";
 import { AuthContext } from "../../context/AuthContext";
 import { Context } from "../../context/Context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 export interface IMenuBurgerProps {
@@ -59,13 +59,11 @@ export const Header = () => {
 
   function quitAccount() {
     setIsOpenMenuUser((prev) => !prev);
-    toast.success("Logout realizado com sucesso");
+    toast("Logout realizado com sucesso", { icon: "⚠️" });
     localStorage.removeItem("@token");
     localStorage.removeItem("@user");
     setUser(null);
-    setTimeout(() => {
-      navigate("/", { replace: true });
-    }, 1000);
+    navigate("/", { replace: true });
   }
 
   function handleToggleHamburgerMenu() {
@@ -112,9 +110,9 @@ export const Header = () => {
   return (
     <HeaderStyle>
       <Container>
-        <div>
+        <Link to={"/"}>
           <img src={logo} alt="Motors shop" />
-        </div>
+        </Link>
 
         <Burger
           isOpen={isOpenHamburgerMenu}
@@ -156,7 +154,7 @@ export const Header = () => {
                 onClick={() => navigate("/register", { replace: true })}
                 background={"var(--colors-grey-10)"}
                 color={"var(--colors-grey-0)"}
-                outline_color={"var(--colors-grey-4)"}
+                border_color={"var(--colors-grey-4)"}
                 children={"Cadastrar"}
                 background_hover={"var(--colors-grey-1)"}
                 color_hover={"var(--colors-grey-10)"}
@@ -165,7 +163,12 @@ export const Header = () => {
           )}
 
           {isOpenMenuUser && (
-            <MenuDropDown ref={inputRef} open={isOpenMenuUser} width={width}>
+            <MenuDropDown
+              ref={inputRef}
+              open={isOpenMenuUser}
+              width={width}
+              height={user?.is_announcer == true ? "12.5rem" : "9.5rem"}
+            >
               <LinkDropDownUser
                 className="text-body-1-400"
                 to=""
@@ -180,13 +183,15 @@ export const Header = () => {
               >
                 Editar Endereço
               </LinkDropDownUser>
-              <LinkDropDownUser
-                className="text-body-1-400"
-                to=""
-                onClick={handleToggleMenuUser}
-              >
-                Minhas Compras
-              </LinkDropDownUser>
+              {user?.is_announcer == true && (
+                <LinkDropDownUser
+                  className="text-body-1-400"
+                  to={`/announcer/${user?.id}`}
+                  onClick={handleToggleMenuUser}
+                >
+                  Meus anúncios
+                </LinkDropDownUser>
+              )}
               <LinkDropDownUser
                 className="text-body-1-400"
                 to=""

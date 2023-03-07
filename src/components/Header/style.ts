@@ -4,6 +4,7 @@ import styled from "styled-components"
 interface OpenMenuUser {
     open: boolean
     width: number
+    height: string
 }
 
 export const HeaderStyle = styled.header`
@@ -24,7 +25,7 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    div{
+    a{
         img{
             display: flex;
             align-items: center;
@@ -133,11 +134,12 @@ export const MenuDropDown = styled.nav<OpenMenuUser>`
     right: 20px;
 
     width: 12.5rem;
-    height: 12.5rem;
+    height: ${props => props.height};
   }
 
   @media (min-width: 1600px) {
     right: ${({ width })=> ((width-1600)/2)+30}px;
+    height: ${props => props.height};
   }  
 `;
 

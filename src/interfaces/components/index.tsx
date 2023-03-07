@@ -5,10 +5,10 @@ export interface IButton {
   id?: string;
   color: string;
   background: string;
-  outline_color: string;
+  border_color: string;
   background_hover?: string;
   color_hover?: string;
-  outline_hover?: string;
+  border_hover?: string;
   disable?: string;
   width?: string;
   height?: string;
@@ -19,10 +19,10 @@ export interface IButton {
 export interface IButtonStyleProps {
   color: string;
   background: string;
-  outline_color?: string;
+  border_color?: string;
   background_hover?: string;
   color_hover?: string;
-  outline_hover?: string;
+  border_hover?: string;
   disable?: string;
   width?: string;
   height?: string;
@@ -49,6 +49,7 @@ export interface IFormUpdateAnnouncement {
   price?: string;
   description?: string;
   type_vehicle?: string;
+  is_active?: string;
   image?: string;
   first_photo_gallery?: string;
   photos_gallery?: any;
@@ -73,4 +74,13 @@ export interface IEditUserProfile {
   street?: string;
   number?: number;
   complement?: string;
+}
+
+export interface IComment {
+  description: string;
+  createdAt: Date;
+  user: {
+    id: string;
+    name: string;
+  };
 }

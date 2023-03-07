@@ -12,6 +12,14 @@ export const SuccessStyle = styled.div`
   height: 2720px;
   background-color: rgba(0, 0, 0, 0.5);
 
+  @media (max-width: 800px) {
+    height: 2180px;
+  }
+
+  @media (max-width: 620px) {
+    height: 2180px;
+  }
+
   .container-modal {
     display: flex;
     position: absolute;

@@ -100,11 +100,11 @@ export const ModalEditAddress = ({ setModalAddress }: ModalProps) => {
         <div className="buttonBox">
           <Button
             color="var(--colors-white)"
-            outline_color="var(--colors-brand-1)"
+            border_color="var(--colors-brand-1)"
             children="Salvar alterações"
             background_hover="var(--colors-brand-2)"
             color_hover="var(--colors-white)"
-            outline_hover="var(--colors-brand-1)"
+            border_hover="var(--colors-brand-1)"
             width="193px"
             height="48px"
             background="var(--colors-brand-1)"
@@ -112,11 +112,11 @@ export const ModalEditAddress = ({ setModalAddress }: ModalProps) => {
           <Button
             onClick={() => setModalAddress(false)}
             color="var(--colors-grey-0)"
-            outline_color="var(--colors-grey-7)"
+            border_color="var(--colors-grey-7)"
             children="Cancelar"
             background_hover="var(--colors-grey-5)"
             color_hover="var(--colors-white)"
-            outline_hover="var(--colors-grey-5)"
+            border_hover="var(--colors-grey-5)"
             width="126px"
             height="48px"
             background="var(--colors-grey-7)"
