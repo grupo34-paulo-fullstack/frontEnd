@@ -51,15 +51,19 @@ export const Card = ({ item }) => {
 
       <p className="text-body-2-400">{item.description}</p>
 
-      <div className="container-name text-body-1-400">
-        <NameIcon
-          className="container-nameIcon-icon text-body-2-400"
-          backgroundColor={generateColor()}
-        >
+      {userLogged?.id != params.id ? (
+        <div className="container-name text-body-1-400">
+          <NameIcon
+            className="container-nameIcon-icon text-body-2-400"
+            backgroundColor={generateColor()}
+          >
+            {item.name}
+          </NameIcon>
           {item.name}
-        </NameIcon>
-        {item.name}
-      </div>
+        </div>
+      ) : (
+        <br />
+      )}
 
       <div className="container-infos">
         <SpanInfo>
