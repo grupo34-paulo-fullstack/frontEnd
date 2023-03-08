@@ -1,17 +1,22 @@
 # Projeto Final M6 - FrontEnd
 
+# Descrição do projeto:
+
+`O projeto é uma plataforma de divulgação de anúncios de vendas de carros e motos. O objetivo do projeto é facilitar a busca de usuários por veículos à venda e garantir uma interação entre vendedor e comprador com praticidade. Ao registrar-se na plataforma o usuário pdoerá anunciar veículos ou procurar algum que seja do seu interesse.`
+
 ## Configure o dotenv:
 
-`na variável de ambiente, coloque o mesmo localhost em que seu backend está rodando`
+`Crie um arquivo .env seguindo o exemplo (.env.example) para configurar as variáveis de ambientee habilitar a conexão com o banco de dados.`
 
 ## Antes de iniciar a aplicação, rode o seguinte comando para instalar as dependências:
 
-`yarn`
+`yarn` ou `yarn install`
 
-## Caso queira iniciar a aplicação localmente, execute:
+## Para inicializar a aplicação localmente, execute:
 
 `yarn dev`
 
-## Caso contrário acesse pelo deploy clicando em:
-
-`https://EXEMPLO.vercel.app/`
+# Integrantes da equipe que construíram a aplicação:
+- Amon Fanticelli Moreira Rangel
+- Filipe Judiss Albuquerque
+- Lucas Vale
