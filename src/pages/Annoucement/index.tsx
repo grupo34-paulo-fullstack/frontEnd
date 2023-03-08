@@ -26,36 +26,28 @@ import { Button } from "../../components/Button";
 import { toast } from "react-hot-toast";
 import { ModalImageCar } from "../../components/ModalImageCar";
 import { Context } from "../../context/Context";
+import { ModalEditAddress } from "../../components/ModalEditAddress";
+import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
 
 export const Annoucement = () => {
-  const { announcementDetail, retrieveAnnouncement, createComment } = useContext(Context);
+  const { announcementDetail, 
+    retrieveAnnouncement, 
+    createComment, 
+    isModalProfileOpen,
+    setModalProfile,
+    isModalAddressOpen,
+    setModalAddress, } = useContext(Context);
 
   const [modalImageCar, setModalImageCar] = useState(false);
   const [imageRender, setImageRender] = useState("");
 
   const textAreaRef = useRef<any>(null);
+  
   const { user } = useContext(AuthContext);
-  // const [comments, setComments] = useState<IComment[]>([]);
+
   const navigate = useNavigate();
-  // const [announcement, setAnnouncement] = useState<IAnnouncement>(
-  //   {} as IAnnouncement
-  // );
 
   const params = useParams();
-
-  // useEffect(() => {
-  //   const getAnnouncementsAndComments = async () => {
-  //     const comments = await api.get(`/comments/${params.id}`);
-  //     setComments(comments.data);
-
-  //     const announcement = await api.get(`/announcements`);
-  //     const announcementOpen = announcement.data.filter(
-  //       (announc: IAnnouncementResponse) => announc.id == params.id
-  //     );
-  //     setAnnouncement(announcementOpen[0]);
-  //   };
-  //   getAnnouncementsAndComments().catch((err) => alert(err));
-  // }, []);
 
   useEffect(() => retrieveAnnouncement(params.id!), []);
 
@@ -64,24 +56,14 @@ export const Annoucement = () => {
     setImageRender(image);
   };
 
-  // const createComment = async () => {
-  //   try {
-  //     const token = localStorage.getItem("@token");
-  //     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-  //     const data = { description: textAreaRef.current.value };
-
-  //     await api.post(`/comments/${params.id}`, data);
-
-  //     const comments = await api.get(`/comments/${params.id}`);
-  //     setComments(comments.data);
-  //   } catch {
-  //     toast.error("Não foi possível fazer o comentário");
-  //   }
-  // };
-
   return (
     <>
+      {isModalProfileOpen && (
+        <ModalProfileEditRemove setModalProfile={setModalProfile} />
+      )}
+      {isModalAddressOpen && (
+        <ModalEditAddress setModalAddress={setModalAddress} />
+      )}
       <Header />
       <Body>
         <MainContent>

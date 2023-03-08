@@ -16,6 +16,8 @@ import { ModalDeleteAnnouncement } from "../../components/ModalDeleteAnnouncemen
 import { AuthContext } from "../../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { IAnnouncement } from "../../interfaces/context";
+import { ModalEditAddress } from "../../components/ModalEditAddress";
+import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
 
 export const AnnouncerPage = () => {
   const params = useParams();
@@ -34,6 +36,10 @@ export const AnnouncerPage = () => {
     showModalDeleteAnnouncement,
     retrieveAnnouncer,
     announcer,
+    isModalProfileOpen,
+    setModalProfile,
+    isModalAddressOpen,
+    setModalAddress,
   } = useContext(Context);
 
   const { user } = useContext(AuthContext);
@@ -45,6 +51,12 @@ export const AnnouncerPage = () => {
       {showEditAnnouncementModal && <ModalEditAnnouncement />}
       {showModalAddAnnouncementSuccess && <ModalAddAnnouncementSuccess />}
       {showModalDeleteAnnouncement && <ModalDeleteAnnouncement />}
+      {isModalProfileOpen && (
+        <ModalProfileEditRemove setModalProfile={setModalProfile} />
+      )}
+      {isModalAddressOpen && (
+        <ModalEditAddress setModalAddress={setModalAddress} />
+      )}
 
       <AnnouncerPageStyle>
         <div className="container-page">
@@ -62,9 +74,7 @@ export const AnnouncerPage = () => {
               </div>
             </div>
 
-            <p id="description">
-              {announcer.description}
-            </p>
+            <p id="description">{announcer.description}</p>
 
             {user?.id == announcer.id ? (
               <Button
@@ -144,9 +154,7 @@ export const AnnouncerPage = () => {
               </div>
             </div>
 
-            <p id="description">
-              {announcer.description}
-            </p>
+            <p id="description">{announcer.description}</p>
 
             <br />
           </div>

@@ -8,9 +8,17 @@ import { Header } from "../../components/Header";
 import { Context } from "../../context/Context";
 import { api } from "../../service/api";
 import { Auction, CardCars, Container } from "./style";
+import { ModalEditAddress } from "../../components/ModalEditAddress";
+import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
 
 export const Home = () => {
-  const { announcements, setAnnouncements } = useContext(Context);
+  const { announcements, 
+    setAnnouncements, 
+    announcements,
+    isModalProfileOpen,
+    setModalProfile,
+    isModalAddressOpen,
+    setModalAddress, } = useContext(Context);
 
   useEffect(() => {
     api
@@ -21,6 +29,12 @@ export const Home = () => {
 
   return (
     <>
+      {isModalProfileOpen && (
+        <ModalProfileEditRemove setModalProfile={setModalProfile} />
+      )}
+      {isModalAddressOpen && (
+        <ModalEditAddress setModalAddress={setModalAddress} />
+      )}
       <Header />
       <Container>
         <h1>Velocidade e experiência em um lugar feito para você</h1>
