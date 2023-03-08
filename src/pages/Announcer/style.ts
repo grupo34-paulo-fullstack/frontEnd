@@ -411,3 +411,20 @@ export const AnnouncerPageWithoutTokenStyle = styled.main`
     }
   }
 `;
+
+
+export const NameIconAnnouncer = styled.h2`
+  display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%; 
+    margin-right: 5px;
+
+    color: var(--colors-white);
+
+    width: 100px;
+    height: 100px;
+
+    background-color: var(--colors-brand-1);
+`
