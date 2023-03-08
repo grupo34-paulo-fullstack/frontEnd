@@ -145,6 +145,9 @@ export const Provider = ({ children }: IProvider) => {
 
   const createComment = (data: string, id: string) => {
     const newData = { description: data };
+
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
     api.post(`/comments/${id}`, newData).then((res) => {
       toast.success("Comentário criado");
       retrieveAnnouncement(id);
