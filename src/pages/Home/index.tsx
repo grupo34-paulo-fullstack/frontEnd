@@ -10,37 +10,39 @@ import { api } from "../../service/api";
 import { Auction, CardCars, Container } from "./style";
 import { ModalEditAddress } from "../../components/ModalEditAddress";
 import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
+import { ModalRemoveUser } from "../../components/ModalRemoveUser";
 
 export const Home = () => {
-
-  const { announcements, 
-    setAnnouncements, 
+  const {
+    announcements,
+    setAnnouncements,
     isModalProfileOpen,
     setModalProfile,
     isModalAddressOpen,
-    setModalAddress, 
-    getAllAnnouncements} = useContext(Context);
+    setModalAddress,
+    isModalRemoveUserOpen,
+    setModalRemoveUser,
+    getAllAnnouncements,
+  } = useContext(Context);
 
   const announCars = announcements.filter(
     (announcement) =>
-      announcement.type_vehicle === "car" &&
-      announcement.is_active == true
-  )
+      announcement.type_vehicle === "car" && announcement.is_active == true
+  );
 
   const announMotors = announcements.filter(
     (announcement) =>
       announcement.type_vehicle === "motorcycle" &&
       announcement.is_active == true
-  )
+  );
 
-  useEffect(()=> {
+  useEffect(() => {
     const request = async () => {
-      await getAllAnnouncements()
-    }
+      await getAllAnnouncements();
+    };
 
-    request()
-  }, [])
-  
+    request();
+  }, []);
 
   useEffect(() => {
     api
@@ -52,10 +54,16 @@ export const Home = () => {
   return (
     <>
       {isModalProfileOpen && (
-        <ModalProfileEditRemove setModalProfile={setModalProfile} />
+        <ModalProfileEditRemove
+          setModalProfile={setModalProfile}
+          setModalRemoveUser={setModalRemoveUser}
+        />
       )}
       {isModalAddressOpen && (
         <ModalEditAddress setModalAddress={setModalAddress} />
+      )}
+      {isModalRemoveUserOpen && (
+        <ModalRemoveUser setModalRemoveUser={setModalRemoveUser} />
       )}
       <Header />
       <Container>
@@ -85,39 +93,43 @@ export const Home = () => {
       <Auction>
         <h5>Leilão</h5>
         <ul>
-          {announCars?.length > 0 ?  
-          cardsHome.map((item, index) => (
-            <CardAuction key={index} item={item} />
-          ))
-          :
-          <>
-            <h6>Não há anuncios de carros no momento, em breve novas atualizações.</h6>
-          </>
-          }
+          {announCars?.length > 0 ? (
+            cardsHome.map((item, index) => (
+              <CardAuction key={index} item={item} />
+            ))
+          ) : (
+            <>
+              <h6>
+                Não há anuncios de carros no momento, em breve novas
+                atualizações.
+              </h6>
+            </>
+          )}
         </ul>
       </Auction>
       <CardCars>
         <h5>Carros</h5>
         <ul>
-          {announCars
-            .map((item, index) => (
-              <CardHome key={index} item={item} />
-            ))}
+          {announCars.map((item, index) => (
+            <CardHome key={index} item={item} />
+          ))}
         </ul>
       </CardCars>
       <CardCars>
         <h5>Motos</h5>
         <ul>
-          { announMotors?.length > 0 ?  
-            
+          {announMotors?.length > 0 ? (
             announMotors.map((item, index) => (
               <CardHome key={index} item={item} />
             ))
-            :
+          ) : (
             <>
-              <h6>Não há anuncios de motos no momento, em breve novas atualizações.</h6>
-            </>            
-          }
+              <h6>
+                Não há anuncios de motos no momento, em breve novas
+                atualizações.
+              </h6>
+            </>
+          )}
         </ul>
       </CardCars>
       <Footer />

@@ -13,6 +13,7 @@ import { Navigate } from "react-router-dom";
 
 export const RegisterPage = () => {
   const { handleRegister } = useContext(AuthContext);
+  const { checkCep } = useContext(Context);
 
   const token = localStorage.getItem("@token");
 
@@ -78,7 +79,6 @@ export const RegisterPage = () => {
             id="description"
             placeholder="Digitar descrição"
             label="Descrição"
-            // onBlur={checkCep}
             error={errors?.description}
             type="text"
           />
@@ -90,6 +90,7 @@ export const RegisterPage = () => {
             id="CEP"
             placeholder="00000.000"
             label="CEP"
+            onBlur={checkCep}
             error={errors?.cep}
             type="text"
           />

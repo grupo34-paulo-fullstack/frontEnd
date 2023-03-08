@@ -11,9 +11,13 @@ import { Button } from "../Button";
 
 interface ModalProps {
   setModalProfile: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalRemoveUser: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ModalProfileEditRemove = ({ setModalProfile }: ModalProps) => {
+export const ModalProfileEditRemove = ({
+  setModalProfile,
+  setModalRemoveUser,
+}: ModalProps) => {
   const { updateUser } = useContext(Context);
   const {
     register,
@@ -107,6 +111,19 @@ export const ModalProfileEditRemove = ({ setModalProfile }: ModalProps) => {
             width="126px"
             height="48px"
             background="var(--colors-grey-7)"
+          />
+
+          <Button
+            onClick={() => setModalRemoveUser(true)}
+            color="var(--colors-grey-0)"
+            border_color="var(--colors-alert-2)"
+            children="Remover Conta"
+            background_hover="var(--colors-alert-1)"
+            color_hover="var(--colors-white)"
+            border_hover="var(--colors-alert-1)"
+            width="90px"
+            height="48px"
+            background="var(--colors-alert-2)"
           />
         </div>
       </Form>

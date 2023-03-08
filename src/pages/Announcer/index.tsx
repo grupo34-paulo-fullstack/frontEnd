@@ -18,6 +18,7 @@ import { useParams } from "react-router-dom";
 import { IAnnouncement } from "../../interfaces/context";
 import { ModalEditAddress } from "../../components/ModalEditAddress";
 import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
+import { ModalRemoveUser } from "../../components/ModalRemoveUser";
 
 export const AnnouncerPage = () => {
   const params = useParams();
@@ -40,6 +41,8 @@ export const AnnouncerPage = () => {
     setModalProfile,
     isModalAddressOpen,
     setModalAddress,
+    setModalRemoveUser,
+    isModalRemoveUserOpen,
   } = useContext(Context);
 
   const { user } = useContext(AuthContext);
@@ -52,10 +55,16 @@ export const AnnouncerPage = () => {
       {showModalAddAnnouncementSuccess && <ModalAddAnnouncementSuccess />}
       {showModalDeleteAnnouncement && <ModalDeleteAnnouncement />}
       {isModalProfileOpen && (
-        <ModalProfileEditRemove setModalProfile={setModalProfile} />
+        <ModalProfileEditRemove
+          setModalProfile={setModalProfile}
+          setModalRemoveUser={setModalRemoveUser}
+        />
       )}
       {isModalAddressOpen && (
         <ModalEditAddress setModalAddress={setModalAddress} />
+      )}
+      {isModalRemoveUserOpen && (
+        <ModalRemoveUser setModalRemoveUser={setModalRemoveUser} />
       )}
 
       <AnnouncerPageStyle>

@@ -28,6 +28,7 @@ import { ModalImageCar } from "../../components/ModalImageCar";
 import { Context } from "../../context/Context";
 import { ModalEditAddress } from "../../components/ModalEditAddress";
 import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
+import { ModalRemoveUser } from "../../components/ModalRemoveUser";
 
 export const Annoucement = () => {
   const {
@@ -38,6 +39,8 @@ export const Annoucement = () => {
     setModalProfile,
     isModalAddressOpen,
     setModalAddress,
+    setModalRemoveUser,
+    isModalRemoveUserOpen,
   } = useContext(Context);
 
   const [modalImageCar, setModalImageCar] = useState(false);
@@ -61,10 +64,16 @@ export const Annoucement = () => {
   return (
     <>
       {isModalProfileOpen && (
-        <ModalProfileEditRemove setModalProfile={setModalProfile} />
+        <ModalProfileEditRemove
+          setModalProfile={setModalProfile}
+          setModalRemoveUser={setModalRemoveUser}
+        />
       )}
       {isModalAddressOpen && (
         <ModalEditAddress setModalAddress={setModalAddress} />
+      )}
+      {isModalRemoveUserOpen && (
+        <ModalRemoveUser setModalRemoveUser={setModalRemoveUser} />
       )}
       <Header />
       <Body>
@@ -85,7 +94,7 @@ export const Annoucement = () => {
                   {new Intl.NumberFormat("pt-BR", {
                     style: "currency",
                     currency: "BRL",
-                  }).format(announcementDetail.price  )}
+                  }).format(announcementDetail.price)}
                 </p>
               </div>
 
