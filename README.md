@@ -6,8 +6,9 @@
 
 ## Tecnologias/ferramentas utilizadas na aplicação:
 - ReactJS
-- Styled-components
-- Axios
+- TypeScript
+- styled-components
+- axios
 - react-hook-form
 - react-icons
 - react-router-dom
