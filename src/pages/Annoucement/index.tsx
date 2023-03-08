@@ -14,7 +14,7 @@ import {
   CommentSectionOffline,
 } from "./style";
 import { CardComments } from "../../components/CardComments";
-import {  useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../service/api";
@@ -30,19 +30,21 @@ import { ModalEditAddress } from "../../components/ModalEditAddress";
 import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
 
 export const Annoucement = () => {
-  const { announcementDetail, 
-    retrieveAnnouncement, 
-    createComment, 
+  const {
+    announcementDetail,
+    retrieveAnnouncement,
+    createComment,
     isModalProfileOpen,
     setModalProfile,
     isModalAddressOpen,
-    setModalAddress, } = useContext(Context);
+    setModalAddress,
+  } = useContext(Context);
 
   const [modalImageCar, setModalImageCar] = useState(false);
   const [imageRender, setImageRender] = useState("");
 
   const textAreaRef = useRef<any>(null);
-  
+
   const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -79,7 +81,12 @@ export const Annoucement = () => {
                   <span className="yearKm">{announcementDetail.km} km</span>
                 </div>
 
-                <p className="price">R$ {announcementDetail.price}</p>
+                <p className="price">
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(announcementDetail.price  )}
+                </p>
               </div>
 
               <Button
@@ -103,29 +110,27 @@ export const Annoucement = () => {
           <Aside>
             <section className="photoSection">
               <h6>Fotos</h6>
-               
-                <ul className="photoList">
-                { 
-                  announcementDetail.gallery?.map((item, index)=> {
-                    return(
-                      <>
-                        <li
-                          key={index}
-                          className="photoElement"
-                          onClick={() => modalAndImageRender(item.image)}
-                        >
-                          <img
-                            className="asideImg"
-                            src={item.image}
-                            alt="Fotos Galeria"
-                          />
-                        </li>
-                      </>
-                    );
-                  })}
 
-                </ul>
-                
+              <ul className="photoList">
+                {announcementDetail.gallery?.map((item, index) => {
+                  return (
+                    <>
+                      <li
+                        key={index}
+                        className="photoElement"
+                        onClick={() => modalAndImageRender(item.image)}
+                      >
+                        <img
+                          className="asideImg"
+                          src={item.image}
+                          alt="Fotos Galeria"
+                        />
+                      </li>
+                    </>
+                  );
+                })}
+              </ul>
+
               {modalImageCar && (
                 <ModalImageCar
                   image={imageRender}
@@ -192,7 +197,13 @@ export const Annoucement = () => {
                 ref={textAreaRef}
                 placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
               ></textarea>
-              <button onClick={() => createComment(textAreaRef.current.value, params.id!)}>Comentar</button>
+              <button
+                onClick={() =>
+                  createComment(textAreaRef.current.value, params.id!)
+                }
+              >
+                Comentar
+              </button>
               <div className="comments-fixed">
                 <CommentsFixed
                   onClick={() => {
