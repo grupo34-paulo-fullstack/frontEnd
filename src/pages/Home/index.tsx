@@ -14,7 +14,6 @@ import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
 export const Home = () => {
   const { announcements, 
     setAnnouncements, 
-    announcements,
     isModalProfileOpen,
     setModalProfile,
     isModalAddressOpen,
