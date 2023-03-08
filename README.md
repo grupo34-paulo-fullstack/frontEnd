@@ -4,6 +4,16 @@
 
 `O projeto é uma plataforma de divulgação de anúncios de vendas de carros e motos. O objetivo do projeto é facilitar a busca de usuários por veículos à venda e garantir uma interação entre vendedor e comprador com praticidade. Ao registrar-se na plataforma o usuário pdoerá anunciar veículos ou procurar algum que seja do seu interesse.`
 
+## Tecnologias/ferramentas utilizadas na aplicação:
+- ReactJS
+- Styled-components
+- Axios
+- react-hook-form
+- react-icons
+- react-router-dom
+- uuid
+- yup
+
 ## Configure o dotenv:
 
 `Crie um arquivo .env seguindo o exemplo (.env.example) para configurar as variáveis de ambientee habilitar a conexão com o banco de dados.`
