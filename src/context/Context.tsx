@@ -160,15 +160,41 @@ export const Provider = ({ children }: IProvider) => {
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
 
+  const updateComment = (data: string, id: string) => {
+    const newData = { description: data };
+    
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    
+    api.patch(`/comments/${id}`, newData)
+      .then((res) => {
+        toast.success("Comentário atualizado");
+        retrieveAnnouncement(res.data.announcement);
+      })
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+
   const deleteUser = () => {
     const token = localStorage.getItem("@token");
-
+    
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     api
       .delete(`/users`)
       .then((response) => {
         toast.success("Sua conta foi deletada!");
+      })
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+        
+      
+  const deleteComment = (id: string) => {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    api
+      .delete(`/comments/${id}`)
+      .then((res) => {
+        toast.success("Comentário excluído");
+        retrieveAnnouncement(id);
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
@@ -207,6 +233,8 @@ export const Provider = ({ children }: IProvider) => {
         suggestion,
         setSuggestion,
         createComment,
+        updateComment,
+        deleteComment,
       }}
     >
       {children}

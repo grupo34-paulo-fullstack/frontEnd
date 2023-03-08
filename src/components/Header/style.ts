@@ -85,6 +85,12 @@ export const NavUser = styled.div`
 
     margin-right: 45px;
     gap: 8px;
+    cursor: default;
+    transition: 0.2s;
+
+    &:hover {
+        transform: scale(1.05);
+    }
 
     p{
         padding: 10px;
