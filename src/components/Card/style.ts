@@ -24,10 +24,20 @@ export const Container = styled.li<IContainerProps>`
 
   h5 {
     font-size: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   p {
     text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .container-name {
@@ -37,12 +47,22 @@ export const Container = styled.li<IContainerProps>`
   }
 
   .container-image {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
     position: relative;
-    text-align: center;
     width: 19.5rem;
     height: 9.5rem;
     background-color: var(--colors-grey-7);
     border: 2px solid var(--colors-grey-7);
+
+    .container-image-img{
+      width: 75%;
+      height: 75%;
+      object-fit: contain;
+    }
 
     .is_active {
       display: flex;
@@ -55,6 +75,7 @@ export const Container = styled.li<IContainerProps>`
       height: 24px;
       left: 16px;
       top: 11px;
+      z-index: 5;
 
       p {
         color: white;
@@ -63,8 +84,9 @@ export const Container = styled.li<IContainerProps>`
         font-size: 14px;
         line-height: 24px;
         font-family: var(--font-inter);
-      }
-    }
+      }      
+    }    
+    
   }
 
   .container-infos {

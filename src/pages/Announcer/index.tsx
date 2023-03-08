@@ -1,6 +1,6 @@
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import { AnnouncerPageStyle, AnnouncerPageWithoutTokenStyle } from "./style";
+import { AnnouncerPageStyle, AnnouncerPageWithoutTokenStyle, NameIconAnnouncer } from "./style";
 import { Button } from "../../components/Button";
 import { cardsAnnouncerPage } from "../../components/CardAuction/database";
 import { v4 as uuid } from "uuid";
@@ -63,9 +63,13 @@ export const AnnouncerPage = () => {
           <div className="background-announcer" />
 
           <div className="information-announcer">
-            <figure>
-              <img src={announcerImg} alt="SL" />
-            </figure>
+            <NameIconAnnouncer >
+            {announcer.name
+              .split(" ")
+              .map((name, index) =>
+                index <= 1 ? name[0].toUpperCase() : undefined
+            )}
+              </NameIconAnnouncer>
 
             <div className="name-announcer">
               <p id="name">{announcer.name}</p>

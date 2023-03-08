@@ -44,7 +44,7 @@ export const Card = ({ item }) => {
             {item.is_active == true ? "Ativo" : "Inativo"}
           </p>
         </div>
-        <img src={item.image} alt="" />
+        <img className="container-image-img" src={item.image} alt="" />
       </div>
 
       <h5>{item.title}</h5>
@@ -67,10 +67,13 @@ export const Card = ({ item }) => {
 
       <div className="container-infos">
         <SpanInfo>
-          <span className="text-body-2-500">{item.km} KM</span>
+          <span className="text-body-2-500">{item.km} km</span>
           <span className="text-body-2-500">{item.year}</span>
         </SpanInfo>
-        <p className="text-body-1-400">R$ {item.price}</p>
+        <p className="text-body-1-400">{new Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            }).format(item.price)}</p>
       </div>
 
       {userLogged?.id == params.id && (
