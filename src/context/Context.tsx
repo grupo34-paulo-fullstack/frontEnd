@@ -123,7 +123,7 @@ export const Provider = ({ children }: IProvider) => {
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
 
-  const checkCep = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const checkCep = async (e: any) => {
     const cep = e.target.value.replace(/\D/g, "");
     fetch(`viacep.com.br/ws/${cep}/json/`)
       .then((res) => res.json())
@@ -166,6 +166,8 @@ export const Provider = ({ children }: IProvider) => {
       .patch(`/users`, data)
       .then((response) => {
         toast.success("Dados editados com sucesso!");
+        setModalProfile(false);
+        setModalAddress(false);
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
