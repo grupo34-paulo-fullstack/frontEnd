@@ -24,18 +24,31 @@ export const Container = styled.li`
 
     h5 {
         font-size: 1rem;
-        margin-top: 16px;
+        margin-top: 10px;
+        text-align: left;
+        margin-top: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    p {
+    .container-description {
         text-align: left;
-        margin-top: 16px;
+        margin-top: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 48px;
     }
 
     .container-name{
         display: flex;
         align-items: center;
-        margin-top: 16px;
+        margin-top: 10px;
     }
 
     .container-image{
