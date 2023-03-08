@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components"
 
 interface OpenMenuUser {
-    open: boolean
-    width: number
-    height: string
+    open: boolean;
+    height: string;
 }
 
 export const HeaderStyle = styled.header`
@@ -24,6 +23,8 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    position: relative;
 
     a{
         img{
@@ -116,6 +117,7 @@ export const MenuDropDown = styled.nav<OpenMenuUser>`
   padding-bottom: 5px;
 
 
+
   @media (max-width: 768px) {
     display: none;
   }
@@ -131,16 +133,11 @@ export const MenuDropDown = styled.nav<OpenMenuUser>`
     transition: transform 0.5s ease-in-out;
 
     top: 70px;
-    right: 20px;
+    right: 30px;
 
     width: 12.5rem;
     height: ${props => props.height};
   }
-
-  @media (min-width: 1600px) {
-    right: ${({ width })=> ((width-1600)/2)+30}px;
-    height: ${props => props.height};
-  }  
 `;
 
 export const LinkDropDownUser = styled(Link)`

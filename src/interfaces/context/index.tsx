@@ -100,7 +100,7 @@ export interface IAnnouncementResponse {
   image: string;
   is_active: boolean;
   user: IUser;
-  gallery: any[];
+  gallery?: any[];
 }
 
 export interface ICreateUser {

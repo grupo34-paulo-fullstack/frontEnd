@@ -15,6 +15,7 @@ export const Container = styled.li`
 
     width: 312px;
     height: 350px;
+    
 
     a {
         text-decoration: none;
@@ -23,24 +24,34 @@ export const Container = styled.li`
 
     h5 {
         font-size: 1rem;
+        margin-top: 16px;
     }
 
     p {
         text-align: left;
+        margin-top: 16px;
     }
 
     .container-name{
         display: flex;
         align-items: center;
-        padding-left: 10px;
+        margin-top: 16px;
     }
 
     .container-image{
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 312px;
         height: 9.5rem;
         background-color:  var(--colors-grey-7);
-        /* border: 2px solid var(--colors-grey-7); */
+        border-radius: 3px;
+
+        img{
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+        }
     }
 
     .container-infos{
@@ -48,12 +59,27 @@ export const Container = styled.li`
 
         display: flex;
         justify-content: space-between;
+        margin-top: 16px;
 
         p{
             font-size: 1rem;
             font-weight: 600;
             color: var(--colors-grey-1);
             margin-right: 6px;
+            
+        }
+    }
+
+    &:hover{
+        .container-image{
+
+            border: 2px solid var(--colors-brand-1);
+
+            img{
+
+                transition: 0.5s;
+                transform: scale(1.2);
+            }
         }
     }
 `
@@ -66,10 +92,12 @@ export const NameIcon = styled.div<Props>`
     border-radius: 50%; 
     margin-right: 5px;
 
+    font-weight: 600;
+
     width: 27px;
     height: 27px;
 
-    font-size: 1rem;
+    font-size: 0.8rem;
 
     background-color: ${(props) => props.backgroundColor};
 `

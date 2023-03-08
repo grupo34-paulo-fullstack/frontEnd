@@ -48,11 +48,15 @@ export const Provider = ({ children }: IProvider) => {
   const [showModalDeleteAnnouncement, setShowModalDeleteAnnouncement] =
     useState<boolean>(false);
 
-  const getAllAnnouncements = async () =>
+  const getAllAnnouncements = async () => {
     await api
       .get("/announcements")
-      .then((res) => setAnnouncements(res.data))
+      .then((res) => {
+      setAnnouncements(res.data)
+      }
+      )
       .catch((error) => console.log(error));
+  }
 
 
   const createAnnouncement = (data: IFormCreateAnnouncement) => {

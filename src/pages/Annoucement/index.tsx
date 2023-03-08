@@ -10,12 +10,11 @@ import {
   Comments,
   CommentSection,
   CommentsBox,
-  BoxComment,
   CommentsFixed,
   CommentSectionOffline,
 } from "./style";
 import { CardComments } from "../../components/CardComments";
-import { LegacyRef, useContext, useEffect, useRef, useState } from "react";
+import {  useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../service/api";
@@ -24,7 +23,6 @@ import { IAnnouncementResponse } from "../../interfaces/context";
 import { Button } from "../../components/Button";
 import { toast } from "react-hot-toast";
 import { ModalImageCar } from "../../components/ModalImageCar";
-import { Context } from "../../context/Context";
 
 
 export const Annoucement = () => {
@@ -111,10 +109,10 @@ export const Annoucement = () => {
             <section className="photoSection">
               <h6>Fotos</h6>
               {
-                announcement?.gallery?.length > 0 ?
+               announcement.gallery != undefined && announcement?.gallery?.length > 0 ?
                 <ul className="photoList">
                 { 
-                  announcement.gallery.map((item, index)=> {
+                  announcement.gallery?.map((item, index)=> {
                     return(
                       <>
                         <li key={index} className="photoElement" onClick={()=> modalAndImageRender(item.image)}>

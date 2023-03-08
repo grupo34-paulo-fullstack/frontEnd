@@ -146,7 +146,6 @@ export const Header = () => {
             <MenuDropDown
               ref={inputRef}
               open={isOpenMenuUser}
-              width={width}
               height={user?.is_announcer == true ? "12.5rem" : "9.5rem"}
             >
               <LinkDropDownUser
