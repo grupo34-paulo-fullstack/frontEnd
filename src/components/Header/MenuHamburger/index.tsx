@@ -5,6 +5,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import { Button } from "../../Button";
 import { IconUser, NavLink } from "./style";
 import { MenuDropDown, StyledBurger } from "./style";
+import { Context } from "../../../context/Context";
 
 const Burger = ({
   isOpen,
@@ -14,6 +15,8 @@ const Burger = ({
   quitAccount,
 }: IMenuBurgerProps) => {
   const { user, setUser } = useContext(AuthContext);
+  const { isModalAddressOpen, setModalAddress } = useContext(Context);
+  const { isModalProfileOpen, setModalProfile } = useContext(Context);
   const navigate = useNavigate();
 
   return (
@@ -37,7 +40,11 @@ const Burger = ({
           <hr />
           {user ? (
             <>
-              <NavLink className="text-body-1-600" to="">
+              <NavLink
+                onClick={() => setModalProfile(!isModalProfileOpen)}
+                className="text-body-1-600"
+                to=""
+              >
                 Editar Perfil
               </NavLink>
               <IconUser>
@@ -45,7 +52,11 @@ const Burger = ({
                   {user.name.split(" ").map((name) => name[0].toUpperCase())}
                 </p>
               </IconUser>
-              <NavLink className="text-body-1-600" to="">
+              <NavLink
+                onClick={() => setModalAddress(!isModalAddressOpen)}
+                className="text-body-1-600"
+                to=""
+              >
                 Editar Endereço
               </NavLink>
               <NavLink className="text-body-1-600" to="">

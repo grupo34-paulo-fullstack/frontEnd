@@ -7,7 +7,7 @@ export const ModalAddAnnouncementSuccess = () => {
   const { setShowModalAddAnnouncementSuccess } = useContext(Context);
 
   setTimeout(() => {
-    setShowModalAddAnnouncementSuccess(false)
+    setShowModalAddAnnouncementSuccess(false);
   }, 4000);
 
   return (

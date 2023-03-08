@@ -1,4 +1,5 @@
 import {
+  IEditUserProfile,
   IFormCreateAnnouncement,
   IFormUpdateAnnouncement,
 } from "../components";
@@ -13,9 +14,6 @@ export interface IContext {
   showAddAnnouncementModal: boolean;
   setShowAddAnnouncementModal: React.Dispatch<React.SetStateAction<boolean>>;
   showModalAddAnnouncementSuccess: boolean;
-  setShowModalAddAnnouncementSuccess: React.Dispatch<
-    React.SetStateAction<boolean>
-  >;
   showEditAnnouncementModal: boolean;
   setShowEditAnnouncementModal: React.Dispatch<React.SetStateAction<boolean>>;
   showModalDeleteAnnouncement: boolean;
@@ -31,6 +29,15 @@ export interface IContext {
   checkCep: (e: React.ChangeEvent<HTMLInputElement>) => void;
   announcementId: string;
   setAnnouncementId: React.Dispatch<React.SetStateAction<string>>;
+  isModalProfileOpen: boolean;
+  setModalProfile: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowModalAddAnnouncementSuccess: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
+
+  updateUser: (data: IEditUserProfile) => void;
+  isModalAddressOpen: boolean;
+  setModalAddress: React.Dispatch<React.SetStateAction<boolean>>;
   announcer: IAnnouncer;
   setAnnouncer: React.Dispatch<React.SetStateAction<IAnnouncer>>;
   retrieveAnnouncer: (id: string) => void;
@@ -38,6 +45,9 @@ export interface IContext {
   announcementDetail: IAnnouncement;
   setAnnouncementDetail: React.Dispatch<React.SetStateAction<IAnnouncement>>;
   createComment: (data: string, id: string) => void;
+  updateComment: (data: string, id: string) => void;
+  deleteComment: (id: string) => void;
+
 }
 
 export interface IAuthContext {
@@ -60,7 +70,7 @@ export interface IAnnouncement {
   image: string;
   is_active: boolean;
   user: IUser;
-  gallery?: IGallery[];
+  gallery: IGallery[];
   comments?: IComment[];
 }
 

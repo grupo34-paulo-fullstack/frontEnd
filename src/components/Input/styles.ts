@@ -18,7 +18,7 @@ export const Container = styled.div`
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.625rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     transition: 0.2s;
 
     &:hover {

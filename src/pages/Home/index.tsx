@@ -6,10 +6,20 @@ import { CardHome } from "../../components/CardHome";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Context } from "../../context/Context";
+import { api } from "../../service/api";
 import { Auction, CardCars, Container } from "./style";
+import { ModalEditAddress } from "../../components/ModalEditAddress";
+import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
 
 export const Home = () => {
-  const { announcements, getAllAnnouncements } = useContext(Context);
+
+  const { announcements, 
+    setAnnouncements,
+    isModalProfileOpen,
+    setModalProfile,
+    isModalAddressOpen,
+    setModalAddress, 
+    getAllAnnouncements} = useContext(Context);
 
   const announCars = announcements.filter(
     (announcement) =>
@@ -30,9 +40,23 @@ export const Home = () => {
 
     request()
   }, [])
+  
+
+  useEffect(() => {
+    api
+      .get("/announcements")
+      .then((res) => setAnnouncements(res.data))
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <>
+      {isModalProfileOpen && (
+        <ModalProfileEditRemove setModalProfile={setModalProfile} />
+      )}
+      {isModalAddressOpen && (
+        <ModalEditAddress setModalAddress={setModalAddress} />
+      )}
       <Header />
       <Container>
         <h1>Velocidade e experiência em um lugar feito para você</h1>
