@@ -11,21 +11,15 @@ export const Container = styled.div`
   background: rgba(18, 18, 20, 0.5);
   z-index: 20000;
   position: fixed;
-`;
 
-export const Form = styled.form`
-  margin-top: 80px;
-  background: #ffffff;
-  border-radius: 8px;
-  width: 520px;
-  display: flex;
-  flex-direction: column;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-bottom: 33px;
-
-  @media screen and (max-width: 1000px) {
-    width: 90%;
+  .removeUserBox {
+    margin-top: 80px;
+    width: 520px;
+    background: #ffffff;
+    border-radius: 8px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 33px;
   }
 
   .titleBox {
@@ -34,6 +28,8 @@ export const Form = styled.form`
     align-items: center;
     width: 100%;
     height: 50px;
+    margin-bottom: 25px;
+
     .title {
       font-family: "Lexend";
       font-style: normal;
@@ -46,23 +42,6 @@ export const Form = styled.form`
 
       color: #212529;
     }
-  }
-
-  .info {
-    margin-top: 18px;
-    margin-bottom: 24px;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 24px;
-    /* identical to box height, or 171% */
-
-    color: #000000;
-  }
-
-  label {
-    margin-bottom: 5px;
   }
   .x {
     display: flex;
@@ -89,25 +68,32 @@ export const Form = styled.form`
     }
   }
 
+  .secondTitle {
+    font-family: "Lexend";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height */
+
+    color: #000000;
+  }
+  p {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    /* or 175% */
+
+    /* Grey Scale/grey-2 */
+    margin-top: 25px;
+    color: #495057;
+  }
   .buttonBox {
+    margin-top: 40px;
     gap: 10px;
     display: flex;
-    flex-direction: row-reverse;
-  }
-
-  .boxTwoInfos {
-    display: flex;
-    display: flex;
-    align-items: center;
-
-    width: 100%;
-
-    .boxFirstHalf {
-      padding-right: 5px;
-      width: 50%;
-    }
-    .boxSecondHalf {
-      width: 50%;
-    }
+    justify-content: flex-end;
   }
 `;

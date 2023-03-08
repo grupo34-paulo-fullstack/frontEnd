@@ -5,7 +5,7 @@ export const Container = styled.div`
   min-height: 100vh;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   background: rgba(18, 18, 20, 0.5);
@@ -14,6 +14,7 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
+  margin-top: 80px;
   background: #ffffff;
   border-radius: 8px;
   width: 520px;

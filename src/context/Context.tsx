@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { AiOutlineReload } from "react-icons/ai";
+import { BsWindowSidebar } from "react-icons/bs";
 import {
   IFormCreateAnnouncement,
   IFormUpdateAnnouncement,
@@ -9,6 +11,7 @@ import {
   IAnnouncement,
   IAnnouncer,
   IContext,
+  ICreateUser,
   IProvider,
 } from "../interfaces/context";
 import { api } from "../service/api";
@@ -27,6 +30,7 @@ export const Provider = ({ children }: IProvider) => {
 
   const [isModalProfileOpen, setModalProfile] = useState(false);
   const [isModalAddressOpen, setModalAddress] = useState(false);
+  const [isModalRemoveUserOpen, setModalRemoveUser] = useState(false);
   const [announcer, setAnnouncer] = useState<IAnnouncer>({} as IAnnouncer);
 
   const [suggestion, setSuggestion] = useState<string>("");
@@ -169,6 +173,10 @@ export const Provider = ({ children }: IProvider) => {
       .delete(`/users`)
       .then((response) => {
         toast.success("Sua conta foi deletada!");
+        setModalRemoveUser(false);
+        setModalProfile(false);
+        localStorage.clear();
+        window.location.reload();
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
@@ -207,6 +215,9 @@ export const Provider = ({ children }: IProvider) => {
         suggestion,
         setSuggestion,
         createComment,
+        isModalRemoveUserOpen,
+        setModalRemoveUser,
+        deleteUser,
       }}
     >
       {children}

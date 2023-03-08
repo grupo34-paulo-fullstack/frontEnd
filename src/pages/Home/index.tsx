@@ -9,6 +9,7 @@ import { Context } from "../../context/Context";
 import { Auction, CardCars, Container } from "./style";
 import { ModalEditAddress } from "../../components/ModalEditAddress";
 import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
+import { ModalRemoveUser } from "../../components/ModalRemoveUser";
 
 export const Home = () => {
   const {
@@ -17,15 +18,23 @@ export const Home = () => {
     setModalProfile,
     isModalAddressOpen,
     setModalAddress,
+    isModalRemoveUserOpen,
+    setModalRemoveUser,
   } = useContext(Context);
 
   return (
     <>
       {isModalProfileOpen && (
-        <ModalProfileEditRemove setModalProfile={setModalProfile} />
+        <ModalProfileEditRemove
+          setModalProfile={setModalProfile}
+          setModalRemoveUser={setModalRemoveUser}
+        />
       )}
       {isModalAddressOpen && (
         <ModalEditAddress setModalAddress={setModalAddress} />
+      )}
+      {isModalRemoveUserOpen && (
+        <ModalRemoveUser setModalRemoveUser={setModalRemoveUser} />
       )}
       <Header />
       <Container>

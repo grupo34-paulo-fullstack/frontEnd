@@ -34,7 +34,6 @@ export interface IContext {
   setShowModalAddAnnouncementSuccess: React.Dispatch<
     React.SetStateAction<boolean>
   >;
-
   updateUser: (data: IEditUserProfile) => void;
   isModalAddressOpen: boolean;
   setModalAddress: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,6 +44,9 @@ export interface IContext {
   announcementDetail: IAnnouncement;
   setAnnouncementDetail: React.Dispatch<React.SetStateAction<IAnnouncement>>;
   createComment: (data: string, id: string) => void;
+  isModalRemoveUserOpen: boolean;
+  setModalRemoveUser: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteUser: () => void;
 }
 
 export interface IAuthContext {
