@@ -90,7 +90,12 @@ export const Annoucement = () => {
                   <span className="yearKm">{announcementDetail.km} km</span>
                 </div>
 
-                <p className="price">R$ {announcementDetail.price}</p>
+                <p className="price">
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(announcementDetail.price)}
+                </p>
               </div>
 
               <Button
