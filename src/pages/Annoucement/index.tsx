@@ -10,12 +10,11 @@ import {
   Comments,
   CommentSection,
   CommentsBox,
-  BoxComment,
   CommentsFixed,
   CommentSectionOffline,
 } from "./style";
 import { CardComments } from "../../components/CardComments";
-import { LegacyRef, useContext, useEffect, useRef, useState } from "react";
+import {  useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../service/api";
@@ -25,6 +24,7 @@ import { IAnnouncement } from "../../interfaces/context";
 import { Button } from "../../components/Button";
 import { toast } from "react-hot-toast";
 import { ModalImageCar } from "../../components/ModalImageCar";
+
 import { Context } from "../../context/Context";
 import { ModalEditAddress } from "../../components/ModalEditAddress";
 import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
@@ -103,10 +103,11 @@ export const Annoucement = () => {
           <Aside>
             <section className="photoSection">
               <h6>Fotos</h6>
-              {announcementDetail?.gallery?.length > 0 ? (
+               
                 <ul className="photoList">
-                  {announcementDetail.gallery.map((item, index) => {
-                    return (
+                { 
+                  announcementDetail.gallery?.map((item, index)=> {
+                    return(
                       <>
                         <li
                           key={index}
@@ -122,11 +123,9 @@ export const Annoucement = () => {
                       </>
                     );
                   })}
-                </ul>
-              ) : (
-                <img src="https://triunfo.pe.gov.br/pm_tr430/wp-content/uploads/2018/03/sem-foto-300x300.jpg" />
-              )}
 
+                </ul>
+                
               {modalImageCar && (
                 <ModalImageCar
                   image={imageRender}
