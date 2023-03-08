@@ -11,11 +11,14 @@ import { toast } from "react-hot-toast";
 import { ILoginRequest } from "../../interfaces/components";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { ModalForgetPassword } from "../../components/ModalForgetPassword";
 
 export const LoginPage = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const token = localStorage.getItem("@token");
+  const user = localStorage.getItem("@user");
 
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -46,7 +49,7 @@ export const LoginPage = () => {
     setIsOpenModal(!isOpenModal);
   };
 
-  return (
+  return !token && !user ? (
     <BodyLogin>
       <Header />
       <LoginMain>
@@ -92,5 +95,7 @@ export const LoginPage = () => {
       </LoginMain>
       <Footer />
     </BodyLogin>
+  ) : (
+    <Navigate to="/" />
   );
 };

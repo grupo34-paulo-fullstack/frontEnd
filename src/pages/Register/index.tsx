@@ -9,10 +9,14 @@ import { ICreateUser } from "../../interfaces/context";
 import { AuthContext } from "../../context/AuthContext";
 import { Context } from "../../context/Context";
 import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 
 export const RegisterPage = () => {
   const { handleRegister } = useContext(AuthContext);
-  const { checkCep } = useContext(Context);
+
+  const token = localStorage.getItem("@token");
+
+  const user = localStorage.getItem("@user");
 
   const {
     register,
@@ -22,7 +26,7 @@ export const RegisterPage = () => {
     resolver: yupResolver(registerSchema),
   });
 
-  return (
+  return !token && !user ? (
     <>
       <Header />
       <RegisterMain>
@@ -198,5 +202,7 @@ export const RegisterPage = () => {
       </RegisterMain>
       <Footer />
     </>
+  ) : (
+    <Navigate to="/" />
   );
 };

@@ -47,6 +47,8 @@ export interface IContext {
   isModalRemoveUserOpen: boolean;
   setModalRemoveUser: React.Dispatch<React.SetStateAction<boolean>>;
   deleteUser: () => void;
+  updateComment: (data: string, id: string) => void;
+  deleteComment: (id: string) => void;
 }
 
 export interface IAuthContext {
@@ -69,7 +71,7 @@ export interface IAnnouncement {
   image: string;
   is_active: boolean;
   user: IUser;
-  gallery?: IGallery[];
+  gallery: IGallery[];
   comments?: IComment[];
 }
 
@@ -109,7 +111,7 @@ export interface IAnnouncementResponse {
   image: string;
   is_active: boolean;
   user: IUser;
-  gallery: any[];
+  gallery?: any[];
 }
 
 export interface ICreateUser {

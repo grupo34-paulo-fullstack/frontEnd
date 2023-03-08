@@ -55,11 +55,14 @@ export const Provider = ({ children }: IProvider) => {
   const [showModalDeleteAnnouncement, setShowModalDeleteAnnouncement] =
     useState<boolean>(false);
 
-  const getAllAnnouncements = async () =>
+  const getAllAnnouncements = async () => {
     await api
       .get("/announcements")
-      .then((res) => setAnnouncements(res.data))
+      .then((res) => {
+        setAnnouncements(res.data);
+      })
       .catch((error) => console.log(error));
+  };
 
   const createAnnouncement = (data: IFormCreateAnnouncement) => {
     const token = localStorage.getItem("@token");
@@ -145,6 +148,9 @@ export const Provider = ({ children }: IProvider) => {
 
   const createComment = (data: string, id: string) => {
     const newData = { description: data };
+
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
     api.post(`/comments/${id}`, newData).then((res) => {
       toast.success("Comentário criado");
       retrieveAnnouncement(id);
@@ -164,6 +170,20 @@ export const Provider = ({ children }: IProvider) => {
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
 
+  const updateComment = (data: string, id: string) => {
+    const newData = { description: data };
+
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    api
+      .patch(`/comments/${id}`, newData)
+      .then((res) => {
+        toast.success("Comentário atualizado");
+        retrieveAnnouncement(res.data.announcement);
+      })
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+
   const deleteUser = () => {
     const token = localStorage.getItem("@token");
 
@@ -177,6 +197,18 @@ export const Provider = ({ children }: IProvider) => {
         setModalProfile(false);
         localStorage.clear();
         window.location.reload();
+      })
+      .catch((error) => toast.error(`${error.response.data.message}`));
+  };
+
+  const deleteComment = (id: string) => {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    api
+      .delete(`/comments/${id}`)
+      .then((res) => {
+        toast.success("Comentário excluído");
+        retrieveAnnouncement(id);
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
@@ -218,6 +250,8 @@ export const Provider = ({ children }: IProvider) => {
         isModalRemoveUserOpen,
         setModalRemoveUser,
         deleteUser,
+        updateComment,
+        deleteComment,
       }}
     >
       {children}

@@ -1,14 +1,10 @@
 import { Link } from "react-router-dom";
+import { IAnnouncementResponse } from "../../interfaces/context";
 import { Container, NameIcon, SpanInfo } from "./style";
 
-export interface ICard {
-  image: string;
-  title: string;
-  description: string;
-  name: string;
-  km: number;
-  year: string;
-  price: string;
+
+export interface IProps {
+  item: IAnnouncementResponse
 }
 
 function generateColor() {
@@ -20,7 +16,7 @@ function generateColor() {
   return color;
 }
 
-export const CardHome = ({ item }) => {
+export const CardHome = ( { item } : IProps) => {
   return (
     <Container>
       <Link to={`/announcement/${item.id}`}>
@@ -37,14 +33,18 @@ export const CardHome = ({ item }) => {
             className="container-nameIcon-icon text-body-2-400"
             backgroundColor={generateColor()}
           >
-            {}
+            {item.user.name
+              .split(" ")
+              .map((name, index) =>
+                index <= 1 ? name[0].toUpperCase() : undefined
+            )}
           </NameIcon>
-          {item.name}
+          {item.user.name}
         </div>
 
         <div className="container-infos">
           <SpanInfo>
-            <span className="text-body-2-500">{item.km}</span>
+            <span className="text-body-2-500">{item.km} km</span>
             <span className="text-body-2-500">{item.year}</span>
           </SpanInfo>
           <p className="text-body-1-400">R$ {item.price}</p>

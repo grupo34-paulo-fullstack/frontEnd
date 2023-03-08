@@ -10,75 +10,31 @@ import {
   Comments,
   CommentSection,
   CommentsBox,
-  BoxComment,
   CommentsFixed,
   CommentSectionOffline,
 } from "./style";
 import { CardComments } from "../../components/CardComments";
-import { LegacyRef, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../service/api";
 import { IComment } from "../../interfaces/components";
 import { IAnnouncementResponse } from "../../interfaces/context";
+import { IAnnouncement } from "../../interfaces/context";
 import { Button } from "../../components/Button";
 import { toast } from "react-hot-toast";
 import { ModalImageCar } from "../../components/ModalImageCar";
+
 import { Context } from "../../context/Context";
 import { ModalEditAddress } from "../../components/ModalEditAddress";
 import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
 import { ModalRemoveUser } from "../../components/ModalRemoveUser";
 
 export const Annoucement = () => {
-  const [modalImageCar, setModalImageCar] = useState(false);
-  const [imageRender, setImageRender] = useState("");
-
-  const textAreaRef = useRef<any>(null);
-  const { user } = useContext(AuthContext);
-  const [comments, setComments] = useState<IComment[]>([]);
-  const navigate = useNavigate();
-  const [announcement, setAnnouncement] = useState<IAnnouncementResponse>(
-    {} as IAnnouncementResponse
-  );
-
-  const params = useParams();
-
-  useEffect(() => {
-    const getAnnouncementsAndComments = async () => {
-      const comments = await api.get(`/comments/${params.id}`);
-      setComments(comments.data);
-
-      const announcement = await api.get(`/announcements`);
-      const announcementOpen = announcement.data.filter(
-        (announc: IAnnouncementResponse) => announc.id == params.id
-      );
-      setAnnouncement(announcementOpen[0]);
-    };
-    getAnnouncementsAndComments().catch((err) => alert(err));
-  }, []);
-
-  const modalAndImageRender = (image: string) => {
-    setModalImageCar(!modalImageCar);
-    setImageRender(image);
-  };
-
-  const createComment = async () => {
-    try {
-      const token = localStorage.getItem("@token");
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-      const data = { description: textAreaRef.current.value };
-
-      await api.post(`/comments/${params.id}`, data);
-
-      const comments = await api.get(`/comments/${params.id}`);
-      setComments(comments.data);
-    } catch {
-      toast.error("Não foi possível fazer o comentário");
-    }
-  };
-
   const {
+    announcementDetail,
+    retrieveAnnouncement,
+    createComment,
     isModalProfileOpen,
     setModalProfile,
     isModalAddressOpen,
@@ -86,6 +42,24 @@ export const Annoucement = () => {
     setModalRemoveUser,
     isModalRemoveUserOpen,
   } = useContext(Context);
+
+  const [modalImageCar, setModalImageCar] = useState(false);
+  const [imageRender, setImageRender] = useState("");
+
+  const textAreaRef = useRef<any>(null);
+
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const params = useParams();
+
+  useEffect(() => retrieveAnnouncement(params.id!), []);
+
+  const modalAndImageRender = (image: string) => {
+    setModalImageCar(!modalImageCar);
+    setImageRender(image);
+  };
 
   return (
     <>
@@ -106,17 +80,17 @@ export const Annoucement = () => {
         <MainContent>
           <BoxImgCarInfoDescription>
             <figure>
-              <img src={announcement.image} alt="Foto Principal" />
+              <img src={announcementDetail.image} alt="Foto Principal" />
             </figure>
             <CarSection>
-              <h6>{announcement.title}</h6>
+              <h6>{announcementDetail.title}</h6>
               <div className="carInfoBox">
                 <div className="yearAndKmBox">
-                  <span className="yearKm">{announcement.year}</span>
-                  <span className="yearKm">{announcement.km} km</span>
+                  <span className="yearKm">{announcementDetail.year}</span>
+                  <span className="yearKm">{announcementDetail.km} km</span>
                 </div>
 
-                <p className="price">R$ {announcement.price}</p>
+                <p className="price">R$ {announcementDetail.price}</p>
               </div>
 
               <Button
@@ -133,36 +107,33 @@ export const Annoucement = () => {
             </CarSection>
             <section className="description">
               <h6>Descrição</h6>
-              <p>{announcement.description}</p>
+              <p>{announcementDetail.description}</p>
             </section>
           </BoxImgCarInfoDescription>
 
           <Aside>
             <section className="photoSection">
               <h6>Fotos</h6>
-              {announcement?.gallery?.length > 0 ? (
-                <ul className="photoList">
-                  {announcement.gallery.map((item, index) => {
-                    return (
-                      <>
-                        <li
-                          key={index}
-                          className="photoElement"
-                          onClick={() => modalAndImageRender(item.image)}
-                        >
-                          <img
-                            className="asideImg"
-                            src={item.image}
-                            alt="Fotos Galeria"
-                          />
-                        </li>
-                      </>
-                    );
-                  })}
-                </ul>
-              ) : (
-                <img src="https://triunfo.pe.gov.br/pm_tr430/wp-content/uploads/2018/03/sem-foto-300x300.jpg" />
-              )}
+
+              <ul className="photoList">
+                {announcementDetail.gallery?.map((item, index) => {
+                  return (
+                    <>
+                      <li
+                        key={index}
+                        className="photoElement"
+                        onClick={() => modalAndImageRender(item.image)}
+                      >
+                        <img
+                          className="asideImg"
+                          src={item.image}
+                          alt="Fotos Galeria"
+                        />
+                      </li>
+                    </>
+                  );
+                })}
+              </ul>
 
               {modalImageCar && (
                 <ModalImageCar
@@ -174,19 +145,21 @@ export const Annoucement = () => {
             </section>
             <section className="userSection">
               <div className="userTag">
-                {announcement.user?.name
+                {announcementDetail.user?.name
                   .split(" ")
                   .map((name, index) =>
                     index <= 1 ? name[0].toUpperCase() : undefined
                   )}
               </div>
-              <span className="userName">{announcement.user?.name}</span>
+              <span className="userName">{announcementDetail.user?.name}</span>
               <p className="userDescription">
-                {announcement.user?.description}
+                {announcementDetail.user?.description}
               </p>
               <button
                 className="userAds"
-                onClick={() => navigate(`/announcer/${announcement.user.id}`)}
+                onClick={() =>
+                  navigate(`/announcer/${announcementDetail.user.id}`)
+                }
               >
                 Ver todos anuncios
               </button>
@@ -199,15 +172,15 @@ export const Annoucement = () => {
             <h6>Comentários</h6>
 
             <ul className="commentList">
-              {comments &&
-                comments.map((comment, index) => (
-                  <CardComments
-                    key={index}
-                    description={comment.description}
-                    createdAt={comment.createdAt}
-                    user={comment.user}
-                  />
-                ))}
+              {announcementDetail?.comments?.map((comment, index) => (
+                <CardComments
+                  key={index}
+                  id={comment.id}
+                  description={comment.description}
+                  createdAt={comment.createdAt}
+                  user={comment.user}
+                />
+              ))}
             </ul>
           </Comments>
 
@@ -228,7 +201,13 @@ export const Annoucement = () => {
                 ref={textAreaRef}
                 placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
               ></textarea>
-              <button onClick={() => createComment()}>Comentar</button>
+              <button
+                onClick={() =>
+                  createComment(textAreaRef.current.value, params.id!)
+                }
+              >
+                Comentar
+              </button>
               <div className="comments-fixed">
                 <CommentsFixed
                   onClick={() => {

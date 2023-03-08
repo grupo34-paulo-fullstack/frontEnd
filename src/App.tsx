@@ -9,7 +9,7 @@ export const App = () => {
       <Provider>
         <RoutesMain />
         <Toaster
-          toastOptions={{ style: { fontSize: 18 } }}
+          toastOptions={{ style: { fontSize: 16 } }}
         />
       </Provider>
     </AuthProvider>
