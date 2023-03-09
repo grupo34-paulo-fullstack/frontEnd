@@ -17,14 +17,8 @@ import { CardComments } from "../../components/CardComments";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
-import { api } from "../../service/api";
-import { IComment } from "../../interfaces/components";
-import { IAnnouncementResponse } from "../../interfaces/context";
-import { IAnnouncement } from "../../interfaces/context";
 import { Button } from "../../components/Button";
-import { toast } from "react-hot-toast";
 import { ModalImageCar } from "../../components/ModalImageCar";
-
 import { Context } from "../../context/Context";
 import { ModalEditAddress } from "../../components/ModalEditAddress";
 import { ModalProfileEditRemove } from "../../components/ModalEditProfile";

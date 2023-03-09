@@ -11,8 +11,10 @@ import { Auction, CardCars, Container } from "./style";
 import { ModalEditAddress } from "../../components/ModalEditAddress";
 import { ModalProfileEditRemove } from "../../components/ModalEditProfile";
 import { ModalRemoveUser } from "../../components/ModalRemoveUser";
+import { viaCepService } from "../../service/viaCep";
 
 export const Home = () => {
+  const cepService = viaCepService();
   const {
     announcements,
     setAnnouncements,
@@ -39,6 +41,7 @@ export const Home = () => {
   useEffect(() => {
     const request = async () => {
       await getAllAnnouncements();
+      cepService.getAddress("29072265").then((resp) => console.log(resp));
     };
 
     request();
