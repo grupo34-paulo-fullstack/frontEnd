@@ -114,6 +114,7 @@ export const ModalProfileEditRemove = ({
           />
 
           <Button
+            id="button-deleteAccount"
             onClick={() => setModalRemoveUser(true)}
             color="var(--colors-grey-0)"
             border_color="var(--colors-alert-2)"

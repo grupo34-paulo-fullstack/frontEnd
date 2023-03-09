@@ -10,22 +10,32 @@ export const Container = styled.div`
 
   background: rgba(18, 18, 20, 0.5);
   z-index: 20000;
-  position: fixed;
+  position: absolute;
+  top: 0;
+  height: 2580px;
+
+  @media (max-width: 800px) {
+    height: 2180px;
+  }
+
+  @media (max-width: 620px) {
+    height: 2180px;
+  }
 `;
 
 export const Form = styled.form`
+  position: absolute;
+  top: 80px;
   margin-top: 80px;
   background: #ffffff;
   border-radius: 8px;
-  width: 520px;
+  max-width: 520px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding-left: 24px;
   padding-right: 24px;
   padding-bottom: 33px;
-  @media screen and (max-width: 1000px) {
-    width: 90%;
-  }
 
   .titleBox {
     display: flex;
@@ -92,5 +102,9 @@ export const Form = styled.form`
     gap: 10px;
     display: flex;
     flex-direction: row-reverse;
+
+    #button-deleteAccount {
+      color: var(--colors-alert-1);
+    }
   }
 `;

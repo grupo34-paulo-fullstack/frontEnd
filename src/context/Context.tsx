@@ -15,6 +15,7 @@ import {
   IProvider,
 } from "../interfaces/context";
 import { api } from "../service/api";
+import { AuthContext } from "./AuthContext";
 
 export const Context = createContext({} as IContext);
 
@@ -25,6 +26,8 @@ export const Provider = ({ children }: IProvider) => {
       .then((res) => setAnnouncements(res.data))
       .catch((error) => console.log(error));
   }, []);
+
+  const { setUser, user } = useContext(AuthContext)
 
   const token = localStorage.getItem("@token");
 
@@ -84,6 +87,7 @@ export const Provider = ({ children }: IProvider) => {
       .then((res) => {
         setShowAddAnnouncementModal(false);
         setShowModalAddAnnouncementSuccess(true);
+        retrieveAnnouncer(user?.id!)
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
@@ -105,7 +109,7 @@ export const Provider = ({ children }: IProvider) => {
       .patch(`/announcements/${announcementId}`, newData)
       .then((res) => {
         toast.success("Anúncio atualizado");
-        getAllAnnouncements();
+        retrieveAnnouncer(user?.id!)
         setShowEditAnnouncementModal(false);
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
@@ -118,6 +122,7 @@ export const Provider = ({ children }: IProvider) => {
       .delete(`/announcements/${id}`)
       .then((res) => {
         toast.success("Anúncio exclúido");
+        retrieveAnnouncer(user?.id!)
         setTimeout(() => setShowModalDeleteAnnouncement(false), 2000);
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
@@ -168,6 +173,7 @@ export const Provider = ({ children }: IProvider) => {
       .patch(`/users`, data)
       .then((response) => {
         toast.success("Dados editados com sucesso!");
+        setUser(response.data)
         setModalProfile(false);
         setModalAddress(false);
       })
