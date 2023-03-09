@@ -164,7 +164,7 @@ export const AnnouncerPageStyle = styled.main`
       .list-cars {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         width: 100%;
         overflow-y: hidden;
         margin-bottom: 210px;
@@ -368,7 +368,7 @@ export const AnnouncerPageWithoutTokenStyle = styled.main`
       .list-cars {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         width: 100%;
         overflow-y: hidden;
         margin-bottom: 206px;
@@ -394,7 +394,7 @@ export const AnnouncerPageWithoutTokenStyle = styled.main`
       .list-bikes {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         width: 100%;
         overflow-y: hidden;
         margin-bottom: 116px;
