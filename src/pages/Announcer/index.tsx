@@ -47,6 +47,8 @@ export const AnnouncerPage = () => {
 
   const { user } = useContext(AuthContext);
 
+  
+
   return token && announcer.id == user?.id ? (
     <>
       <Header />
