@@ -24,8 +24,10 @@ function generateColor() {
 }
 
 export const Card = ({ item }) => {
-  const { setAnnouncementId, setShowEditAnnouncementModal } =
+  const { setAnnouncementId, setShowEditAnnouncementModal, announcer } =
     useContext(Context);
+
+  console.log(announcer)
 
   const userLogged = JSON.parse(localStorage.getItem("@user")!);
 
@@ -57,9 +59,11 @@ export const Card = ({ item }) => {
             className="container-nameIcon-icon text-body-2-400"
             backgroundColor={generateColor()}
           >
-            {item.name}
+            {announcer?.name?.split(" ")
+                 .map((name: string, index: number) =>
+                   index <= 1 ? name[0].toUpperCase() : undefined)}
           </NameIcon>
-          {item.name}
+          {announcer.name}
         </div>
       ) : (
         <br />

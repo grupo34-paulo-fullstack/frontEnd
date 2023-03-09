@@ -23,12 +23,6 @@ import { ModalRemoveUser } from "../../components/ModalRemoveUser";
 export const AnnouncerPage = () => {
   const params = useParams();
 
-  const token = localStorage.getItem("@token");
-
-  useEffect(() => {
-    retrieveAnnouncer(params.id!);
-  }, []);
-
   const {
     showAddAnnouncementModal,
     setShowAddAnnouncementModal,
@@ -45,9 +39,13 @@ export const AnnouncerPage = () => {
     isModalRemoveUserOpen,
   } = useContext(Context);
 
-  const { user } = useContext(AuthContext);
+  const token = localStorage.getItem("@token");
 
+  useEffect(() => {
+    retrieveAnnouncer(params.id!)
+  }, []);
   
+  const { user } = useContext(AuthContext);
 
   return token && announcer.id == user?.id ? (
     <>
@@ -75,12 +73,11 @@ export const AnnouncerPage = () => {
 
           <div className="information-announcer">
             <NameIconAnnouncer >
-            {announcer.name
-              .split(" ")
-              .map((name, index) =>
-                index <= 1 ? name[0].toUpperCase() : undefined
-            )}
-              </NameIconAnnouncer>
+              {announcer?.name?.split(" ")
+                .map((name, index) =>
+                  index <= 1 ? name[0].toUpperCase() : undefined
+              )}
+            </NameIconAnnouncer>
 
             <div className="name-announcer">
               <p id="name">{announcer.name}</p>
@@ -158,9 +155,13 @@ export const AnnouncerPage = () => {
           <div className="background-announcer" />
 
           <div className="information-announcer">
-            <figure>
-              <img src={announcerImg} alt="SL" />
-            </figure>
+            <NameIconAnnouncer >
+              {
+                announcer?.name?.split(" ")
+                 .map((name, index) =>
+                   index <= 1 ? name[0].toUpperCase() : undefined)
+              }
+            </NameIconAnnouncer>
 
             <div className="name-announcer">
               <p id="name">{announcer.name}</p>

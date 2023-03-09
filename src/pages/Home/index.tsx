@@ -25,17 +25,6 @@ export const Home = () => {
     getAllAnnouncements,
   } = useContext(Context);
 
-  const announCars = announcements.filter(
-    (announcement) =>
-      announcement.type_vehicle === "car" && announcement.is_active == true
-  );
-
-  const announMotors = announcements.filter(
-    (announcement) =>
-      announcement.type_vehicle === "motorcycle" &&
-      announcement.is_active == true
-  );
-
   useEffect(() => {
     const request = async () => {
       await getAllAnnouncements();
@@ -43,6 +32,21 @@ export const Home = () => {
 
     request();
   }, []);
+
+  const announCars = announcements.filter(
+    (announcement) =>
+      announcement.type_vehicle === "car" && announcement.is_active == true
+  );
+
+  console.log(announcements)
+
+  const announMotors = announcements.filter(
+    (announcement) =>
+      announcement.type_vehicle === "motorcycle" &&
+      announcement.is_active == true
+  );  
+
+  console.log(announCars)
 
   useEffect(() => {
     api
@@ -92,10 +96,20 @@ export const Home = () => {
       </Container>
       <Auction>
         <h5>Leilão</h5>
-        <ul>
-          {announCars?.length > 0 ? (
+        <ul>          
+          {cardsHome?.length > 0 && (
             cardsHome.map((item, index) => (
               <CardAuction key={index} item={item} />
+            ))
+          )}
+        </ul>
+      </Auction>
+      <CardCars>
+        <h5>Carros</h5>
+        <ul>          
+          {announCars?.length > 0 ? (
+            announCars.map((item, index) => (
+              <CardHome key={index} item={item} />
             ))
           ) : (
             <>
@@ -105,14 +119,6 @@ export const Home = () => {
               </h6>
             </>
           )}
-        </ul>
-      </Auction>
-      <CardCars>
-        <h5>Carros</h5>
-        <ul>
-          {announCars.map((item, index) => (
-            <CardHome key={index} item={item} />
-          ))}
         </ul>
       </CardCars>
       <CardCars>

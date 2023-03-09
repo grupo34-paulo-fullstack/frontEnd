@@ -16,7 +16,9 @@ function generateColor() {
   return color;
 }
 
-export const CardHome = ( { item } : IProps) => {
+export const CardHome = ( { item }) => {
+
+  console.log(item)
   return (
     <Container>
       <Link to={`/announcement/${item.id}`}>
@@ -35,7 +37,7 @@ export const CardHome = ( { item } : IProps) => {
           >
             {item.user.name
               .split(" ")
-              .map((name, index) =>
+              .map((name: any, index:number) =>
                 index <= 1 ? name[0].toUpperCase() : undefined
             )}
           </NameIcon>
