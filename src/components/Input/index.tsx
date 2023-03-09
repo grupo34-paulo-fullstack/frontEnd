@@ -2,7 +2,6 @@ import { forwardRef } from "react";
 import { FieldError } from "react-hook-form";
 import { BiErrorCircle } from "react-icons/bi";
 import { Container, Error } from "./styles";
-import { RefAttributes } from "react";
 
 interface InputProps {
   id: string;
@@ -11,7 +10,6 @@ interface InputProps {
   error?: FieldError;
   placeholder?: string;
   autoComplete?: string;
-  onBlur?: any;
 }
 
 export const Input = forwardRef(
@@ -23,7 +21,6 @@ export const Input = forwardRef(
       type,
       autoComplete,
       placeholder,
-      onBlur,
       ...register
     }: InputProps,
     ref: React.LegacyRef<HTMLInputElement>

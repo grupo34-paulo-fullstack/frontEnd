@@ -36,7 +36,7 @@ export const RegisterPage = () => {
           <span>informações pessoais</span>
           <Input
             {...register("name")}
-            id="user"
+            id="name"
             placeholder="Ex: Samuel Leão"
             label="Nome"
             error={errors?.name}
@@ -68,7 +68,7 @@ export const RegisterPage = () => {
           />
           <Input
             {...register("birthdate")}
-            id="date"
+            id="birthdate"
             placeholder="00/00/00"
             label="Data de nascimento"
             error={errors?.birthdate}
@@ -87,10 +87,9 @@ export const RegisterPage = () => {
 
           <Input
             {...register("cep")}
-            id="CEP"
+            id="cep"
             placeholder="00000.000"
             label="CEP"
-            onBlur={checkCep}
             error={errors?.cep}
             type="text"
           />
@@ -154,7 +153,7 @@ export const RegisterPage = () => {
               <input
                 {...register("is_announcer")}
                 className="adInput"
-                value="Comprador"
+                value="false"
                 id="Comprador"
                 type="radio"
                 name="is_announcer"
@@ -168,7 +167,7 @@ export const RegisterPage = () => {
               <input
                 {...register("is_announcer")}
                 className="adInput"
-                value="Anunciante"
+                value="true"
                 id="Anunciante"
                 type="radio"
                 name="is_announcer"
@@ -179,6 +178,7 @@ export const RegisterPage = () => {
               </label>
             </div>
           </div>
+          <h1>{errors?.is_announcer?.message ?? ""}</h1>
 
           <Input
             {...register("password")}
@@ -191,7 +191,7 @@ export const RegisterPage = () => {
 
           <Input
             {...register("passwordCheck")}
-            id="confirmPassword"
+            id="passwordCheck"
             placeholder="Digitar senha"
             label="Confirmar Senha"
             error={errors?.passwordCheck}

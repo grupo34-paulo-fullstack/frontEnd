@@ -23,10 +23,12 @@ export const registerSchema = yup.object().shape({
   number: yup.string().required("Campo obrigatório"),
   complement: yup.string(),
   is_announcer: yup.boolean(),
-  password: yup.string().required("deve conter uma senha")
-  .matches(/(\d)/, "deve conter ao menos 1 número")
-  .matches(/[A-Z]/, "deve conter ao menos 1 letra maiúscula")
-  .min(8, "deve conter ao menos 8 caracteres"),
+  password: yup
+    .string()
+    .required("deve conter uma senha")
+    .matches(/(\d)/, "deve conter 1 número")
+    .matches(/[A-Z]/, "deve conter 1 letra maiúscula")
+    .min(8, "deve conter ao menos 8 caracteres"),
   passwordCheck: yup
     .string()
     .oneOf([yup.ref("password")], "As senhas não estão iguais"),

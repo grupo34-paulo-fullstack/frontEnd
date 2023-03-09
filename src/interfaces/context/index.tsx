@@ -115,7 +115,7 @@ export interface IAnnouncementResponse {
 }
 
 export interface ICreateUser {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   cpf: string;
