@@ -94,6 +94,7 @@ export const Auction = styled.div`
         
         &::-webkit-scrollbar {
             width: 16px;
+            height: 20px;
         }
 
         &::-webkit-scrollbar-track {
@@ -140,20 +141,22 @@ export const CardCars = styled.div`
         & {
             scrollbar-width: auto;
             scrollbar-color: var(--colors-brand-1) var(--colors-white);
+            
+
         }
         
         &::-webkit-scrollbar {
             width: 16px;            
+            height: 8px;
         }
 
         &::-webkit-scrollbar-track {
-            background: var(--colors-white);
+            
         }
 
         &::-webkit-scrollbar-thumb {
             background-color: var(--colors-brand-1);
-            border-radius: 10px;
-            border: 6px solid var(--colors-white);            
+            border-radius: 10px;       
         }
 
         li{

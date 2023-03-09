@@ -12,6 +12,7 @@ export const CardComments = ({
   description,
   createdAt,
   user,
+  paramsId
 }: IComment) => {
   const { deleteComment, updateComment } = useContext(Context);
 
@@ -57,7 +58,7 @@ export const CardComments = ({
 
         {token && user.id == userLogged?.id && (
           <div className="button-settings">
-            <button id="delete-comment" onClick={() => deleteComment(id!)}> <MdDeleteForever /> </button>
+            <button id="delete-comment" onClick={() => deleteComment(paramsId! ,id!)}> <MdDeleteForever /> </button>
             <button onClick={() => setShowEditComment(!showEditComment)}>
               {showEditComment == false ? <TiEdit /> : <CgClose />}
             </button>

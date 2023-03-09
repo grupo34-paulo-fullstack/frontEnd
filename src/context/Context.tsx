@@ -134,8 +134,10 @@ export const Provider = ({ children }: IProvider) => {
 
   const retrieveAnnouncer = (id: string) => {
     api
-      .get(`users/${id}`)
-      .then((res) => setAnnouncer(res.data))
+      .get(`/users/${id}`)
+      .then((res) =>{
+         setAnnouncer(res.data)
+        } ) 
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
 
@@ -181,9 +183,11 @@ export const Provider = ({ children }: IProvider) => {
       .patch(`/comments/${id}`, newData)
       .then((res) => {
         toast.success("Comentário atualizado");
+        console.log(res.data.announcement)
         retrieveAnnouncement(res.data.announcement);
       })
-      .catch((error) => toast.error(`${error.response.data.message}`));
+      .catch((error) => {toast.error(`${error.response.data.message}`)
+      console.log(error, newData)});
   };
 
   const deleteUser = () => {
@@ -203,14 +207,15 @@ export const Provider = ({ children }: IProvider) => {
       .catch((error) => toast.error(`${error.response.data.message}`));
   };
 
-  const deleteComment = (id: string) => {
+  const deleteComment = (announcementId: string, id: string) => {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     api
       .delete(`/comments/${id}`)
       .then((res) => {
         toast.success("Comentário excluído");
-        retrieveAnnouncement(id);
+        console.log(res)
+        retrieveAnnouncement(announcementId);
       })
       .catch((error) => toast.error(`${error.response.data.message}`));
   };

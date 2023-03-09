@@ -184,6 +184,7 @@ export const Annoucement = () => {
                   description={comment.description}
                   createdAt={comment.createdAt}
                   user={comment.user}
+                  paramsId={params.id!}
                 />
               ))}
             </ul>
@@ -207,8 +208,14 @@ export const Annoucement = () => {
                 placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
               ></textarea>
               <button
-                onClick={() =>
-                  createComment(textAreaRef.current.value, params.id!)
+              
+                onClick={() =>{
+                  if (textAreaRef.current.value == "") {
+                    toast.error("Digite um comentário!");
+                  } else {
+                    createComment(textAreaRef.current.value, params.id!)
+                  }
+                }
                 }
               >
                 Comentar

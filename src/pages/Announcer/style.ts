@@ -181,6 +181,27 @@ export const AnnouncerPageStyle = styled.main`
           margin-right: 48px;
           margin-bottom: 15px;
         }
+
+        & {
+            scrollbar-width: auto;
+            scrollbar-color: var(--colors-brand-1) var(--colors-white);
+            
+
+        }
+        
+        &::-webkit-scrollbar {
+            width: 16px;            
+            height: 7px;
+        }
+
+        &::-webkit-scrollbar-track {
+            
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--colors-brand-1);
+            border-radius: 10px;       
+        }
       }
 
       #title-bikes {
@@ -384,6 +405,27 @@ export const AnnouncerPageWithoutTokenStyle = styled.main`
         li {
           margin-right: 48px;
           margin-bottom: 15px;
+        }
+
+        & {
+            scrollbar-width: auto;
+            scrollbar-color: var(--colors-brand-1) var(--colors-white);
+            
+
+        }
+        
+        &::-webkit-scrollbar {
+            width: 16px;    
+            height: 7px;
+        }
+
+        &::-webkit-scrollbar-track {
+            
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--colors-brand-1);
+            border-radius: 10px;   
         }
       }
 

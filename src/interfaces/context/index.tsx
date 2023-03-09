@@ -48,7 +48,7 @@ export interface IContext {
   setModalRemoveUser: React.Dispatch<React.SetStateAction<boolean>>;
   deleteUser: () => void;
   updateComment: (data: string, id: string) => void;
-  deleteComment: (id: string) => void;
+  deleteComment: (annoucementId: string, id: string) => void;
 }
 
 export interface IAuthContext {
