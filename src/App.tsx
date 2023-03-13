@@ -1,11 +1,17 @@
-import { Toaster } from 'react-hot-toast'
-import './App.css'
+import { Toaster } from "react-hot-toast";
+import { Provider } from "./context/Context";
+import { Provider as AuthProvider } from "./context/AuthContext";
+import { RoutesMain } from "./routes";
 
-function App() {
-
+export const App = () => {
   return (
-    <Toaster />
-  )
-}
-
-export default App
+    <AuthProvider>
+      <Provider>
+        <RoutesMain />
+        <Toaster
+          toastOptions={{ style: { fontSize: 16 } }}
+        />
+      </Provider>
+    </AuthProvider>
+  );
+};
